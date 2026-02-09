@@ -1,0 +1,345 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// User Profile
+model Profile {
+  id          String    @id @default(uuid())
+  username    String?   @unique
+  full_name   String?
+  email       String?   @unique
+  avatar_url  String?
+  is_student  Boolean   @default(false)
+  bio         String?
+  location    String?
+  school      String?
+  website     String?
+  linkedin    String?
+  github      String?
+  twitter     String?
+  created_at  DateTime  @default(now())
+  updated_at  DateTime? @updatedAt
+
+  // Relations
+  enrollments      Enrollment[]
+  opportunities    Opportunity[]
+  posts            Post[]
+  comments         Comment[]
+  post_likes       PostLike[]
+  groups_created   Group[] @relation("GroupCreator")
+  group_members    GroupMember[]
+  messages_sent    DirectMessage[] @relation("MessageSender")
+  messages_received DirectMessage[] @relation("MessageReceiver")
+  community_messages CommunityMessage[]
+  followers        Follow[] @relation("Following")
+  following        Follow[] @relation("Follower")
+  org_members      OrganizationMember[]
+  
+  @@map("profiles")
+}
+
+// Organizations (Schools, Companies, etc.)
+model Organization {
+  id          String    @id @default(uuid())
+  name        String
+  slug        String    @unique
+  type        OrgType
+  description String?
+  website_url String?
+  email       String?
+  phone       String?
+  location    String?
+  is_verified Boolean   @default(false)
+  logo_url    String?
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+
+  members       OrganizationMember[]
+  opportunities Opportunity[]
+  posts         Post[]
+
+  @@map("organizations")
+}
+
+enum OrgType {
+  school
+  university
+  company
+  nonprofit
+}
+
+model OrganizationMember {
+  id          String   @id @default(uuid())
+  org_id      String
+  profile_id  String
+  role        OrgRole  @default(member)
+  joined_at   DateTime @default(now())
+
+  organization Organization @relation(fields: [org_id], references: [id], onDelete: Cascade)
+  profile      Profile      @relation(fields: [profile_id], references: [id], onDelete: Cascade)
+
+  @@unique([org_id, profile_id])
+  @@map("organization_members")
+}
+
+enum OrgRole {
+  admin
+  moderator
+  member
+}
+
+// Enrollments (deprecated but keeping for backward compat)
+model School {
+  id          String    @id @default(uuid())
+  name        String
+  slug        String    @unique
+  website_url String?
+  is_verified Boolean   @default(false)
+  logo_url    String?
+  created_at  DateTime  @default(now())
+
+  enrollments   Enrollment[]
+
+  @@map("schools")
+}
+
+enum EnrollmentRole {
+  student
+  admin
+  faculty
+}
+
+enum EnrollmentStatus {
+  pending
+  verified
+  rejected
+}
+
+model Enrollment {
+  id        String           @id @default(uuid())
+  profile_id String
+  school_id String
+  role      EnrollmentRole   @default(student)
+  status    EnrollmentStatus @default(pending)
+  created_at DateTime        @default(now())
+
+  profile   Profile @relation(fields: [profile_id], references: [id], onDelete: Cascade)
+  school    School  @relation(fields: [school_id], references: [id], onDelete: Cascade)
+
+  @@unique([profile_id, school_id])
+  @@map("enrollments")
+}
+
+// Opportunities (Internships, Scholarships, Placements)
+enum OpportunityType {
+  internship
+  scholarship
+  placement
+  job
+}
+
+model Opportunity {
+  id          String          @id @default(uuid())
+  creator_id  String
+  org_id      String?
+  type        OpportunityType
+  title       String
+  description String?
+  requirements String?
+  benefits    String?
+  location    String?
+  deadline    DateTime?
+  compensation String?
+  duration    String?
+  remote_option String?
+  status      String         @default("open")
+  created_at  DateTime       @default(now())
+  updated_at  DateTime       @updatedAt
+
+  creator     Profile       @relation(fields: [creator_id], references: [id], onDelete: Cascade)
+  organization Organization? @relation(fields: [org_id], references: [id], onDelete: SetNull)
+
+  @@map("opportunities")
+}
+
+// Posts
+enum PostType {
+  text
+  article
+  question
+  achievement
+  opportunity
+}
+
+model Post {
+  id          String   @id @default(uuid())
+  author_id   String
+  org_id      String?
+  group_id    String?
+  title       String?
+  content     String
+  type        PostType @default(text)
+  tags        String[]
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  author      Profile       @relation(fields: [author_id], references: [id], onDelete: Cascade)
+  organization Organization? @relation(fields: [org_id], references: [id], onDelete: SetNull)
+  group       Group?        @relation(fields: [group_id], references: [id], onDelete: SetNull)
+  comments    Comment[]
+  likes       PostLike[]
+
+  @@map("posts")
+}
+
+model Comment {
+  id          String   @id @default(uuid())
+  post_id     String
+  author_id   String
+  content     String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  post        Post    @relation(fields: [post_id], references: [id], onDelete: Cascade)
+  author      Profile @relation(fields: [author_id], references: [id], onDelete: Cascade)
+
+  @@map("comments")
+}
+
+model PostLike {
+  post_id     String
+  profile_id  String
+  created_at  DateTime @default(now())
+
+  post        Post    @relation(fields: [post_id], references: [id], onDelete: Cascade)
+  profile     Profile @relation(fields: [profile_id], references: [id], onDelete: Cascade)
+
+  @@id([post_id, profile_id])
+  @@map("post_likes")
+}
+
+// Groups & Communities
+model Group {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  type        GroupType @default(public)
+  category    String?
+  rules       String?
+  creator_id  String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  creator     Profile @relation("GroupCreator", fields: [creator_id], references: [id], onDelete: Cascade)
+  members     GroupMember[]
+  posts       Post[]
+  messages    CommunityMessage[]
+
+  @@map("groups")
+}
+
+enum GroupType {
+  public
+  private
+}
+
+model GroupMember {
+  id          String   @id @default(uuid())
+  group_id    String
+  profile_id  String
+  role        String   @default("member") // 'admin' | 'moderator' | 'member'
+  joined_at   DateTime @default(now())
+
+  group       Group   @relation(fields: [group_id], references: [id], onDelete: Cascade)
+  profile     Profile @relation(fields: [profile_id], references: [id], onDelete: Cascade)
+
+  @@unique([group_id, profile_id])
+  @@map("group_members")
+}
+
+// Legacy Communities (keeping for backward compatibility)
+model Community {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  creator_id  String
+  is_private  Boolean  @default(false)
+  created_at  DateTime @default(now())
+
+  members     CommunityMember[]
+  messages    Message[]
+
+  @@map("communities")
+}
+
+model CommunityMember {
+  community_id String
+  profile_id   String
+  role         String   @default("member")
+  joined_at    DateTime @default(now())
+
+  community    Community @relation(fields: [community_id], references: [id], onDelete: Cascade)
+
+  @@id([community_id, profile_id])
+  @@map("community_members")
+}
+
+model Message {
+  id           String   @id @default(uuid())
+  community_id String
+  sender_id    String
+  content      String
+  created_at   DateTime @default(now())
+
+  community    Community @relation(fields: [community_id], references: [id], onDelete: Cascade)
+
+  @@map("messages")
+}
+
+// Group/Community Chat Messages
+model CommunityMessage {
+  id          String   @id @default(uuid())
+  group_id    String
+  sender_id   String
+  content     String
+  created_at  DateTime @default(now())
+
+  group       Group   @relation(fields: [group_id], references: [id], onDelete: Cascade)
+  sender      Profile @relation(fields: [sender_id], references: [id], onDelete: Cascade)
+
+  @@map("community_messages")
+}
+
+// Direct Messages
+model DirectMessage {
+  id          String   @id @default(uuid())
+  sender_id   String
+  receiver_id String
+  content     String
+  read        Boolean  @default(false)
+  created_at  DateTime @default(now())
+
+  sender      Profile @relation("MessageSender", fields: [sender_id], references: [id], onDelete: Cascade)
+  receiver    Profile @relation("MessageReceiver", fields: [receiver_id], references: [id], onDelete: Cascade)
+
+  @@map("direct_messages")
+}
+
+// Follow System
+model Follow {
+  follower_id  String
+  following_id String
+  created_at   DateTime @default(now())
+
+  follower     Profile @relation("Follower", fields: [follower_id], references: [id], onDelete: Cascade)
+  following    Profile @relation("Following", fields: [following_id], references: [id], onDelete: Cascade)
+
+  @@id([follower_id, following_id])
+  @@map("follows")
+}

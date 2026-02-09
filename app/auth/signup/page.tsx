@@ -1,0 +1,178 @@
+'use client';
+
+import { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import Image from 'next/image';
+import logoImage from "@/public/logo.png"
+
+export default function SignUpPage() {
+  const router = useRouter();
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
+
+      if (response.ok) {
+        router.push('/auth/onboarding');
+      } else {
+        const data = await response.json();
+        setError(data.error || 'Failed to create account');
+      }
+    } catch (err) {
+      setError('An error occurred. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+const LogoIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24px"
+    height="24px"
+    viewBox="0 0 11.16 11.16"
+    style={{
+      shapeRendering: "geometricPrecision",
+      textRendering: "geometricPrecision",
+      imageRendering: "optimizeQuality",
+      fillRule: "evenodd",
+      clipRule: "evenodd",
+    }}
+    {...props}
+  >
+    <g>
+      <rect fill="#000000" width="11.16" height="11.16" rx="2.88" ry="2.88" />
+      <path
+        fill="#89F336"
+        d="M5.22 2.93c-0.05,0.09 -0.12,0.22 -0.21,0.4 -0.03,0.08 -0.09,0.2 -0.16,0.35 -0.02,0.02 -0.04,0.03 -0.06,0.03 0,0 -0.13,-0.04 -0.39,-0.14 -0.25,-0.09 -0.47,-0.14 -0.63,-0.14 -0.49,0 -0.73,0.21 -0.73,0.64 0,0.24 0.17,0.45 0.51,0.63 0.57,0.29 0.89,0.47 0.95,0.51 0.34,0.28 0.51,0.64 0.51,1.11 0,0.59 -0.23,1.06 -0.7,1.4 -0.42,0.31 -0.94,0.46 -1.56,0.46 -0.28,0 -0.44,-0.03 -0.46,-0.1 -0.01,-0.1 -0.03,-0.24 -0.07,-0.44 -0.02,-0.08 -0.05,-0.19 -0.1,-0.35 -0.01,-0.03 -0.01,-0.05 -0.01,-0.07 0,-0.04 0.02,-0.06 0.06,-0.06 0.06,0 0.16,0.01 0.29,0.02 0.13,0.02 0.23,0.02 0.3,0.02 0.82,0 1.24,-0.26 1.24,-0.79 0,-0.26 -0.17,-0.49 -0.5,-0.68 -0.61,-0.34 -0.92,-0.52 -0.93,-0.53 -0.33,-0.27 -0.5,-0.64 -0.5,-1.09 0,-0.5 0.16,-0.89 0.48,-1.19 0.32,-0.28 0.73,-0.43 1.23,-0.43 0.21,0 0.45,0.04 0.73,0.11 0.3,0.08 0.52,0.17 0.67,0.28 0.02,0.01 0.03,0.03 0.04,0.05z"
+      />
+      <path
+        fill="#89F336"
+        d="M9.74 5.37c0,0.69 -0.32,1.15 -0.96,1.39 0,0.13 0.13,0.37 0.4,0.73 0.26,0.35 0.39,0.53 0.39,0.53 0,0.04 -0.13,0.06 -0.39,0.08 -0.18,0.01 -0.31,0.01 -0.4,0.01 -0.19,0 -0.31,-0.04 -0.35,-0.12 -0.13,-0.21 -0.32,-0.52 -0.59,-0.93 -0.03,-0.04 -0.32,-0.06 -0.86,-0.06l-0.16 0.01 0 0.98c0,0.08 -0.03,0.12 -0.08,0.12 -0.09,0 -0.21,0 -0.38,0 -0.16,0 -0.29,0 -0.37,0 -0.06,0 -0.09,-0.05 -0.09,-0.16l0 -2.47c0,-0.32 -0.01,-0.8 -0.04,-1.45 -0.02,-0.64 -0.04,-1.12 -0.04,-1.45 0,-0.05 0.03,-0.07 0.08,-0.08 0.09,0 0.22,-0.01 0.39,-0.01 0.04,-0.01 0.12,-0.02 0.24,-0.03 0.09,-0.02 0.17,-0.02 0.22,-0.02 0.04,0 0.06,0.03 0.06,0.09 0,0.15 -0.01,0.36 -0.02,0.64 -0.01,0.29 -0.01,0.5 -0.01,0.64l0 1.02c0,0.06 0.01,0.09 0.03,0.09 0.06,-0.05 0.16,-0.13 0.29,-0.23 0.44,-0.35 0.87,-0.52 1.27,-0.52 0.39,0 0.71,0.1 0.96,0.3 0.27,0.22 0.41,0.52 0.41,0.9zm-0.96 0.19c0,-0.38 -0.25,-0.57 -0.74,-0.57 -0.36,0 -0.77,0.25 -1.23,0.73l0 0.59c0.21,0.04 0.47,0.06 0.78,0.06 0.3,0 0.56,-0.05 0.78,-0.17 0.27,-0.15 0.41,-0.36 0.41,-0.64z"
+      />
+    </g>
+  </svg>
+);
+
+
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-muted px-4">
+      <Card className="w-full max-w-md border-0">
+        <CardHeader className="space-y-1">
+          {/* <LogoIcon className="w-15 h-15 mx-auto" /> */}
+          <CardTitle className="text-2xl font-bold">Start your skoolar journey</CardTitle>
+          <CardDescription className='text-sm'>
+            Join now to connect with students and opportunities
+          </CardDescription>
+        </CardHeader>
+        <form onSubmit={handleSubmit}>
+          <CardContent className="space-y-4">
+            {error && (
+              <div className="rounded-md bg-red-50 p-3 text-sm text-red-800">
+                {error}
+              </div>
+            )}
+            <div className="space-y-2">
+              <Label htmlFor="name">Full Name</Label>
+              <Input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="John Doe"
+                value={formData.name}
+                onChange={handleChange}
+                className="w-full py-3 px-6 h-fit text-base rounded-xl"
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="you@example.com"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full py-3 px-6 h-fit text-base rounded-xl"
+                required
+              />
+            </div>
+            {/* <div className="space-y-2">
+              <Label htmlFor="password">Password</Label>
+              <Input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="••••••••"
+                value={formData.password}
+                onChange={handleChange}
+                className="w-full py-3 px-6 h-fit text-base rounded-xl"
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="confirmPassword">Confirm Password</Label>
+              <Input
+                id="confirmPassword"
+                name="confirmPassword"
+                type="password"
+                placeholder="••••••••"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                className="w-full py-3 px-6 h-fit text-base rounded-xl"
+                required
+              />
+            </div> */}
+          </CardContent>
+          <CardFooter className="flex flex-col space-y-4 mt-4">
+            <Button type="submit" className="w-full py-3 px-6 h-fit text-base rounded-xl" disabled={loading}>
+              {loading ? 'Creating account...' : 'Get started'}
+            </Button>
+            <p className="text-center text-sm text-gray-600">
+              Already have an account?{' '}
+              <Link href="/auth/signin" className="text-blue-600 hover:underline">
+                Sign in
+              </Link>
+            </p>
+          </CardFooter>
+        </form>
+      </Card>
+    </div>
+  );
+}
