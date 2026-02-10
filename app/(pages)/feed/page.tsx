@@ -126,34 +126,34 @@ export default function FeedPage() {
                 )}
               </div>
             </div>
-            
-                {/* Action Buttons */}
-                <div className="grid grid-cols-4 mt-3 w-full">
-                  <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-blue-500 hover:bg-blue-500/10 rounded-3xl cursor-pointer">
-                    <MessageCircle className="h-5 w-5" />
-                    <span className="text-xs">{post.comments}</span>
-                  </Button>
-                  
-                  <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-green-500 hover:bg-green-500/10 rounded-3xl cursor-pointer">
-                    <Repeat2 className="h-5 w-5" />
-                    <span className="text-xs">{post.reposts}</span>
-                  </Button>
-                  
-                  <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-red-500 hover:bg-red-500/10 rounded-3xl cursor-pointer">
-                    <Heart className="h-5 w-5" />
-                    <span className="text-xs">{post.likes}</span>
-                  </Button>
-                  
-                  <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-blue-500 hover:bg-blue-500/10 rounded-3xl cursor-pointer">
-                    <Send className="h-5 w-5" />
-                  </Button>
-                </div>
+
+            {/* Action Buttons */}
+            <div className="grid grid-cols-4 mt-3 w-full">
+              <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-blue-500 hover:bg-blue-500/10 rounded-3xl cursor-pointer">
+                <MessageCircle className="h-5 w-5" />
+                <span className="text-xs">{post.comments}</span>
+              </Button>
+
+              <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-green-500 hover:bg-green-500/10 rounded-3xl cursor-pointer">
+                <Repeat2 className="h-5 w-5" />
+                <span className="text-xs">{post.reposts}</span>
+              </Button>
+
+              <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-red-500 hover:bg-red-500/10 rounded-3xl cursor-pointer">
+                <Heart className="h-5 w-5" />
+                <span className="text-xs">{post.likes}</span>
+              </Button>
+
+              <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-blue-500 hover:bg-blue-500/10 rounded-3xl cursor-pointer">
+                <Send className="h-5 w-5" />
+              </Button>
+            </div>
           </article>
         ))}
       </div>
       <div className="w-full p-4 flex items-center justify-center">
         <Button size="lg" className="rounded-full" asChild>
-            <Link href="/auth/signup">Load more</Link>
+          <Link href="/auth/signup">Load more</Link>
         </Button>
       </div>
     </div>
