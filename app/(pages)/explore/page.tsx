@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Heart, MessageCircle, Repeat2, Search, Send, TrendingUp } from 'lucide-react';
+import SearchBar from '@/components/layout/search-bar';
 
 const mockPosts = [
   {
@@ -63,26 +64,20 @@ export default function ExplorePage() {
   );
 
   return (
-    <div className='border-r'>
+    <div>
       {/* Header */}
-      <div className="sticky top-0 z-10 backdrop-blur-lg bg-background/80 border-b">
+      <div className="sticky top-0 z-10 backdrop-blur-lg bg-background/80">
         <div className="px-4 py-4">
           <h1 className="text-xl font-bold mb-3">Discover</h1>
           {/* Search Bar */}
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder="Search posts, topics, or people..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 rounded-full"
-            />
+            <SearchBar />
           </div>
         </div>
       </div>
 
       {/* Trending Topics */}
-      <div className="border-b p-4">
+      <div className="p-4">
         <h2 className="font-bold text-lg mb-3 flex items-center gap-2">
           <TrendingUp className="h-5 w-5" />
           Trending Topics
@@ -90,7 +85,7 @@ export default function ExplorePage() {
         <div className="flex flex-wrap gap-2">
           {trendingTopics.map((topic, index) => (
             <Link key={index} href={`/explore?q=${encodeURIComponent(topic.tag)}`}>
-              <Badge variant="secondary" className="cursor-pointer hover:bg-muted hover:text-muted-foreground hover:text-primary-foreground">
+              <Badge variant="secondary" className="cursor-pointer hover:bg-secondary/80 hover:text-primary-foreground px-2 py-1.5">
                 {topic.tag}
               </Badge>
             </Link>
@@ -99,10 +94,10 @@ export default function ExplorePage() {
       </div>
 
       {/* Posts Feed */}
-      <div className="grid grid-cols-1 sm:grid-cols-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
         {filteredPosts.map((post) => (
           <Link key={post.id} href={`/posts/${post.id}`}>
-            <article className="p-4 hover:bg-muted/50 transition-colors">
+            <article className="p-4 hover:bg-muted/50 transition-colors rounded-2xl border h-full">
               <div className="flex gap-3">
                 {/* Avatar */}
                 <Avatar className="h-10 w-10">

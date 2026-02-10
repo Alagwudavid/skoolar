@@ -67,7 +67,7 @@ export function HeroSection() {
             {stats.map((stat, index) => {
               const Icon = stat.icon
               return (
-                <Card key={index} className={`text-center border-0 shadow-none bg-black/50 rounded-none py-3 ${index === 0 && ("md:rounded-tl-2xl pl-6")} ${index === 3 && ("md:rounded-tr-2xl pr-6")}`}>
+                <Card key={index} className={`text-center border-0 shadow-none bg-black/70 rounded-none py-3 ${index === 0 && ("md:rounded-tl-2xl pl-6")} ${index === 3 && ("md:rounded-tr-2xl pr-6")}`}>
                   <CardContent className="p-3 pb-0 text-background">
                     <Icon className="h-8 w-8 mx-auto" />
                     <div className="text-2xl font-bold">{stat.value}</div>

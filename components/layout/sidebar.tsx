@@ -82,7 +82,7 @@ export function Sidebar() {
   const [showMore, setShowMore] = useState(false);
 
   return (
-    <aside className="hidden h-screen w-64 xl:w-72 flex-col border-r bg-background md:flex sticky top-0 overflow-y-auto custom-scrollbar">
+    <aside className="hidden h-screen w-64 xl:w-72 flex-col bg-background md:flex sticky top-0 overflow-y-auto custom-scrollbar">
       {/* Logo */}
       <div className="p-4">
         <Link href="/" className="flex p-3 items-start justify-start">
@@ -102,7 +102,7 @@ export function Sidebar() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "flex items-center gap-4 px-4 py-3 rounded-full text-xl transition-colors hover:bg-muted",
+                  "flex items-center gap-4 px-4 py-3 rounded-full text-xl transition-colors hover:bg-muted w-full",
                   isActive && "font-bold"
                 )}
               >
@@ -165,10 +165,10 @@ export function Sidebar() {
       <div className="p-4">
         <Link
           href="/profile"
-          className="flex items-center gap-3 p-3 rounded-full hover:bg-muted hover:text-muted-foreground transition-colors"
+          className="flex items-center gap-3 p-3 rounded-full hover:bg-muted hover:text-foreground transition-colors"
         >
           <Avatar>
-            <AvatarFallback>U</AvatarFallback>
+            <AvatarFallback className="bg-secondary text-secondary-foreground">U</AvatarFallback>
           </Avatar>
           <div className="flex flex-col flex-1 min-w-0">
             <span className="font-semibold text-sm truncate">User Name</span>

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { TrendingUp } from "lucide-react";
+import SearchBar from "./search-bar";
 
 const suggestedUsers = [
     { id: '1', name: 'Sarah Johnson', username: '@sarahj', role: 'CS Student' },
@@ -19,6 +20,7 @@ const trendingTopics = [
 export function RightBar() {
     return (
         <aside className="hidden lg:flex lg:w-80 xl:w-96 flex-col gap-6 p-6 sticky top-0 h-screen overflow-y-auto">
+            <SearchBar />
             {/* Login Card */}
             <Card className="rounded-3xl">
                 <CardHeader>

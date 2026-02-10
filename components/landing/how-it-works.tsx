@@ -28,7 +28,7 @@ export function HowItWorks() {
         <section className="max-w-5xl mx-auto py-20">
             <div className="bg-gradient-to-br from-[#89F336] to-[#89F336]/50 dark:from-[#89F336]/20 dark:to-yellow-800/10 rounded-[64px] p-12 py-20">
                 <h2 className="text-3xl font-bold text-center mb-4">
-                    Getting Started <span className="text-primary">Process</span>
+                    Getting Started <span className="text-background">Process</span>
                 </h2>
 
                 <div className="grid md:grid-cols-3 gap-8 mt-12">

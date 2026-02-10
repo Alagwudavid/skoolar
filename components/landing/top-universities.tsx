@@ -32,13 +32,13 @@ export function TopUniversities() {
                 </Button>
             </div>
 
-            <div className="flex flex-wrap gap-3 mb-6">
+            {/* <div className="flex flex-wrap gap-3 mb-6">
                 {topUniversities.map((uni, index) => (
                     <Button key={index} variant="outline" size="sm" className="rounded-full">
                         {uni}
                     </Button>
                 ))}
-            </div>
+            </div> */}
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {universityCards.map((item, index) => (

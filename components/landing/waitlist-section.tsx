@@ -140,8 +140,7 @@ export function WaitlistSection() {
     <section
       ref={sectionRef}
       id="waitlist-form"
-      className="relative w-full px-4 sm:px-6 lg:px-8 py-16 sm:py-20 rounded-t-3xl lg:rounded-t-[82px] bg-background text-foreground border-t"
-    >
+      className="relative w-full px-4 sm:px-6 lg:px-8 py-16 sm:py-20 bg-background text-foreground">
       {/* <div
         className="w-full min-h-[500px] mx-auto px-4 sm:px-6 lg:px-14 py-16"
       > */}
@@ -149,8 +148,8 @@ export function WaitlistSection() {
         <div className="space-y-8 w-full mx-auto text-center">
           <div className="space-y-6 max-w-lg mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-none border border-secondary mx-auto">
-              <Sparkles className="w-5 h-5 text-foreground animate-pulse" />
-              <span className="text-sm font-medium text-foreground">
+              <Sparkles className="w-5 h-5 fill-foreground" />
+              <span className="text-sm font-semibold text-foreground">
                 Beyond education
               </span>
             </div>
@@ -208,7 +207,7 @@ export function WaitlistSection() {
           {/* Trust Badge */}
           <div className="flex items-center justify-center gap-3 mt-6">
             <div className="flex -space-x-2">
-              <div className="w-6 h-6 rounded-full border-2 border-foreground overflow-hidden relative">
+              <div className="w-6 h-6 rounded-full border border-foreground overflow-hidden relative">
                 <Image
                   src={userPhoto1Src}
                   alt="User 1"
@@ -216,7 +215,7 @@ export function WaitlistSection() {
                   className="object-cover"
                 />
               </div>
-              <div className="w-6 h-6 rounded-full border-2 border-foreground overflow-hidden relative">
+              <div className="w-6 h-6 rounded-full border border-foreground overflow-hidden relative">
                 <Image
                   src={userPhoto2Src}
                   alt="User 2"
@@ -224,7 +223,7 @@ export function WaitlistSection() {
                   className="object-cover"
                 />
               </div>
-              <div className="w-6 h-6 rounded-full border-2 border-foreground overflow-hidden relative">
+              <div className="w-6 h-6 rounded-full border border-foreground overflow-hidden relative">
                 <Image
                   src={userPhoto3Src}
                   alt="User 3"
