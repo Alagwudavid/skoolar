@@ -98,7 +98,7 @@ const posts = [
 ];
 
     return (
-        <div className="container max-w-4xl pr-4">
+        <div className="max-w-xl mx-auto pr-4">
             <div className="">
                 {/* Header */}
                 <div className="sticky top-0 z-10 backdrop-blur-lg bg-background/80">
@@ -108,11 +108,11 @@ const posts = [
                 </div>
 
                 <Card className="rounded-none pt-0 border-0 shadow-none">
-                    <div className='h-50 w-full bg-[#89F336] rounded-4xl'></div>
+                    <div className='h-50 w-full bg-secondary rounded-4xl'></div>
                     <CardHeader>
                         <div className="flex items-start gap-6">
                             <Avatar className="h-24 w-24">
-                                <AvatarFallback className="text-2xl">{user.name.charAt(0)}</AvatarFallback>
+                                <AvatarFallback className="text-2xl bg-secondary text-secondary-foreground">{user.name.charAt(0)}</AvatarFallback>
                             </Avatar>
                             <div className="flex-1">
                                 <div className="flex items-start justify-between">
@@ -120,7 +120,7 @@ const posts = [
                                         <CardTitle className="text-2xl">{user.name}</CardTitle>
                                         <CardDescription>{user.email}</CardDescription>
                                     </div>
-                                    <Button asChild>
+                                    <Button className='hover:bg-secondary/80' asChild>
                                         <Link href="/profile/edit">Edit Profile</Link>
                                     </Button>
                                 </div>
@@ -181,9 +181,9 @@ const posts = [
                     </Card>
                 </div>
 
-                <div className="divide-y border rounded-4xl overflow-hidden h-screen" >
+                <div className="divide-y border rounded-4xl overflow-hidden h-full mb-4" >
                     {posts.map((post) => (
-                      <article key={post.id} className="p-4 hover:bg-muted/50 transition-colors cursor-pointer">
+                      <article key={post.id} className="p-4 hover:bg-muted/70 transition-colors cursor-pointer">
                         <div className="flex gap-3">
                           {/* Avatar */}
                           <Link href={`/users/${post.user.username}`}>

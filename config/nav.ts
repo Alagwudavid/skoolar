@@ -1,4 +1,4 @@
-import { Home, Compass, PlusCircle, Users, Briefcase, User, MessageCircle } from "lucide-react";
+import { Home, Compass, Users, Briefcase, MessageCircle, Settings2 } from "lucide-react";
 import { NavItem } from "@/types";
 
 export const siteConfig = {
@@ -33,8 +33,8 @@ export const mainNav: NavItem[] = [
     icon: Briefcase,
   },
   {
-    title: "Profile",
-    href: "/profile",
-    icon: User,
+    title: "Setting",
+    href: "/setting",
+    icon: Settings2,
   },
 ];

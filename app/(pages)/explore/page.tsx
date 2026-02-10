@@ -67,7 +67,7 @@ export default function ExplorePage() {
     <div>
       {/* Header */}
       <div className="sticky top-0 z-10 backdrop-blur-lg bg-background/80">
-        <div className="px-4 py-4">
+        <div className="p-4">
           <h1 className="text-xl font-bold mb-3">Discover</h1>
           {/* Search Bar */}
           <div className="relative">
@@ -94,7 +94,7 @@ export default function ExplorePage() {
       </div>
 
       {/* Posts Feed */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-4">
         {filteredPosts.map((post) => (
           <Link key={post.id} href={`/posts/${post.id}`}>
             <article className="p-4 hover:bg-muted/50 transition-colors rounded-2xl border h-full">
