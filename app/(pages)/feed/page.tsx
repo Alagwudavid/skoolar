@@ -4,6 +4,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Heart, MessageCircle, Repeat2, Send, MoreHorizontal } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 const posts = [
   {
@@ -119,8 +120,8 @@ export default function FeedPage() {
 
                 {/* Post Image (if exists) */}
                 {post.image && (
-                  <div className="mt-3 rounded-2xl overflow-hidden border">
-                    <img src={post.image} alt="Post image" className="w-full" />
+                  <div className="mt-3 rounded-2xl overflow-hidden border relative w-full h-96">
+                    <Image src={post.image} alt="Post image" fill className="object-cover" />
                   </div>
                 )}
               </div>

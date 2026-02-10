@@ -13,7 +13,7 @@ export default function EnrollPage() {
 
   return (
     <div className="container mx-auto px-4">
-      <EnrollForm schools={schools} />
+      <EnrollmentForm schools={schools} />
     </div>
   );
 }
