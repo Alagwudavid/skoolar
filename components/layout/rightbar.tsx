@@ -20,7 +20,7 @@ export function RightBar() {
     return (
         <aside className="hidden lg:flex lg:w-80 xl:w-96 flex-col gap-6 p-6 sticky top-0 h-screen overflow-y-auto">
             {/* Login Card */}
-            <Card className="rounded-4xl">
+            <Card className="rounded-3xl">
                 <CardHeader>
                     <CardTitle>Log in or sign up</CardTitle>
                     <CardDescription>
@@ -28,10 +28,10 @@ export function RightBar() {
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                    <Button className="w-full" size="lg" asChild>
+                    <Button className="w-full hover:bg-secondary/80" size="lg" asChild>
                         <Link href="/auth/signup">Sign up</Link>
                     </Button>
-                    <Button variant="outline" className="w-full" size="lg" asChild>
+                    <Button variant="outline" className="w-full hover:text-foreground" size="lg" asChild>
                         <Link href="/auth/signin">Log in</Link>
                     </Button>
                 </CardContent>
@@ -61,10 +61,10 @@ export function RightBar() {
             </Card> */}
 
             {/* Trending Topics */}
-            <Card className="p-0 gap-0">
-                <CardHeader className="pt-3 pb-2! border-b">
+            <Card className="p-0 gap-0 rounded-3xl">
+                <CardHeader className="pt-3 pb-2! border-b px-3">
                     <CardTitle className="text-base flex items-center gap-2">
-                        <TrendingUp className="h-4 w-4" />
+                        <TrendingUp className="h-5 w-5" />
                         Trending
                     </CardTitle>
                 </CardHeader>
@@ -73,7 +73,7 @@ export function RightBar() {
                         <Link
                             key={index}
                             href={`/explore?q=${encodeURIComponent(topic.tag)}`}
-                            className="block hover:bg-secondary p-2 transition-colors"
+                            className="block hover:bg-muted hover:text-muted-foreground p-2 transition-colors"
                         >
                             <div className="font-semibold">{topic.tag}</div>
                             <div className="text-xs text-muted-foreground">{topic.posts}</div>
@@ -91,7 +91,7 @@ export function RightBar() {
             </Card>
 
             {/* Footer Links */}
-            <div className="flex flex-wrap gap-2 text-xs text-muted-foreground px-2">
+            <div className="flex flex-wrap gap-2 text-sm text-foreground px-2">
                 <Link href="/terms" className="hover:underline">Terms</Link>
                 <span>•</span>
                 <Link href="/privacy" className="hover:underline">Privacy Policy</Link>

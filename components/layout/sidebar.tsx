@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import {
-  BookOpen,
   ChevronDown,
   TrendingUp,
   Bot,
@@ -103,7 +102,7 @@ export function Sidebar() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "flex items-center gap-4 px-4 py-3 rounded-full text-xl transition-colors hover:bg-secondary",
+                  "flex items-center gap-4 px-4 py-3 rounded-full text-xl transition-colors hover:bg-muted",
                   isActive && "font-bold"
                 )}
               >
@@ -117,7 +116,7 @@ export function Sidebar() {
           <button
             onClick={() => setShowMore(!showMore)}
             className={cn(
-              "flex items-center gap-4 px-4 py-3 rounded-full text-xl transition-colors hover:bg-secondary w-full text-left"
+              "flex items-center gap-4 px-4 py-3 rounded-full text-xl transition-colors hover:bg-muted cursor-pointer w-full text-left"
             )}
           >
             <ChevronDown className={cn(
@@ -139,7 +138,7 @@ export function Sidebar() {
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      "flex items-center gap-4 px-4 py-3 rounded-full text-xl transition-colors hover:bg-secondary",
+                      "flex items-center gap-4 px-4 py-3 rounded-full text-xl transition-colors hover:bg-muted",
                       isActive && "font-bold"
                     )}
                   >
@@ -155,7 +154,7 @@ export function Sidebar() {
         {/* Post Button */}
         <Button
           size="lg"
-          className="w-full mt-4 rounded-full text-lg font-bold h-12"
+          className="w-full mt-4 rounded-full text-lg font-bold h-12 hover:bg-secondary/80"
           asChild
         >
           <Link href="/posts/create">Post</Link>
@@ -166,7 +165,7 @@ export function Sidebar() {
       <div className="p-4">
         <Link
           href="/profile"
-          className="flex items-center gap-3 p-3 rounded-full hover:bg-secondary transition-colors"
+          className="flex items-center gap-3 p-3 rounded-full hover:bg-muted hover:text-muted-foreground transition-colors"
         >
           <Avatar>
             <AvatarFallback>U</AvatarFallback>

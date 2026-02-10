@@ -71,7 +71,7 @@ export function Footer() {
                     </div>
                 </div>
 
-                {/* <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center text-sm opacity-90">
+                {/* <div className="border-t border-secondary-foreground/20 mt-8 pt-8 text-center text-sm opacity-90">
                     <p>© 2026 Skoolar. All rights reserved.</p>
                 </div> */}
             </div>

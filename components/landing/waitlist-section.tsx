@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useRef } from "react";
 // import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Crown, Loader2, Sparkles } from "lucide-react";
+import { ArrowRight, Loader2, Sparkles } from "lucide-react";
 // import { SuccessModal } from "@/components/success-modal";
 import Image from "next/image";
 import userPhoto1 from "@/public/user_photo-1.png";
@@ -148,7 +148,7 @@ export function WaitlistSection() {
       <div className="container flex items-center justify-center">
         <div className="space-y-8 w-full mx-auto text-center">
           <div className="space-y-6 max-w-lg mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-none border border-primary mx-auto">
+            <div className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-none border border-secondary mx-auto">
               <Sparkles className="w-5 h-5 text-foreground animate-pulse" />
               <span className="text-sm font-medium text-foreground">
                 Beyond education
@@ -188,7 +188,7 @@ export function WaitlistSection() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="px-4 py-3 rounded-3xl bg-secondary hover:bg-secondary/80 text-white font-semibold flex items-center justify-center transition disabled:opacity-50 disabled:cursor-not-allowed gap-2 whitespace-nowrap cursor-pointer"
+                className="px-4 py-3 rounded-3xl bg-secondary hover:bg-muted/80 text-white font-semibold flex items-center justify-center transition disabled:opacity-50 disabled:cursor-not-allowed gap-2 whitespace-nowrap cursor-pointer"
               >
                 {isSubmitting ? (
                   <>

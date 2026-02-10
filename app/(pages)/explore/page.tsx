@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Search, TrendingUp } from 'lucide-react';
+import { Heart, MessageCircle, Repeat2, Search, Send, TrendingUp } from 'lucide-react';
 
 const mockPosts = [
   {
@@ -90,7 +90,7 @@ export default function ExplorePage() {
         <div className="flex flex-wrap gap-2">
           {trendingTopics.map((topic, index) => (
             <Link key={index} href={`/explore?q=${encodeURIComponent(topic.tag)}`}>
-              <Badge variant="secondary" className="cursor-pointer hover:bg-secondary hover:text-primary-foreground">
+              <Badge variant="secondary" className="cursor-pointer hover:bg-muted hover:text-muted-foreground hover:text-primary-foreground">
                 {topic.tag}
               </Badge>
             </Link>
@@ -99,10 +99,10 @@ export default function ExplorePage() {
       </div>
 
       {/* Posts Feed */}
-      <div className="divide-y">
+      <div className="grid grid-cols-1 sm:grid-cols-2">
         {filteredPosts.map((post) => (
           <Link key={post.id} href={`/posts/${post.id}`}>
-            <article className="p-4 hover:bg-secondary/50 transition-colors">
+            <article className="p-4 hover:bg-muted/50 transition-colors">
               <div className="flex gap-3">
                 {/* Avatar */}
                 <Avatar className="h-10 w-10">
@@ -118,7 +118,6 @@ export default function ExplorePage() {
                     <span className="text-muted-foreground text-sm">
                       {new Date(post.createdAt).toLocaleDateString()}
                     </span>
-                    <Badge variant="outline" className="ml-auto">{post.type}</Badge>
                   </div>
 
                   {/* Post Content */}
@@ -138,10 +137,26 @@ export default function ExplorePage() {
                     </div>
                   )}
 
-                  {/* Stats */}
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                    <span>❤️ {post.likes}</span>
-                    <span>💬 {post.comments}</span>
+                  {/* Action Buttons */}
+                  <div className="grid grid-cols-4 mt-3 w-full">
+                    <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-blue-500 hover:bg-blue-500/10 rounded-3xl cursor-pointer">
+                      <MessageCircle className="h-5 w-5" />
+                      <span className="text-xs">{post.comments}</span>
+                    </Button>
+
+                    <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-green-500 hover:bg-green-500/10 rounded-3xl cursor-pointer">
+                      <Repeat2 className="h-5 w-5" />
+                      <span className="text-xs">0</span>
+                    </Button>
+
+                    <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-red-500 hover:bg-red-500/10 rounded-3xl cursor-pointer">
+                      <Heart className="h-5 w-5" />
+                      <span className="text-xs">{post.likes}</span>
+                    </Button>
+
+                    <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-blue-500 hover:bg-blue-500/10 rounded-3xl cursor-pointer">
+                      <Send className="h-5 w-5" />
+                    </Button>
                   </div>
                 </div>
               </div>

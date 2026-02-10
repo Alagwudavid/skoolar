@@ -78,7 +78,7 @@ export default function MessagesPage() {
                                         href={`/messages/${conv.userId}`}
                                         className="block"
                                     >
-                                        <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted transition-colors">
+                                        <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted hover:text-muted-foreground transition-colors">
                                             <Avatar>
                                                 <AvatarFallback>{conv.userName.charAt(0)}</AvatarFallback>
                                             </Avatar>

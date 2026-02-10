@@ -57,7 +57,7 @@ export default function CommunitiesPage() {
       <div className="p-4 grid gap-4 md:grid-cols-2">
         {communities.map((community) => (
           <Link key={community.id} href={`/communities/${community.id}`}>
-            <Card className="hover:shadow-lg transition-all hover:border-primary/50">
+            <Card className="hover:shadow-lg transition-all hover:border-secondary/50">
               <CardHeader>
                 <div className="flex items-start gap-3">
                   <Avatar className="h-12 w-12">

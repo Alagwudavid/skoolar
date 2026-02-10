@@ -74,7 +74,7 @@ export default function OpportunitiesPage() {
                     </Button>
                 </div>
 
-                <div className="flex gap-4">
+                <div className="flex gap-4 p-4">
                     <Input
                         placeholder="Search opportunities..."
                         value={searchQuery}
@@ -95,10 +95,10 @@ export default function OpportunitiesPage() {
                     </Select>
                 </div>
 
-                <div className="grid gap-4">
+                <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 p-4">
                     {filteredOpportunities.map((opportunity) => (
                         <Link key={opportunity.id} href={`/opportunities/${opportunity.id}`}>
-                            <Card className="hover:bg-muted/50 transition-colors">
+                            <Card className="hover:bg-muted/50 transition-colors h-full">
                                 <CardHeader>
                                     <div className="flex items-start justify-between">
                                         <div className="space-y-1">

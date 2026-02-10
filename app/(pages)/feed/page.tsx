@@ -82,7 +82,7 @@ export default function FeedPage() {
       {/* Posts Feed */}
       <div className="divide-y border rounded-4xl overflow-hidden" >
         {posts.map((post) => (
-          <article key={post.id} className="p-4 hover:bg-secondary/50 transition-colors cursor-pointer">
+          <article key={post.id} className="p-4 hover:bg-muted/50 transition-colors cursor-pointer">
             <div className="flex gap-3">
               {/* Avatar */}
               <Link href={`/users/${post.user.username}`}>
@@ -152,7 +152,7 @@ export default function FeedPage() {
         ))}
       </div>
       <div className="w-full p-4 flex items-center justify-center">
-        <Button size="lg" className="rounded-full" asChild>
+        <Button size="lg" className="rounded-full hover:bg-secondary/80" asChild>
           <Link href="/auth/signup">Load more</Link>
         </Button>
       </div>

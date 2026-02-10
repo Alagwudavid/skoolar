@@ -87,7 +87,7 @@ export default function NewMessagePage() {
                                                 <button
                                                     key={user.id}
                                                     type="button"
-                                                    className="w-full flex items-center gap-3 p-3 hover:bg-muted transition-colors"
+                                                    className="w-full flex items-center gap-3 p-3 hover:bg-muted hover:text-muted-foreground transition-colors"
                                                     onClick={() => {
                                                         setSelectedUser(user)
                                                         setSearchQuery('')
