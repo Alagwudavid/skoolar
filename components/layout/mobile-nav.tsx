@@ -13,14 +13,14 @@ export function MobileNav() {
       {mainNav.map((item) => {
         const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
         const Icon = item.icon;
-        
+
         return (
           <Link
             key={item.href}
             href={item.href}
             className={cn(
               "flex flex-col items-center justify-center gap-1 text-muted-foreground transition-colors",
-              isActive && "text-primary"
+              isActive && "text-foreground"
             )}
           >
             <Icon className={cn("h-6 w-6", isActive && "stroke-[2.5]")} />

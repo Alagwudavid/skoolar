@@ -73,7 +73,7 @@ export function RightBar() {
                         <Link
                             key={index}
                             href={`/explore?q=${encodeURIComponent(topic.tag)}`}
-                            className="block hover:bg-accent p-2 transition-colors"
+                            className="block hover:bg-secondary p-2 transition-colors"
                         >
                             <div className="font-semibold">{topic.tag}</div>
                             <div className="text-xs text-muted-foreground">{topic.posts}</div>

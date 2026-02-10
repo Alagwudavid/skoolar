@@ -20,7 +20,7 @@ export default function Home() {
       <TopUniversities />
       <PartnerOrganizations />
       <HowItWorks />
-      <FeaturesSection />
+      {/* <FeaturesSection /> */}
       <WaitlistSection />
       {/* <TestimonialsSection /> */}
       <Footer />

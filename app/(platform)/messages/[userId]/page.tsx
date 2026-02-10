@@ -126,8 +126,8 @@ export default function ConversationPage({ params }: { params: { userId: string 
                                         >
                                             <div
                                                 className={`rounded-lg px-4 py-2 max-w-[70%] ${message.isCurrentUser
-                                                        ? 'bg-primary text-primary-foreground'
-                                                        : 'bg-muted'
+                                                    ? 'bg-secondary text-secondary-foreground'
+                                                    : 'bg-muted'
                                                     }`}
                                             >
                                                 <p className="text-sm">{message.content}</p>

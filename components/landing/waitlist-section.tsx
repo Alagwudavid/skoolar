@@ -145,109 +145,109 @@ export function WaitlistSection() {
       {/* <div
         className="w-full min-h-[500px] mx-auto px-4 sm:px-6 lg:px-14 py-16"
       > */}
-        <div className="container flex items-center justify-center">
-          <div className="space-y-8 w-full mx-auto text-center">
-            <div className="space-y-6 max-w-lg mx-auto text-center">
-              <div className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-none border border-primary mx-auto">
-                <Sparkles className="w-5 h-5 text-foreground animate-pulse" />
-                <span className="text-sm font-medium text-foreground">
-                  Beyond education
-                </span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
-                Are you a Student?
-              </h2>
-              <p className="text-lg text-foreground">
-                Be among the first to experience our platform when we launch in
-                Q2 2026.
-              </p>
-            </div>
-
-            {/* Waitlist Form */}
-            <form onSubmit={handleSubmit} className="max-w-3xl mx-auto">
-              <div className="flex flex-col sm:flex-row gap-3 flex-wrap items-center justify-center">
-                <input
-                  type="text"
-                  placeholder="Full Name"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  disabled={isSubmitting}
-                  required
-                  className="flex-1 px-4 py-3 rounded-3xl border border-2 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-50 disabled:cursor-not-allowed"
-                />
-                <input
-                  ref={emailInputRef}
-                  type="email"
-                  placeholder="Email Address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  disabled={isSubmitting}
-                  required
-                  className="flex-1 px-4 py-3 rounded-3xl border border-2 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-50 disabled:cursor-not-allowed"
-                />
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="px-4 py-3 rounded-3xl bg-primary hover:bg-primary/90 text-white font-semibold flex items-center justify-center transition disabled:opacity-50 disabled:cursor-not-allowed gap-2 whitespace-nowrap cursor-pointer"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                      Joining...
-                    </>
-                  ) : (
-                    <>
-                      Join Now
-                      <ArrowRight className="w-5 h-5" />
-                    </>
-                  )}
-                </button>
-              </div>
-            </form>
-
-            {/* Trust Badge */}
-            <div className="flex items-center justify-center gap-3 mt-6">
-              <div className="flex -space-x-2">
-                <div className="w-6 h-6 rounded-full border-2 border-foreground overflow-hidden relative">
-                  <Image
-                    src={userPhoto1Src}
-                    alt="User 1"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="w-6 h-6 rounded-full border-2 border-foreground overflow-hidden relative">
-                  <Image
-                    src={userPhoto2Src}
-                    alt="User 2"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="w-6 h-6 rounded-full border-2 border-foreground overflow-hidden relative">
-                  <Image
-                    src={userPhoto3Src}
-                    alt="User 3"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              </div>
-              <span className="text-foreground/80 text-xs">
-                Trusted by many students
+      <div className="container flex items-center justify-center">
+        <div className="space-y-8 w-full mx-auto text-center">
+          <div className="space-y-6 max-w-lg mx-auto text-center">
+            <div className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-none border border-primary mx-auto">
+              <Sparkles className="w-5 h-5 text-foreground animate-pulse" />
+              <span className="text-sm font-medium text-foreground">
+                Beyond education
               </span>
             </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
+              Are you a Student?
+            </h2>
+            <p className="text-lg text-foreground">
+              Be among the first to experience our platform when we launch in
+              Q2 2026.
+            </p>
+          </div>
 
-            {/* Success Modal */}
-            {/* <SuccessModal
+          {/* Waitlist Form */}
+          <form onSubmit={handleSubmit} className="max-w-3xl mx-auto">
+            <div className="flex flex-col sm:flex-row gap-3 flex-wrap items-center justify-center">
+              <input
+                type="text"
+                placeholder="Full Name"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                disabled={isSubmitting}
+                required
+                className="flex-1 px-4 py-3 rounded-3xl border border-2 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-50 disabled:cursor-not-allowed"
+              />
+              <input
+                ref={emailInputRef}
+                type="email"
+                placeholder="Email Address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={isSubmitting}
+                required
+                className="flex-1 px-4 py-3 rounded-3xl border border-2 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-50 disabled:cursor-not-allowed"
+              />
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="px-4 py-3 rounded-3xl bg-secondary hover:bg-secondary/80 text-white font-semibold flex items-center justify-center transition disabled:opacity-50 disabled:cursor-not-allowed gap-2 whitespace-nowrap cursor-pointer"
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    Joining...
+                  </>
+                ) : (
+                  <>
+                    Join Now
+                    <ArrowRight className="w-5 h-5" />
+                  </>
+                )}
+              </button>
+            </div>
+          </form>
+
+          {/* Trust Badge */}
+          <div className="flex items-center justify-center gap-3 mt-6">
+            <div className="flex -space-x-2">
+              <div className="w-6 h-6 rounded-full border-2 border-foreground overflow-hidden relative">
+                <Image
+                  src={userPhoto1Src}
+                  alt="User 1"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="w-6 h-6 rounded-full border-2 border-foreground overflow-hidden relative">
+                <Image
+                  src={userPhoto2Src}
+                  alt="User 2"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="w-6 h-6 rounded-full border-2 border-foreground overflow-hidden relative">
+                <Image
+                  src={userPhoto3Src}
+                  alt="User 3"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </div>
+            <span className="text-foreground/80 text-xs">
+              Trusted by many students
+            </span>
+          </div>
+
+          {/* Success Modal */}
+          {/* <SuccessModal
               isOpen={showSuccessModal}
               onClose={() => setShowSuccessModal(false)}
               position={modalData.position}
               referralLink={modalData.referralLink}
               statusLink={modalData.statusLink}
             /> */}
-          </div>
         </div>
+      </div>
       {/* </div> */}
     </section>
   );

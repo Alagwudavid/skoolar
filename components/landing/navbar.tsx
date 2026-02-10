@@ -80,16 +80,16 @@ export function Navbar() {
                 </Link>
                 <nav className={`hidden md:flex items-center gap-6 ${isScrolled ? 'text-foreground' : 'text-background'
                     }`}>
-                    <Link href="/opportunities" className="text-sm font-medium hover:text-primary">
+                    <Link href="/opportunities" className="text-sm font-medium hover:underline underline-offset-4">
                         Opportunities
                     </Link>
-                    <Link href="/orgs" className="text-sm font-medium hover:text-primary">
+                    <Link href="/orgs" className="text-sm font-medium hover:underline underline-offset-4">
                         Organizations
                     </Link>
-                    <Link href="/groups" className="text-sm font-medium hover:text-primary">
+                    <Link href="/groups" className="text-sm font-medium hover:underline underline-offset-4">
                         Groups
                     </Link>
-                    <Link href="/explore" className="text-sm font-medium hover:text-primary">
+                    <Link href="/explore" className="text-sm font-medium hover:underline underline-offset-4">
                         Explore
                     </Link>
                 </nav>
@@ -97,7 +97,7 @@ export function Navbar() {
                     <Button
                         variant={isScrolled ? "ghost" : "outline"}
                         size="default"
-                        className={`rounded-full ${!isScrolled ? 'border-background text-background hover:bg-background hover:text-foreground' : ''
+                        className={`rounded-full ${!isScrolled ? 'border-background text-foreground hover:bg-background hover:text-foreground' : ''
                             }`}
                         asChild
                     >

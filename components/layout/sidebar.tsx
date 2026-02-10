@@ -103,7 +103,7 @@ export function Sidebar() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "flex items-center gap-4 px-4 py-3 rounded-full text-xl transition-colors hover:bg-accent",
+                  "flex items-center gap-4 px-4 py-3 rounded-full text-xl transition-colors hover:bg-secondary",
                   isActive && "font-bold"
                 )}
               >
@@ -117,7 +117,7 @@ export function Sidebar() {
           <button
             onClick={() => setShowMore(!showMore)}
             className={cn(
-              "flex items-center gap-4 px-4 py-3 rounded-full text-xl transition-colors hover:bg-accent w-full text-left"
+              "flex items-center gap-4 px-4 py-3 rounded-full text-xl transition-colors hover:bg-secondary w-full text-left"
             )}
           >
             <ChevronDown className={cn(
@@ -139,7 +139,7 @@ export function Sidebar() {
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      "flex items-center gap-4 px-4 py-3 rounded-full text-xl transition-colors hover:bg-accent",
+                      "flex items-center gap-4 px-4 py-3 rounded-full text-xl transition-colors hover:bg-secondary",
                       isActive && "font-bold"
                     )}
                   >
@@ -166,7 +166,7 @@ export function Sidebar() {
       <div className="p-4">
         <Link
           href="/profile"
-          className="flex items-center gap-3 p-3 rounded-full hover:bg-accent transition-colors"
+          className="flex items-center gap-3 p-3 rounded-full hover:bg-secondary transition-colors"
         >
           <Avatar>
             <AvatarFallback>U</AvatarFallback>

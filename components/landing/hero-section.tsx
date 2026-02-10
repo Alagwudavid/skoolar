@@ -25,12 +25,14 @@ export function HeroSection() {
       // style={{backgroundImage: url('/c7238ed4f6c3f25f169eb9561ad4e2fd.jpg')}}
       >
         <Image
-          src={"/c7238ed4f6c3f25f169eb9561ad4e2fd.jpg"}
+          src="/c7238ed4f6c3f25f169eb9561ad4e2fd.jpg"
           width={1420}
           height={540}
           alt='background image of student with laptop'
           className='absolute inset-0 w-full h-full object-cover z-0'
         />
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black/40 z-[1]" />
         <div className="relative z-10 pt-20 md:pt-32 container max-w-3xl mx-auto text-center">
           <div className='space-y-8 p-4'>
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-background">

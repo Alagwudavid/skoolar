@@ -70,8 +70,8 @@ export function ChatRoom({ communityId, initialMessages, currentUserId }: ChatRo
               </Avatar>
               <div
                 className={`rounded-lg p-3 text-sm ${msg.sender_id === currentUserId
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-muted"
+                  ? "bg-secondary text-secondary-foreground"
+                  : "bg-muted"
                   }`}
               >
                 {msg.content}

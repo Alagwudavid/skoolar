@@ -71,7 +71,7 @@ export function FeaturedOpportunities() {
                                 </CardDescription>
                             </CardHeader>
                             <CardContent>
-                                <div className="font-semibold text-primary">{opportunity.price}</div>
+                                <div className="font-semibold text-foreground">{opportunity.price}</div>
                             </CardContent>
                         </Card>
                     </Link>

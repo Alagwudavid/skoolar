@@ -94,7 +94,7 @@ export default function MessagesPage() {
                                                         {conv.lastMessage}
                                                     </p>
                                                     {conv.unread > 0 && (
-                                                        <span className="ml-2 bg-primary text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                                                        <span className="ml-2 bg-secondary text-secondary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
                                                             {conv.unread}
                                                         </span>
                                                     )}

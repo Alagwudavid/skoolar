@@ -90,7 +90,7 @@ export default function ExplorePage() {
         <div className="flex flex-wrap gap-2">
           {trendingTopics.map((topic, index) => (
             <Link key={index} href={`/explore?q=${encodeURIComponent(topic.tag)}`}>
-              <Badge variant="secondary" className="cursor-pointer hover:bg-primary hover:text-primary-foreground">
+              <Badge variant="secondary" className="cursor-pointer hover:bg-secondary hover:text-primary-foreground">
                 {topic.tag}
               </Badge>
             </Link>
@@ -102,7 +102,7 @@ export default function ExplorePage() {
       <div className="divide-y">
         {filteredPosts.map((post) => (
           <Link key={post.id} href={`/posts/${post.id}`}>
-            <article className="p-4 hover:bg-accent/50 transition-colors">
+            <article className="p-4 hover:bg-secondary/50 transition-colors">
               <div className="flex gap-3">
                 {/* Avatar */}
                 <Avatar className="h-10 w-10">

@@ -82,7 +82,7 @@ export default function FeedPage() {
       {/* Posts Feed */}
       <div className="divide-y border rounded-4xl overflow-hidden" >
         {posts.map((post) => (
-          <article key={post.id} className="p-4 hover:bg-accent/50 transition-colors cursor-pointer">
+          <article key={post.id} className="p-4 hover:bg-secondary/50 transition-colors cursor-pointer">
             <div className="flex gap-3">
               {/* Avatar */}
               <Link href={`/users/${post.user.username}`}>

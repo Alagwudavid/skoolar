@@ -100,8 +100,8 @@ export default function GroupChatPage({ params }: { params: { id: string } }) {
                                         </div>
                                         <div
                                             className={`rounded-lg px-4 py-2 max-w-[70%] ${message.userId === 'current-user'
-                                                    ? 'bg-primary text-primary-foreground'
-                                                    : 'bg-muted'
+                                                ? 'bg-secondary text-secondary-foreground'
+                                                : 'bg-muted'
                                                 }`}
                                         >
                                             <p className="text-sm">{message.content}</p>
