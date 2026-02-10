@@ -50,7 +50,7 @@ export function ChatRoom({ communityId, initialMessages, currentUserId }: ChatRo
         full_name: 'You'
       }
     };
-    
+
     setMessages((prev) => [...prev, newMessage]);
     setInput("");
   };
@@ -60,35 +60,33 @@ export function ChatRoom({ communityId, initialMessages, currentUserId }: ChatRo
       <ScrollArea className="flex-1 p-4">
         <div className="space-y-4">
           {messages.map((msg) => (
-             <div
-               key={msg.id}
-               className={`flex items-start gap-2 ${
-                 msg.sender_id === currentUserId ? "flex-row-reverse" : "flex-row"
-               }`}
-             >
-               <Avatar className="h-8 w-8">
-                 <AvatarFallback>U</AvatarFallback>
-               </Avatar>
-               <div
-                 className={`rounded-lg p-3 text-sm ${
-                   msg.sender_id === currentUserId
-                     ? "bg-primary text-primary-foreground"
-                     : "bg-muted"
-                 }`}
-               >
-                 {msg.content}
-               </div>
-             </div>
+            <div
+              key={msg.id}
+              className={`flex items-start gap-2 ${msg.sender_id === currentUserId ? "flex-row-reverse" : "flex-row"
+                }`}
+            >
+              <Avatar className="h-8 w-8">
+                <AvatarFallback>U</AvatarFallback>
+              </Avatar>
+              <div
+                className={`rounded-lg p-3 text-sm ${msg.sender_id === currentUserId
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-muted"
+                  }`}
+              >
+                {msg.content}
+              </div>
+            </div>
           ))}
           <div ref={scrollRef} />
         </div>
       </ScrollArea>
       <div className="p-4 border-t bg-background">
         <form onSubmit={handleSend} className="flex gap-2">
-          <Input 
-            value={input} 
-            onChange={(e) => setInput(e.target.value)} 
-            placeholder="Type a message..." 
+          <Input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Type a message..."
             className="flex-1"
           />
           <Button type="submit">Send</Button>
