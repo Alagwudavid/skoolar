@@ -19,21 +19,19 @@ export function HeroSection() {
   ]
 
   return (
-    <section className="relative w-full">
+    <section className="relative w-full pt-9">
       <div className="relative bg-[#55ba08] rounded-b-[82px] overflow-hidden "
       // bg-[url('/c7238ed4f6c3f25f169eb9561ad4e2fd.jpg')]" 
       // style={{backgroundImage: url('/c7238ed4f6c3f25f169eb9561ad4e2fd.jpg')}}
       >
-        {/* <Image
+        <Image
           src={"/c7238ed4f6c3f25f169eb9561ad4e2fd.jpg"}
           width={1420}
           height={540}
           alt='background image of student with laptop'
-          className='absolute top-0 object-cover w-full'
-        /> */}
-        {/* <div className=' pt-20 md:pt-32 container mx-auto text-center space-y-8'>
-        </div> */}
-        <div className="pt-20 md:pt-32 container max-w-3xl mx-auto text-center">
+          className='absolute inset-0 w-full h-full object-cover z-0'
+        />
+        <div className="relative z-10 pt-20 md:pt-32 container max-w-3xl mx-auto text-center">
           <div className='space-y-8 p-4'>
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-background">
               Search, explore and discover your opportunity!

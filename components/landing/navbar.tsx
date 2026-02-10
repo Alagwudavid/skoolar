@@ -1,4 +1,7 @@
+'use client'
+
 import Link from 'next/link'
+import { useState, useEffect } from 'react'
 import { BookOpen } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
@@ -53,15 +56,30 @@ const LogoIcon = (props: React.SVGProps<SVGSVGElement>) => (
     </svg>
 );
 export function Navbar() {
+    const [isScrolled, setIsScrolled] = useState(false)
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 20)
+        }
+
+        window.addEventListener('scroll', handleScroll)
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, [])
+
     return (
-        <header className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
+        <header className={`fixed top-9 left-0 right-0 z-40 transition-all duration-300 ${isScrolled
+            ? 'bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm'
+            : 'bg-transparent'
+            }`}>
             <div className="container flex h-16 px-4 items-center justify-between mx-auto">
                 <Link href="/" className="flex items-center gap-2 font-bold text-xl">
                     {/* <LogoIcon className="h-8 w-8" /> */}
                     {/* Skoolar */}
                     <LogoIcon className="h-6 w-30" />
                 </Link>
-                <nav className="hidden md:flex items-center gap-6">
+                <nav className={`hidden md:flex items-center gap-6 ${isScrolled ? 'text-foreground' : 'text-background'
+                    }`}>
                     <Link href="/opportunities" className="text-sm font-medium hover:text-primary">
                         Opportunities
                     </Link>
@@ -76,10 +94,20 @@ export function Navbar() {
                     </Link>
                 </nav>
                 <div className="flex items-center gap-2">
-                    <Button variant="ghost" size="default" className='rounded-full' asChild>
+                    <Button
+                        variant={isScrolled ? "ghost" : "outline"}
+                        size="default"
+                        className={`rounded-full ${!isScrolled ? 'border-background text-background hover:bg-background hover:text-foreground' : ''
+                            }`}
+                        asChild
+                    >
                         <Link href="/auth/signin">Sign In</Link>
                     </Button>
-                    <Button size="default" className='rounded-full' asChild>
+                    <Button
+                        size="default"
+                        className='rounded-full'
+                        asChild
+                    >
                         <Link href="/auth/signup">Sign Up</Link>
                     </Button>
                 </div>
