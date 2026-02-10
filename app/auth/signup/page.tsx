@@ -69,7 +69,7 @@ const LogoIcon = (props: React.SVGProps<SVGSVGElement>) => (
     style={{
       shapeRendering: "geometricPrecision",
       textRendering: "geometricPrecision",
-      imageRendering: "optimizeQuality",
+      imageRendering: "auto",
       fillRule: "evenodd",
       clipRule: "evenodd",
     }}
