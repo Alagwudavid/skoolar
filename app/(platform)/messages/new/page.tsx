@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -14,7 +14,7 @@ type User = {
     email: string
 }
 
-export default function NewMessagePage() {
+function NewMessageContent() {
     const router = useRouter()
     const searchParams = useSearchParams()
     const preselectedUserId = searchParams.get('userId')
@@ -132,5 +132,22 @@ export default function NewMessagePage() {
                 </CardContent>
             </Card>
         </div>
+    )
+}
+
+export default function NewMessagePage() {
+    return (
+        <Suspense fallback={
+            <div className="container max-w-2xl py-8">
+                <Card>
+                    <CardHeader>
+                        <CardTitle>New Message</CardTitle>
+                        <CardDescription>Loading...</CardDescription>
+                    </CardHeader>
+                </Card>
+            </div>
+        }>
+            <NewMessageContent />
+        </Suspense>
     )
 }
