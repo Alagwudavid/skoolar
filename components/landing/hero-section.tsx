@@ -53,7 +53,7 @@ export function HeroSection() {
               />
               <Button
                 size="icon"
-                className="absolute right-1 top-1 h-12 w-12 rounded-full"
+                className="absolute right-1 top-1 h-12 w-12 rounded-full hover:bg-primary/80 hover:text-primary-foreground transition-colors"
                 asChild
               >
                 <Link href={`/explore?q=${searchQuery}`}>
