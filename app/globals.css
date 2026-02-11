@@ -6,14 +6,14 @@
 :root {
     /* Intranet Color Scheme */
     --background: 255 255 255;
-    --foreground: 15 23 42;
+    --foreground: 0 0 0;
     --card: 255 255 255;
     --card-foreground: 15 23 42;
     --popover: 255 255 255;
     --popover-foreground: 15 23 42;
     --primary: 137 243 54;
     /* #89F336 - Bright Green */
-    --primary-foreground: 255 255 255;
+    --primary-foreground: 0 0 0;
     --secondary: 15 23 42;
     /* Deep Navy */
     --secondary-foreground: 255 255 255;

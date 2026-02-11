@@ -1,12 +1,12 @@
 import { Building2 } from 'lucide-react'
 
 const partnerOrganizations = [
-  { name: 'Tech Corp', type: 'Company' },
-  { name: 'Innovation Labs', type: 'Company' },
-  { name: 'Stanford', type: 'University' },
-  { name: 'MIT', type: 'University' },
-  { name: 'Google', type: 'Company' },
-  { name: 'Microsoft', type: 'Company' }
+  { name: 'Instutitute 1', type: 'Company' },
+  { name: 'Instutitute 2', type: 'Company' },
+  { name: 'Instutitute 3', type: 'University' },
+  { name: 'Instutitute 4', type: 'University' },
+  { name: 'Instutitute 5', type: 'Company' },
+  { name: 'Instutitute 6', type: 'Company' }
 ]
 
 export function PartnerOrganizations() {

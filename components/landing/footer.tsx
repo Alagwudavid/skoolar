@@ -44,7 +44,7 @@ const LogoText = (props: React.SVGProps<SVGSVGElement>) => (
 );
 export function Footer() {
     return (
-        <footer className="bg-black text-primary-foreground mt-20 rounded-t-[82px] overflow-hidden">
+        <footer className="bg-black text-white mt-20 rounded-t-[82px] overflow-hidden">
             <div className="container mx-auto p-10 sm:px-20 sm:pt-20">
                 <div className="grid md:grid-cols-4 gap-8">
                     <div>
@@ -54,44 +54,47 @@ export function Footer() {
                         <p className="text-sm opacity-90 mb-4">
                             Connecting students with opportunities worldwide.
                         </p>
+                        <p className="text-sm opacity-90 mb-4">
+                            © 2026 Skoolar, LLC.
+                        </p>
                     </div>
 
                     <div>
                         <h4 className="font-semibold mb-4">Company</h4>
                         <ul className="space-y-2 text-sm opacity-90">
-                            <li><Link href="/about">About Us</Link></li>
-                            <li><Link href="/contact">Contact</Link></li>
-                            <li><Link href="/careers">Careers</Link></li>
+                            <li><Link href="/about" className=" font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-primary">About Us</Link></li>
+                            <li><Link href="/contact" className=" font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-primary">Contact</Link></li>
+                            <li><Link href="/careers" className=" font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-primary">Careers</Link></li>
                         </ul>
                     </div>
 
                     <div>
                         <h4 className="font-semibold mb-4">Support</h4>
                         <ul className="space-y-2 text-sm opacity-90">
-                            <li><Link href="/help">Help Center</Link></li>
-                            <li><Link href="/terms">Terms of Service</Link></li>
-                            <li><Link href="/privacy">Privacy Policy</Link></li>
+                            <li><Link href="/help" className=" font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-primary">Help Center</Link></li>
+                            <li><Link href="/terms" className=" font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-primary">Terms of Service</Link></li>
+                            <li><Link href="/privacy" className=" font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-primary">Privacy Policy</Link></li>
                         </ul>
                     </div>
 
                     <div>
                         <h4 className="font-semibold mb-4">Follow Us</h4>
                         <div className="flex gap-4">
-                            <Button size="icon" variant="secondary" className="rounded-full">
-                                <Twitter className="h-4 w-4" />
+                            <Button size="icon" variant="secondary" className="rounded-full hover:bg-primary/80">
+                                <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24"><path fill="currentColor" d="M14.058 3.41c-1.807.767-2.995 2.453-3.056 4.38L11 7.972l-.243-.023C8.365 7.68 6.259 6.437 4.813 4.418a1 1 0 0 0-1.685.092l-.097.186l-.049.099c-.719 1.485-1.19 3.29-1.017 5.203l.03.273c.283 2.263 1.5 4.215 3.779 5.679l.173.107l-.081.043c-1.315.663-2.518.952-3.827.9c-1.056-.04-1.446 1.372-.518 1.878c3.598 1.961 7.461 2.566 10.792 1.6c4.06-1.18 7.152-4.223 8.335-8.433l.127-.495c.238-.993.372-2.006.401-3.024l.003-.332l.393-.779l.44-.862l.214-.434l.118-.247c.265-.565.456-1.033.574-1.43l.014-.056l.008-.018c.22-.593-.166-1.358-.941-1.358l-.122.007a1 1 0 0 0-.231.057l-.086.038a8 8 0 0 1-.88.36l-.356.115l-.271.08l-.772.214c-1.336-1.118-3.144-1.254-5.012-.554l-.211.084z"></path></svg>
                             </Button>
-                            <Button size="icon" variant="secondary" className="rounded-full">
-                                <Linkedin className="h-4 w-4" />
+                            <Button size="icon" variant="secondary" className="rounded-full hover:bg-primary/80">
+                                <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24"><path fill="currentColor" fillRule="evenodd" d="M9.429 8.969h3.714v1.85c.535-1.064 1.907-2.02 3.968-2.02c3.951 0 4.889 2.118 4.889 6.004V22h-4v-6.312c0-2.213-.535-3.461-1.897-3.461c-1.889 0-2.674 1.345-2.674 3.46V22h-4zM2.57 21.83h4V8.799h-4zM7.143 4.55a2.53 2.53 0 0 1-.753 1.802a2.57 2.57 0 0 1-1.82.748a2.6 2.6 0 0 1-1.818-.747A2.55 2.55 0 0 1 2 4.55c0-.677.27-1.325.753-1.803A2.58 2.58 0 0 1 4.571 2c.682 0 1.336.269 1.819.747s.753 1.126.753 1.803" clipRule="evenodd"></path></svg>
                             </Button>
-                            <Button size="icon" variant="secondary" className="rounded-full">
-                                <Facebook className="h-4 w-4" />
+                            <Button size="icon" variant="secondary" className="rounded-full hover:bg-primary/80">
+                                <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24"><g fill="none"><path d="M2 12c0-3.738 0-5.608.804-7A6 6 0 0 1 5 2.804C6.392 2 8.262 2 12 2s5.608 0 7 .804A6 6 0 0 1 21.196 5C22 6.392 22 8.262 22 12s0 5.608-.804 7A6 6 0 0 1 19 21.196C17.608 22 15.739 22 12 22s-5.608 0-7-.804A6 6 0 0 1 2.804 19C2 17.608 2 15.739 2 12"></path><path d="M16.5 12a4.5 4.5 0 1 1-9 0a4.5 4.5 0 0 1 9 0"></path><path stroke="currentColor" strokeWidth={2} d="M2 12c0-3.738 0-5.608.804-7A6 6 0 0 1 5 2.804C6.392 2 8.262 2 12 2s5.608 0 7 .804A6 6 0 0 1 21.196 5C22 6.392 22 8.262 22 12s0 5.608-.804 7A6 6 0 0 1 19 21.196C17.608 22 15.739 22 12 22s-5.608 0-7-.804A6 6 0 0 1 2.804 19C2 17.608 2 15.739 2 12Z"></path><path stroke="currentColor" strokeLinejoin="round" strokeWidth={2} d="M17.75 6.25h.004v.004h-.004zM16.5 12a4.5 4.5 0 1 1-9 0a4.5 4.5 0 0 1 9 0Z"></path></g></svg>
                             </Button>
                         </div>
                     </div>
                 </div>
 
-                <div className="mt-8 pt-8 text-center text-sm opacity-90">
-                    <LogoText className="h-fit w-full max-w-5xl text-foreground lg:-mb-18 mx-auto" />
+                <div className="mt-8 pt-8 text-center text-sm opacity-50">
+                    <LogoText className="h-fit w-full max-w-5xl text-muted-foreground lg:-mb-18 mx-auto" />
                 </div>
             </div>
         </footer>
