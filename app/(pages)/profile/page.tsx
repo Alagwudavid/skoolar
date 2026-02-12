@@ -98,7 +98,7 @@ const posts = [
 ];
 
     return (
-        <div className="max-w-xl mx-auto pr-4">
+        <div className="max-w-xl mx-auto sm:pr-4">
             <div className="">
                 {/* Header */}
                 <div className="sticky top-0 z-10 backdrop-blur-lg bg-background/80">
