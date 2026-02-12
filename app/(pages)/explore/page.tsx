@@ -12,38 +12,38 @@ import SearchBar from '@/components/layout/search-bar';
 import Image from 'next/image';
 
 const featuredOpportunities = [
-    {
-        id: '1',
-        type: 'Internship',
-        title: 'Software Engineering Intern',
-        organization: 'Tech Corp',
-        location: 'San Francisco, CA',
-        price: '$5,000/month'
-    },
-    {
-        id: '2',
-        type: 'Scholarship',
-        title: 'Merit-Based Scholarship 2026',
-        organization: 'Stanford University',
-        location: 'Remote',
-        price: 'Full Tuition'
-    },
-    {
-        id: '3',
-        type: 'Placement',
-        title: 'Graduate Software Developer',
-        organization: 'Innovation Labs',
-        location: 'New York, NY',
-        price: '$95K/year'
-    },
-    {
-        id: '4',
-        type: 'Internship',
-        title: 'Data Science Intern',
-        organization: 'Analytics Inc',
-        location: 'Boston, MA',
-        price: '$4,500/month'
-    }
+  {
+    id: '1',
+    type: 'Internship',
+    title: 'Software Engineering Intern',
+    organization: 'Tech Corp',
+    location: 'San Francisco, CA',
+    price: '$5,000/month'
+  },
+  {
+    id: '2',
+    type: 'Scholarship',
+    title: 'Merit-Based Scholarship 2026',
+    organization: 'Stanford University',
+    location: 'Remote',
+    price: 'Full Tuition'
+  },
+  {
+    id: '3',
+    type: 'Placement',
+    title: 'Graduate Software Developer',
+    organization: 'Innovation Labs',
+    location: 'New York, NY',
+    price: '$95K/year'
+  },
+  {
+    id: '4',
+    type: 'Internship',
+    title: 'Data Science Intern',
+    organization: 'Analytics Inc',
+    location: 'Boston, MA',
+    price: '$4,500/month'
+  }
 ]
 
 const mockNews = [
@@ -181,223 +181,223 @@ export default function ExplorePage() {
         ))}
       </div>
 
-        <div className="space-y-2 p-4 sm:p-0">
-          <div className="flex items-center justify-between">
-                <div>
-                    <h2 className="text-lg sm:text-xl font-bold mb-2 text-foreground">Trending</h2>
-                </div>
-                <Button variant="link" className='' asChild>
-                    <Link href="/opportunities" className='flex items-center gap-2'>
-                        View All
-                        <ChevronRight className='w-5 h-5' />
-                    </Link>
-                </Button>
+      <div className="space-y-2 p-4 sm:p-0">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-lg sm:text-xl font-bold mb-2 text-foreground">Trending</h2>
           </div>
-          <div className="h-60 w-full border rounded-2xl flex flex-col bg-muted relative overflow-hidden">
-            <Image src={"/stories/s_1.png"} width={120} height={240} alt="Status of User 3" className="w-full h-full" />
-            <div className="w-full h-full inset-0 bg-black/50 absolute top-0 z-10" />
-            <h1 className="text-white text-lg font-bold absolute bottom-2 left-2 z-20">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
-          </div>
+          <Button variant="link" className='' asChild>
+            <Link href="/opportunities" className='flex items-center gap-2'>
+              View All
+              <ChevronRight className='w-5 h-5' />
+            </Link>
+          </Button>
         </div>
-
-        <div className="space-y-2 p-4 sm:p-0">
-          <div className="flex items-center justify-between">
-                <div>
-                    <h2 className="text-lg sm:text-xl font-bold mb-2 text-foreground">Opportunities</h2>
-                </div>
-                <Button variant="link" className='' asChild>
-                    <Link href="/opportunities" className='flex items-center gap-2'>
-                        View All
-                        <ChevronRight className='w-5 h-5' />
-                    </Link>
-                </Button>
-          </div>
-          <div className="flex items-center gap-6 overflow-x-auto custom-scrollbar sm:pb-2">
-              {featuredOpportunities.map((opportunity) => (
-                  <Link key={opportunity.id} href={`/opportunities/${opportunity.id}`}>
-                      <Card className="w-72 h-72 shrink-0 hover:shadow-lg transition-shadow rounded-2xl overflow-hidden pt-0 gap-2">
-                          <div className="aspect-video bg-muted rounded-2xl relative">
-                              <div className="flex items-start justify-between mb-2 mr-2 absolute bottom-0 right-0">
-                                  <Badge className='px-3 py-1.5 bg-primary text-primary-foreground'>{opportunity.type}</Badge>
-                              </div>
-                          </div>
-                          <CardHeader>
-                              <CardTitle className="text-lg line-clamp-2 hover:text-primary">{opportunity.title}</CardTitle>
-                              <CardDescription className="line-clamp-1">
-                                  {opportunity.organization} • {opportunity.location}
-                              </CardDescription>
-                          </CardHeader>
-                          <CardContent>
-                              <div className="font-semibold text-foreground">{opportunity.price}</div>
-                          </CardContent>
-                      </Card>
-                  </Link>
-              ))}
-          </div>
+        <div className="h-60 w-full border rounded-2xl flex flex-col bg-muted relative overflow-hidden">
+          <Image src={"/stories/s_1.png"} width={120} height={240} alt="Status of User 3" className="w-full h-full" />
+          <div className="w-full h-full inset-0 bg-black/50 absolute top-0 z-10" />
+          <h1 className="text-white text-lg font-bold absolute bottom-2 left-2 z-20">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
         </div>
-      
-        <div className="space-y-2 p-4 sm:p-0">
-          <div className="flex items-center justify-between">
-                <div>
-                    <h2 className="text-lg sm:text-xl font-bold mb-2 text-foreground">Today&apos;s News</h2>
-                </div>
-                <Button variant="link" className='' asChild>
-                    <Link href="/opportunities" className='flex items-center gap-2'>
-                        View All
-                        <ChevronRight className='w-5 h-5' />
-                    </Link>
-                </Button>
+      </div>
+
+      <div className="space-y-2 p-4 sm:p-0">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-lg sm:text-xl font-bold mb-2 text-foreground">Opportunities</h2>
           </div>
-          <div className="divide-y border rounded-4xl overflow-hidden">
-            {filteredNews.map((news) => (
-              // <Link key={news.id} href={`/news/${news.id}`}>
-                <article key={news.id} className="p-4 cursor-pointer transition-colors h-full">
-                  <div className="flex gap-3">
-                    {/* Avatar */}
-                    <Avatar className="h-10 w-10">
-                      <AvatarFallback>{news.author.avatar}</AvatarFallback>
-                    </Avatar>
+          <Button variant="link" className='' asChild>
+            <Link href="/opportunities" className='flex items-center gap-2'>
+              View All
+              <ChevronRight className='w-5 h-5' />
+            </Link>
+          </Button>
+        </div>
+        <div className="flex items-center gap-6 overflow-x-auto custom-scrollbar sm:pb-2">
+          {featuredOpportunities.map((opportunity) => (
+            <Link key={opportunity.id} href={`/opportunities/${opportunity.id}`}>
+              <Card className="w-72 h-72 shrink-0 hover:shadow-lg transition-shadow rounded-2xl overflow-hidden pt-0 gap-2">
+                <div className="aspect-video bg-muted rounded-2xl relative">
+                  <div className="flex items-start justify-between mb-2 mr-2 absolute bottom-0 right-0">
+                    <Badge className='px-3 py-1.5 bg-primary text-primary-foreground'>{opportunity.type}</Badge>
+                  </div>
+                </div>
+                <CardHeader>
+                  <CardTitle className="text-lg line-clamp-2 hover:text-primary">{opportunity.title}</CardTitle>
+                  <CardDescription className="line-clamp-1">
+                    {opportunity.organization} • {opportunity.location}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="font-semibold text-foreground">{opportunity.price}</div>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
+        </div>
+      </div>
 
-                    {/* Content */}
-                    <div className="flex-1 min-w-0">
-                      {/* User Info */}
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="font-semibold">{news.author.name}</span>
-                        <span className="text-muted-foreground">·</span>
-                        <span className="text-muted-foreground text-sm">
-                          {new Date(news.createdAt).toLocaleDateString()}
-                        </span>
-                      </div>
+      <div className="space-y-2 p-4 sm:p-0">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-lg sm:text-xl font-bold mb-2 text-foreground">Today&apos;s News</h2>
+          </div>
+          <Button variant="link" className='' asChild>
+            <Link href="/opportunities" className='flex items-center gap-2'>
+              View All
+              <ChevronRight className='w-5 h-5' />
+            </Link>
+          </Button>
+        </div>
+        <div className="divide-y border rounded-4xl overflow-hidden">
+          {filteredNews.map((news) => (
+            // <Link key={news.id} href={`/news/${news.id}`}>
+            <article key={news.id} className="p-4 cursor-pointer transition-colors h-full">
+              <div className="flex gap-3">
+                {/* Avatar */}
+                <Avatar className="h-10 w-10">
+                  <AvatarFallback>{news.author.avatar}</AvatarFallback>
+                </Avatar>
 
-                      {/* Post Content */}
-                      <h3 className="font-bold text-lg mb-1">{news.title}</h3>
-                      <p className="text-muted-foreground line-clamp-2 text-sm mb-2">
-                        {news.content}
-                      </p>
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  {/* User Info */}
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="font-semibold">{news.author.name}</span>
+                    <span className="text-muted-foreground">·</span>
+                    <span className="text-muted-foreground text-sm">
+                      {new Date(news.createdAt).toLocaleDateString()}
+                    </span>
+                  </div>
 
-                      {/* Tags */}
-                      {news.tags.length > 0 && (
-                        <div className="flex flex-wrap gap-1 mb-2">
-                          {news.tags.map((tag) => (
-                            <Badge key={tag} variant="secondary" className="text-xs">
-                              #{tag}
-                            </Badge>
-                          ))}
-                        </div>
+                  {/* Post Content */}
+                  <h3 className="font-bold text-lg mb-1">{news.title}</h3>
+                  <p className="text-muted-foreground line-clamp-2 text-sm mb-2">
+                    {news.content}
+                  </p>
+
+                  {/* Tags */}
+                  {news.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-1 mb-2">
+                      {news.tags.map((tag) => (
+                        <Badge key={tag} variant="secondary" className="text-xs">
+                          #{tag}
+                        </Badge>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Action Buttons */}
+                  <div className="hidden grid grid-cols-4 mt-3 w-full">
+                    <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-blue-500 hover:bg-blue-500/10 rounded-3xl cursor-pointer">
+                      <MessageCircle className="h-5 w-5" />
+                      <span className="text-xs">{news.comments}</span>
+                    </Button>
+
+                    <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-green-500 hover:bg-green-500/10 rounded-3xl cursor-pointer">
+                      <Repeat2 className="h-5 w-5" />
+                      <span className="text-xs">0</span>
+                    </Button>
+
+                    <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-red-500 hover:bg-red-500/10 rounded-3xl cursor-pointer">
+                      <Heart className="h-5 w-5" />
+                      <span className="text-xs">{news.likes}</span>
+                    </Button>
+
+                    <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-blue-500 hover:bg-blue-500/10 rounded-3xl cursor-pointer">
+                      <Send className="h-5 w-5" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </article>
+            // </Link>
+          ))}
+        </div>
+      </div>
+
+      <div className="space-y-2 p-4 sm:p-0">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-lg sm:text-xl font-bold mb-2 text-foreground">For You</h2>
+          </div>
+          <Button variant="link" className='' asChild>
+            <Link href="/opportunities" className='flex items-center gap-2'>
+              View All
+              <ChevronRight className='w-5 h-5' />
+            </Link>
+          </Button>
+        </div>
+        {/* Posts Feed */}
+        <div className="divide-y border rounded-4xl overflow-hidden" >
+          {posts.map((post) => (
+            <article key={post.id} className="p-4 cursor-pointer">
+              <div className="flex gap-3">
+                {/* Avatar */}
+                <Link href={`/users/${post.user.username}`}>
+                  <Avatar className="h-10 w-10">
+                    <AvatarFallback>{post.user.avatar}</AvatarFallback>
+                  </Avatar>
+                </Link>
+
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  {/* User Info */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-1">
+                      <Link href={`/users/${post.user.username}`} className="font-semibold hover:underline">
+                        {post.user.name}
+                      </Link>
+                      {post.user.verified && (
+                        <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" className="h-5 w-5 text-lime-500"><path fill="currentColor" fillRule="evenodd" d="M12 21a9 9 0 1 0 0-18a9 9 0 0 0 0 18m-.232-5.36l5-6l-1.536-1.28l-4.3 5.159l-2.225-2.226l-1.414 1.414l3 3l.774.774z" clipRule="evenodd"></path></svg>
                       )}
-
-                      {/* Action Buttons */}
-                      <div className="hidden grid grid-cols-4 mt-3 w-full">
-                        <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-blue-500 hover:bg-blue-500/10 rounded-3xl cursor-pointer">
-                          <MessageCircle className="h-5 w-5" />
-                          <span className="text-xs">{news.comments}</span>
-                        </Button>
-
-                        <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-green-500 hover:bg-green-500/10 rounded-3xl cursor-pointer">
-                          <Repeat2 className="h-5 w-5" />
-                          <span className="text-xs">0</span>
-                        </Button>
-
-                        <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-red-500 hover:bg-red-500/10 rounded-3xl cursor-pointer">
-                          <Heart className="h-5 w-5" />
-                          <span className="text-xs">{news.likes}</span>
-                        </Button>
-
-                        <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-blue-500 hover:bg-blue-500/10 rounded-3xl cursor-pointer">
-                          <Send className="h-5 w-5" />
-                        </Button>
-                      </div>
+                      {/* <span className="text-muted-foreground">@{post.user.username}</span> */}
+                      <span className="text-muted-foreground">·</span>
+                      <span className="text-muted-foreground">{post.timestamp}</span>
                     </div>
+                    <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full">
+                      <MoreHorizontal className="h-5 w-5" />
+                    </Button>
                   </div>
-                </article>
-              // </Link>
-            ))}
-          </div>
+
+                  {/* Post Content */}
+                  <div className="mt-2 whitespace-pre-wrap text-[15px]">
+                    {post.content}
+                  </div>
+
+                  {/* Post Image (if exists) */}
+                  {post.image && (
+                    <div className="mt-3 rounded-2xl overflow-hidden border relative w-full h-96">
+                      <Image src={post.image} alt="Post image" fill className="object-cover" />
+                    </div>
+                  )}
+
+                  {/* Action Buttons */}
+                  <div className="flex items-center gap-3 mt-4">
+                    <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-blue-500 rounded-full cursor-pointer">
+                      <MessageCircle className="h-5 w-5" />
+                      <span className="text-xs">{post.comments}</span>
+                    </Button>
+
+                    <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-green-500 rounded-full cursor-pointer">
+                      <Repeat2 className="h-5 w-5" />
+                      <span className="text-xs">{post.reposts}</span>
+                    </Button>
+
+                    <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-red-500 rounded-full cursor-pointer">
+                      <Heart className="h-5 w-5" />
+                      <span className="text-xs">{post.likes}</span>
+                    </Button>
+
+                    <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-blue-500 rounded-full cursor-pointer">
+                      <Send className="h-5 w-5" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
-
-        <div className="space-y-2 p-4 sm:p-0">
-          <div className="flex items-center justify-between">
-                <div>
-                    <h2 className="text-lg sm:text-xl font-bold mb-2 text-foreground">For You</h2>
-                </div>
-                <Button variant="link" className='' asChild>
-                    <Link href="/opportunities" className='flex items-center gap-2'>
-                        View All
-                        <ChevronRight className='w-5 h-5' />
-                    </Link>
-                </Button>
-          </div>
-          {/* Posts Feed */}
-          <div className="divide-y border rounded-4xl overflow-hidden" >
-            {posts.map((post) => (
-              <article key={post.id} className="p-4 cursor-pointer">
-                <div className="flex gap-3">
-                  {/* Avatar */}
-                  <Link href={`/users/${post.user.username}`}>
-                    <Avatar className="h-10 w-10">
-                      <AvatarFallback>{post.user.avatar}</AvatarFallback>
-                    </Avatar>
-                  </Link>
-        
-                  {/* Content */}
-                  <div className="flex-1 min-w-0">
-                    {/* User Info */}
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-1">
-                        <Link href={`/users/${post.user.username}`} className="font-semibold hover:underline">
-                          {post.user.name}
-                        </Link>
-                        {post.user.verified && (
-                          <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" className="h-5 w-5 text-lime-500"><path fill="currentColor" fillRule="evenodd" d="M12 21a9 9 0 1 0 0-18a9 9 0 0 0 0 18m-.232-5.36l5-6l-1.536-1.28l-4.3 5.159l-2.225-2.226l-1.414 1.414l3 3l.774.774z" clipRule="evenodd"></path></svg>
-                        )}
-                        {/* <span className="text-muted-foreground">@{post.user.username}</span> */}
-                        <span className="text-muted-foreground">·</span>
-                        <span className="text-muted-foreground">{post.timestamp}</span>
-                      </div>
-                      <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full">
-                        <MoreHorizontal className="h-5 w-5" />
-                      </Button>
-                    </div>
-        
-                    {/* Post Content */}
-                    <div className="mt-2 whitespace-pre-wrap text-[15px]">
-                      {post.content}
-                    </div>
-        
-                    {/* Post Image (if exists) */}
-                    {post.image && (
-                      <div className="mt-3 rounded-2xl overflow-hidden border relative w-full h-96">
-                        <Image src={post.image} alt="Post image" fill className="object-cover" />
-                      </div>
-                    )}
-        
-                    {/* Action Buttons */}
-                    <div className="flex items-center gap-3 mt-4">
-                      <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-blue-500 rounded-full cursor-pointer">
-                        <MessageCircle className="h-5 w-5" />
-                        <span className="text-xs">{post.comments}</span>
-                      </Button>
-        
-                      <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-green-500 rounded-full cursor-pointer">
-                        <Repeat2 className="h-5 w-5" />
-                        <span className="text-xs">{post.reposts}</span>
-                      </Button>
-        
-                      <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-red-500 rounded-full cursor-pointer">
-                        <Heart className="h-5 w-5" />
-                        <span className="text-xs">{post.likes}</span>
-                      </Button>
-        
-                      <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-blue-500 rounded-full cursor-pointer">
-                        <Send className="h-5 w-5" />
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>        
+      </div>
     </div>
   );
 }

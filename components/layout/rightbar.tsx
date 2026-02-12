@@ -21,13 +21,13 @@ const trendingTopics = [
 ];
 
 export function RightBar() {
-        const router = useRouter();
-        const pathname = usePathname();
+    const router = useRouter();
+    const pathname = usePathname();
 
-        const isExplorePage = pathname.startsWith('/explore');
+    const isExplorePage = pathname.startsWith('/explore');
 
     return (
-        <aside className="hidden lg:flex lg:w-80 xl:w-96 flex-col gap-6 p-6 sticky top-0 h-screen overflow-y-auto  custom-scrollbar">
+        <aside className="hidden lg:flex lg:w-80 xl:w-96 flex-col gap-6 p-6 sticky top-0 h-screen overflow-y-auto custom-scrollbar">
             <div className={`relative ${isExplorePage ? "hidden" : "block"}`}>
                 <SearchBar />
             </div>
