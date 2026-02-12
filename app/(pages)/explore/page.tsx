@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Heart, MessageCircle, Repeat2, Search, Send, TrendingUp } from 'lucide-react';
 import SearchBar from '@/components/layout/search-bar';
+import Image from 'next/image';
 
 const mockPosts = [
   {
@@ -64,7 +65,7 @@ export default function ExplorePage() {
   );
 
   return (
-    <div>
+    <div className='max-w-xl mx-auto border'>
       {/* Header */}
       <div className="sticky top-0 z-10 backdrop-blur-lg bg-background/80">
         <div className="p-4">
@@ -92,6 +93,15 @@ export default function ExplorePage() {
           ))}
         </div>
       </div>
+
+
+        <div className="h-60 w-full border rounded-2xl flex flex-col relative overflow-hidden">
+          <div className="bg-muted relative h-full">
+            <Image src={"/stories/s_1.png"} width={120} height={240} alt="Status of User 3" className="w-full h-full" />
+            <div className="w-full h-full inset-0 bg-black/50 absolute top-0 z-10" />
+            <h1 className="text-white text-lg font-bold absolute bottom-2 left-2 z-20">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
+          </div>
+        </div>
 
       {/* Posts Feed */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-4">

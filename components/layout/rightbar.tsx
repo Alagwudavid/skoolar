@@ -30,7 +30,7 @@ export function RightBar() {
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                    <Button className="w-full hover:bg-secondary/80" size="lg" asChild>
+                    <Button className="w-full" size="lg" asChild>
                         <Link href="/auth/signup">Sign up</Link>
                     </Button>
                     <Button variant="outline" className="w-full hover:text-foreground" size="lg" asChild>

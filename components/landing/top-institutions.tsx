@@ -27,7 +27,7 @@ export function TopInstitutions() {
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {universityCards.map((item, index) => (
                     <Card key={index} className="hover:shadow-lg transition-shadow rounded-2xl overflow-hidden pt-0 font-mono gap-3">
-                        <div className="aspect-video bg-muted rounded-2xl relative">
+                        <div className="w-full h-42 bg-muted rounded-2xl relative">
                             <Image src={item.BannerImgSrc} className="w-full h-full object-cover" width={240} height={240} alt={item.organization} />
                         </div>
                         <CardHeader className='flex items-start'>
