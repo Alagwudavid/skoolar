@@ -50,9 +50,6 @@ export default function SearchBar({
   maxWidth = "max-w-xl",
   placeholder = "Search...",
   onSearch,
-  isInCommunity = false,
-  communityName = "Intranet-community",
-  communityLink = "/c/general",
 }: SearchBarProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -192,11 +189,11 @@ export default function SearchBar({
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
           <input
             type="text"
-            placeholder={`${isInCommunity ? "Search in " + communityName : placeholder}`}
+            placeholder={placeholder}
             value={searchQuery}
             onChange={handleChange}
             onFocus={handleFocus}
-            className={`w-full bg-background text-foreground ${isInCommunity ? "pl-22 lg:pl-40" : "pl-10"} pr-12 py-2 rounded-full border focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent placeholder-gray-400`}
+            className={`w-full bg-background text-foreground pl-10 pr-12 py-2 rounded-full border focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent placeholder-gray-400`}
           />
 
           {/* Clear Button or Loading Indicator */}

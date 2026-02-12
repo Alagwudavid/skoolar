@@ -20,7 +20,9 @@ const trendingTopics = [
 export function RightBar() {
     return (
         <aside className="hidden lg:flex lg:w-80 xl:w-96 flex-col gap-6 p-6 sticky top-0 h-screen overflow-y-auto">
-            <SearchBar />
+            <div className="relative">
+                <SearchBar />
+            </div>
             {/* Login Card */}
             <Card className="rounded-3xl">
                 <CardHeader>
