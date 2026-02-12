@@ -35,10 +35,10 @@ export function HeroSection() {
         <div className="absolute inset-0 bg-black/40 z-[1]" />
         <div className="relative z-10 pt-20 md:pt-32 container max-w-3xl mx-auto text-center">
           <div className='space-y-8 p-4'>
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-background">
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white">
               Search, explore and discover your opportunity!
             </h1>
-            <p className="text-xl text-background">
+            <p className="text-xl text-white">
               Connect with opportunities, organizations, and fellow students
             </p>
 
@@ -68,7 +68,7 @@ export function HeroSection() {
               const Icon = stat.icon
               return (
                 <Card key={index} className={`text-center border-0 shadow-none bg-black/70 rounded-none py-3 ${index === 0 && ("md:rounded-tl-2xl pl-6")} ${index === 3 && ("md:rounded-tr-2xl pr-6")}`}>
-                  <CardContent className="p-3 pb-0 text-background">
+                  <CardContent className="p-3 pb-0 text-white">
                     <Icon className="h-8 w-8 mx-auto" />
                     <div className="text-2xl font-bold">{stat.value}</div>
                     <div className="text-sm">{stat.label}</div>
