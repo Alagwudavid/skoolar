@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 import {
   ChevronDown,
@@ -13,11 +14,28 @@ import {
   MapPin,
   Home as HomeIcon,
   GraduationCap as UniversityIcon,
-  Settings2
+  Settings2,
+  Settings,
+  Activity,
+  Bookmark,
+  Moon,
+  AlertCircle,
+  LogOut,
+  ChevronLeft,
+  Sun,
+  Monitor,
+  Check
 } from "lucide-react";
 import { mainNav } from "@/config/nav";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const LogoText = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -81,13 +99,15 @@ const moreMenuItems = [
 export function Sidebar() {
   const pathname = usePathname();
   const [showMore, setShowMore] = useState(false);
+  const [showAppearanceMenu, setShowAppearanceMenu] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   return (
     <aside className="hidden h-screen w-64 xl:w-72 flex-col bg-background md:flex sticky top-0 overflow-y-auto custom-scrollbar">
       {/* Logo */}
       <div className="p-4">
         <Link href="/" className="flex p-3 items-start justify-start">
-          <LogoText className="h-6 w-25 text-foreground" />
+          <LogoText className="h-6 w-25 text-primary" />
         </Link>
       </div>
 
@@ -151,26 +171,116 @@ export function Sidebar() {
             </div>
           )}
         </div>
-
-        {/* Post Button */}
-        {/* <Button
-          size="lg"
-          className="w-full mt-4 rounded-full text-lg font-bold h-12 hover:bg-primary/80"
-          asChild
-        >
-          <Link href="/posts/create">Post</Link>
-        </Button> */}
       </nav>
 
       {/* User Profile */}
       <div className="p-4">
-        <Link
-          href="/profile"
-          className="flex items-center gap-3 p-3 rounded-full hover:bg-muted hover:text-foreground transition-colors"
-        >
-          <Settings2 className="h-7 w-7" />
-          <span>Menu</span>
-        </Link>
+        <DropdownMenu onOpenChange={(open) => { if (!open) setShowAppearanceMenu(false); }}>
+          <DropdownMenuTrigger asChild>
+            <button className="flex items-center gap-3 p-3 rounded-full hover:bg-muted hover:text-foreground transition-colors w-full">
+              <Settings2 className="h-7 w-7" />
+              <span className="text-xl">Preference</span>
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            className="w-72 p-0"
+            align="end"
+            side="top"
+            sideOffset={16}
+            alignOffset={-8}
+          >
+            {!showAppearanceMenu ? (
+              <>
+                <div className="p-2">
+                  <DropdownMenuItem asChild>
+                    <Link href="/setting" className="flex items-center gap-3 p-3 text-base cursor-pointer">
+                      <Settings className="h-5 w-5" />
+                      <span>Settings</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="/profile" className="flex items-center gap-3 p-3 text-base cursor-pointer">
+                      <Activity className="h-5 w-5" />
+                      <span>Your Activity</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="/profile" className="flex items-center gap-3 p-3 text-base cursor-pointer">
+                      <Bookmark className="h-5 w-5" />
+                      <span>Saved</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    className="flex items-center gap-3 p-3 text-base cursor-pointer"
+                    onSelect={(e) => {
+                      e.preventDefault();
+                      setShowAppearanceMenu(true);
+                    }}
+                  >
+                    <Moon className="h-5 w-5" />
+                    <span>Switch appearance</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="/report" className="flex items-center gap-3 p-3 text-base cursor-pointer">
+                      <AlertCircle className="h-5 w-5" />
+                      <span>Report a problem</span>
+                    </Link>
+                  </DropdownMenuItem>
+                </div>
+                <DropdownMenuSeparator />
+                <div className="p-2">
+                  <DropdownMenuItem className="flex items-center gap-3 p-3 text-base cursor-pointer">
+                    <LogOut className="h-5 w-5" />
+                    <span>Log out</span>
+                  </DropdownMenuItem>
+                </div>
+              </>
+            ) : (
+              <div className="p-2">
+                <DropdownMenuItem
+                  className="flex items-center gap-3 p-3 text-base cursor-pointer mb-2"
+                  onSelect={(e) => {
+                    e.preventDefault();
+                    setShowAppearanceMenu(false);
+                  }}
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                  <span>Switch appearance</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  className="flex items-center justify-between p-3 text-base cursor-pointer"
+                  onSelect={() => setTheme("light")}
+                >
+                  <div className="flex items-center gap-3">
+                    <Sun className="h-5 w-5" />
+                    <span>Light</span>
+                  </div>
+                  {theme === "light" && <Check className="h-5 w-5" />}
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  className="flex items-center justify-between p-3 text-base cursor-pointer"
+                  onSelect={() => setTheme("dark")}
+                >
+                  <div className="flex items-center gap-3">
+                    <Moon className="h-5 w-5" />
+                    <span>Dark</span>
+                  </div>
+                  {theme === "dark" && <Check className="h-5 w-5" />}
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  className="flex items-center justify-between p-3 text-base cursor-pointer"
+                  onSelect={() => setTheme("system")}
+                >
+                  <div className="flex items-center gap-3">
+                    <Monitor className="h-5 w-5" />
+                    <span>System</span>
+                  </div>
+                  {theme === "system" && <Check className="h-5 w-5" />}
+                </DropdownMenuItem>
+              </div>
+            )}
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </aside>
   );
