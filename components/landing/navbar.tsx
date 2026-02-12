@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { BookOpen } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { RIcons } from "../icons/regular";
+import { RIcons } from "../icons/collection";
 
 export function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false)

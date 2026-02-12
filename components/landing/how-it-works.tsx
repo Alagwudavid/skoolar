@@ -26,9 +26,9 @@ const howItWorks = [
 export function HowItWorks() {
     return (
         <section className="max-w-5xl mx-auto py-20">
-            <div className="bg-gradient-to-br from-[#89F336] to-[#89F336]/50 dark:from-[#89F336]/20 dark:to-yellow-800/10 rounded-[64px] p-12 py-20">
+            <div className="bg-black dark:bg-muted text-white dark:text-muted-foreground rounded-[64px] p-12 py-20">
                 <h2 className="text-3xl font-bold text-center mb-4">
-                    Getting Started <span className="text-background">Process</span>
+                    Getting Started <span className="text-primary">Process</span>
                 </h2>
 
                 <div className="grid md:grid-cols-3 gap-8 mt-12">
@@ -40,14 +40,14 @@ export function HowItWorks() {
                                     <Icon className="h-8 w-8 text-primary" />
                                 </div>
                                 <h3 className="text-xl font-bold">{step.title}</h3>
-                                <p className="text-foreground">{step.description}</p>
+                                <p className="text-white">{step.description}</p>
                             </div>
                         )
                     })}
                 </div>
 
                 <div className="text-center mt-12">
-                    <Button size="lg" className='rounded-full px-3 py-2' asChild>
+                    <Button size="lg" className='rounded-full px-3 py-2 bg-secondary text-secondary-foreground' asChild>
                         <Link href="/auth/signup">Start Now →</Link>
                     </Button>
                 </div>

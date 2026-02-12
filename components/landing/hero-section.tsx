@@ -7,22 +7,22 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent } from '@/components/ui/card'
 import Image from 'next/image'
+import { BuildingIcon, GraduationCapIcon } from '../icons/regular'
+import { ActiveOpportunitiesIcon, GroupIcon } from '../icons'
 
 export function HeroSection() {
   const [searchQuery, setSearchQuery] = useState('')
 
   const stats = [
-    { icon: GraduationCap, label: 'Schools', value: '500+' },
-    { icon: Briefcase, label: 'Opportunities', value: '1.2K+' },
-    { icon: Users, label: 'Students', value: '50K+' },
-    { icon: Building2, label: 'Companies', value: '400+' }
+    { icon: GraduationCapIcon, label: 'Schools', value: '500+' },
+    { icon: ActiveOpportunitiesIcon, label: 'Opportunities', value: '1.2K+' },
+    { icon: GroupIcon, label: 'Students', value: '50K+' },
+    { icon: BuildingIcon, label: 'Companies', value: '400+' }
   ]
 
   return (
     <section className="relative w-full pt-9">
       <div className="relative bg-[#55ba08] rounded-b-[82px] overflow-hidden "
-      // bg-[url('/c7238ed4f6c3f25f169eb9561ad4e2fd.jpg')]" 
-      // style={{backgroundImage: url('/c7238ed4f6c3f25f169eb9561ad4e2fd.jpg')}}
       >
         <Image
           src="/c7238ed4f6c3f25f169eb9561ad4e2fd.jpg"

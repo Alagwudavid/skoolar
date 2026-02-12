@@ -53,7 +53,7 @@ export default function OrganizationsPage() {
   });
 
   return (
-    <div className="container max-w-6xl py-8 border-r">
+    <div className="container max-w-6xl py-8">
       <div className="mb-8 flex items-center justify-between">
         <div>
           <h1 className="mb-2 text-3xl font-bold">Organizations</h1>

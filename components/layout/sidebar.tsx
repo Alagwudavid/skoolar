@@ -36,7 +36,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { RIcons } from "../icons/regular";
+import { RIcons } from "../icons/collection";
 import { AiIcon, ActiveAiIcon } from "../icons";
 const moreMenuItems = [
   {

@@ -56,7 +56,7 @@ export default function GroupsPage() {
     })
 
     return (
-        <div className="container py-8 p-4 border-r">
+        <div className="container py-8 p-4">
             <div className="space-y-6 p-4">
                 <div className="flex items-center justify-between">
                     <div>

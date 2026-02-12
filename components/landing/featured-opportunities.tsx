@@ -61,11 +61,11 @@ export function FeaturedOpportunities() {
                         <Card className="h-full hover:shadow-lg transition-shadow rounded-2xl overflow-hidden pt-0 gap-2">
                             <div className="aspect-video bg-muted rounded-2xl relative">
                                 <div className="flex items-start justify-between mb-2 mr-2 absolute bottom-0 right-0">
-                                    <Badge className='px-3 py-1.5'>{opportunity.type}</Badge>
+                                    <Badge className='px-3 py-1.5 bg-primary text-primary-foreground'>{opportunity.type}</Badge>
                                 </div>
                             </div>
                             <CardHeader>
-                                <CardTitle className="text-lg line-clamp-2">{opportunity.title}</CardTitle>
+                                <CardTitle className="text-lg line-clamp-2 hover:text-primary">{opportunity.title}</CardTitle>
                                 <CardDescription className="line-clamp-1">
                                     {opportunity.organization} • {opportunity.location}
                                 </CardDescription>
