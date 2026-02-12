@@ -1,6 +1,5 @@
-import { Compass, Users, Briefcase, MessageCircle, User, PlusSquare } from "lucide-react";
 import { NavItem } from "@/types";
-import { HomeIcon } from "@/components/icons";
+import { HomeIcon, ActiveHomeIcon, CompassIcon, ActiveCompassIcon, ChatIcon, ActiveChatIcon, GroupIcon, ActiveGroupIcon, OpportunitiesIcon, ActiveOpportunitiesIcon, PlusIcon, ActivePlusIcon, UserIcon, ActiveUserIcon } from "@/components/icons";
 
 export const siteConfig = {
   name: "Skoolar",
@@ -12,35 +11,42 @@ export const mainNav: NavItem[] = [
     title: "Feed",
     href: "/feed",
     icon: HomeIcon,
+    activeIcon: ActiveHomeIcon,
   },
   {
     title: "Discover",
     href: "/explore",
-    icon: Compass,
+    icon: CompassIcon,
+    activeIcon: ActiveCompassIcon,
   },
   {
     title: "Chat",
     href: "/messages",
-    icon: MessageCircle,
+    icon: ChatIcon,
+    activeIcon: ActiveChatIcon,
   },
   {
     title: "Groups",
     href: "/groups",
-    icon: Users,
+    icon: GroupIcon,
+    activeIcon: ActiveGroupIcon,
   },
   {
     title: "Opportunities",
     href: "/opportunities",
-    icon: Briefcase,
+    icon: OpportunitiesIcon,
+    activeIcon: ActiveOpportunitiesIcon,
   },
   {
     title: "Create",
     href: "/posts/create",
-    icon: PlusSquare,
+    icon: PlusIcon,
+    activeIcon: ActivePlusIcon,
   },
   {
     title: "Profile",
     href: "/profile",
-    icon: User,
+    icon: UserIcon,
+    activeIcon: ActiveUserIcon,
   },
 ];
