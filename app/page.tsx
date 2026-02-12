@@ -2,7 +2,7 @@ import { AnnouncementBanner } from '@/components/landing/announcement-banner'
 import { Navbar } from '@/components/landing/navbar'
 import { HeroSection } from '@/components/landing/hero-section'
 import { FeaturedOpportunities } from '@/components/landing/featured-opportunities'
-import { TopUniversities } from '@/components/landing/top-universities'
+import { TopInstitutions } from '@/components/landing/top-institutions'
 import { PartnerOrganizations } from '@/components/landing/partner-organizations'
 import { HowItWorks } from '@/components/landing/how-it-works'
 import { FeaturesSection } from '@/components/landing/features-section'
@@ -17,7 +17,7 @@ export default function Home() {
       <Navbar />
       <HeroSection />
       <FeaturedOpportunities />
-      <TopUniversities />
+      <TopInstitutions />
       <PartnerOrganizations />
       <HowItWorks />
       {/* <FeaturesSection /> */}

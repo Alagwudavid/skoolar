@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import Link from 'next/link'
+import { PlusIcon } from '@/components/icons/regular'
 
 type Opportunity = {
     id: string
@@ -65,12 +66,12 @@ export default function OpportunitiesPage() {
                 <div className="flex items-center justify-between p-4 border-b">
                     <div>
                         <h1 className="text-3xl font-bold">Opportunities</h1>
-                        <p className="text-muted-foreground">
-                            Discover internships, scholarships, and placements
-                        </p>
                     </div>
-                    <Button asChild>
-                        <Link href="/opportunities/create">Post Opportunity</Link>
+                    <Button asChild className='rounded-full px-3 py-2'>
+                        <Link href="/opportunities/create">
+                            <PlusIcon className="w-6 h-6" />
+                            Create
+                        </Link>
                     </Button>
                 </div>
 

@@ -145,7 +145,7 @@ export function Sidebar() {
               "flex items-center gap-4 px-4 py-3 rounded-full text-xl transition-colors hover:bg-muted cursor-pointer w-full text-left"
             )}
           >
-            <RIcons.ChevronUp className={cn(
+            <RIcons.ChevronDown className={cn(
               "h-7 w-7 transition-transform",
               showMore && "rotate-180"
             )} />
