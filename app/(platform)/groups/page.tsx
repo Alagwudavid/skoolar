@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
 import Link from 'next/link'
+import SearchBar from '@/components/layout/search-bar'
+import { PlusIcon } from 'lucide-react'
 
 type Group = {
     id: string
@@ -58,7 +60,7 @@ export default function GroupsPage() {
     return (
         <div className="container py-8 p-4">
             <div className="space-y-6 p-4">
-                <div className="flex items-center justify-between">
+                {/* <div className="flex items-center justify-between">
                     <div>
                         <h1 className="text-3xl font-bold">Groups</h1>
                         <p className="text-muted-foreground">
@@ -68,14 +70,15 @@ export default function GroupsPage() {
                     <Button asChild>
                         <Link href="/groups/create">Create Group</Link>
                     </Button>
-                </div>
+                </div> */}
 
                 <div className="flex gap-4">
-                    <Input
+                    <SearchBar
+                        maxWidth="max-w-sm"
                         placeholder="Search groups..."
                         value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        className="max-w-sm"
+                        onChange={setSearchQuery}
+                        showDropdown={false}
                     />
                     <div className="flex gap-2">
                         <Button
@@ -97,6 +100,13 @@ export default function GroupsPage() {
                             Private
                         </Button>
                     </div>
+                    
+                    <Button asChild className='rounded-full px-3 py-2'>
+                        <Link href="/groups/create">
+                            <PlusIcon className="w-6 h-6" />
+                            Create
+                        </Link>
+                    </Button>
                 </div>
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">

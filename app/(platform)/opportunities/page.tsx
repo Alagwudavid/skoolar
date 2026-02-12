@@ -4,10 +4,10 @@ import { useState } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import Link from 'next/link'
 import { PlusIcon } from '@/components/icons/regular'
+import SearchBar from '@/components/layout/search-bar'
 
 type Opportunity = {
     id: string
@@ -63,10 +63,26 @@ export default function OpportunitiesPage() {
     return (
         <div className="container mx-auto">
             <div className="flex flex-col gap-6">
-                <div className="flex items-center justify-between p-4 border-b">
-                    <div>
-                        <h1 className="text-3xl font-bold">Opportunities</h1>
-                    </div>
+                <div className="flex gap-4 p-4">
+                    <SearchBar
+                        maxWidth="max-w-sm"
+                        placeholder="Search opportunities..."
+                        value={searchQuery}
+                        onChange={setSearchQuery}
+                        showDropdown={false}
+                    />
+                    <Select value={typeFilter} onValueChange={setTypeFilter}>
+                        <SelectTrigger className="w-[180px] rounded-2xl">
+                            <SelectValue placeholder="Type" />
+                        </SelectTrigger>
+                        <SelectContent className='rounded-2xl'>
+                            <SelectItem value="all">All Types</SelectItem>
+                            <SelectItem value="internship">Internships</SelectItem>
+                            <SelectItem value="scholarship">Scholarships</SelectItem>
+                            <SelectItem value="placement">Placements</SelectItem>
+                            <SelectItem value="job">Jobs</SelectItem>
+                        </SelectContent>
+                    </Select>
                     <Button asChild className='rounded-full px-3 py-2'>
                         <Link href="/opportunities/create">
                             <PlusIcon className="w-6 h-6" />
@@ -75,55 +91,26 @@ export default function OpportunitiesPage() {
                     </Button>
                 </div>
 
-                <div className="flex gap-4 p-4">
-                    <Input
-                        placeholder="Search opportunities..."
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        className="max-w-sm"
-                    />
-                    <Select value={typeFilter} onValueChange={setTypeFilter}>
-                        <SelectTrigger className="w-[180px]">
-                            <SelectValue placeholder="Type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="all">All Types</SelectItem>
-                            <SelectItem value="internship">Internships</SelectItem>
-                            <SelectItem value="scholarship">Scholarships</SelectItem>
-                            <SelectItem value="placement">Placements</SelectItem>
-                            <SelectItem value="job">Jobs</SelectItem>
-                        </SelectContent>
-                    </Select>
-                </div>
-
-                <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 p-4">
+                <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 p-4">
                     {filteredOpportunities.map((opportunity) => (
                         <Link key={opportunity.id} href={`/opportunities/${opportunity.id}`}>
-                            <Card className="hover:bg-muted/50 transition-colors h-full">
-                                <CardHeader>
-                                    <div className="flex items-start justify-between">
-                                        <div className="space-y-1">
-                                            <CardTitle>{opportunity.title}</CardTitle>
-                                            <CardDescription>
-                                                <Link
-                                                    href={`/orgs/${opportunity.id}`}
-                                                    className="hover:underline"
-                                                    onClick={(e) => e.stopPropagation()}
-                                                >
-                                                    {opportunity.organization}
-                                                </Link>
-                                            </CardDescription>
-                                        </div>
-                                        <Badge className="capitalize">{opportunity.type}</Badge>
+                            <Card className="h-full hover:shadow-lg transition-shadow rounded-2xl overflow-hidden pt-0 gap-2">
+                                <div className="aspect-video bg-muted rounded-2xl relative">
+                                    <div className="flex items-start justify-between mb-2 mr-2 absolute bottom-0 right-0">
+                                        <Badge className='px-3 py-1.5 bg-primary text-primary-foreground'>{opportunity.type}</Badge>
                                     </div>
+                                </div>
+                                <CardHeader>
+                                    <CardTitle className="text-lg line-clamp-2 hover:text-primary">{opportunity.title}</CardTitle>
+                                    <CardDescription className="line-clamp-1">
+                                        {opportunity.organization} • {opportunity.location}
+                                    </CardDescription>
                                 </CardHeader>
                                 <CardContent>
-                                    <p className="text-sm text-muted-foreground mb-3">
-                                        {opportunity.description}
-                                    </p>
-                                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                                    {/* <div className="font-semibold text-foreground">{opportunity.price}</div> */}
+                                    <div className="flex flex-col items-start gap-4 text-sm text-foreground">
                                         <span>📍 {opportunity.location}</span>
-                                        <span>•</span>
+                                        {/* <span>•</span> */}
                                         <span>⏰ Deadline: {opportunity.deadline}</span>
                                     </div>
                                 </CardContent>

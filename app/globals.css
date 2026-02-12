@@ -128,7 +128,7 @@
     }
 
     body {
-        @apply bg-background text-foreground;
+        @apply bg-background text-foreground custom-scrollbar;
     }
 }
 
@@ -160,7 +160,7 @@
 }
 
 .custom-scrollbar:hover {
-    scrollbar-color: rgb(var(--muted-foreground) / 0.3) transparent;
+    scrollbar-color: rgb(var(--muted-foreground) / 0.3) rgb(var(--muted) / 0.5);
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -173,6 +173,11 @@
     border-radius: 10px;
 }
 
+.custom-scrollbar:hover::-webkit-scrollbar-track {
+    background: rgb(var(--muted) / 0.5);
+    border-radius: 10px;
+}
+
 .custom-scrollbar::-webkit-scrollbar-thumb {
     background: transparent;
     border-radius: 10px;
@@ -181,10 +186,12 @@
 
 .custom-scrollbar:hover::-webkit-scrollbar-thumb {
     background: rgb(var(--muted-foreground) / 0.3);
+    border-radius: 10px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: rgb(var(--muted-foreground) / 0.5);
+    border-radius: 10px;
 }
 
 .min-h-page {

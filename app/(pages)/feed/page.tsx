@@ -74,29 +74,6 @@ const posts = [
 export default function FeedPage() {
   return (
     <div className="max-w-xl mx-auto">
-      {/* Header */}
-      {/* <div className="sticky top-0 z-10 backdrop-blur-lg bg-background/80 flex items-center gap-2 justify-between">
-        <div className="px-4 py-4 flex flex-col items-center justify-center">
-          <HomeIcon className="w-6 h-6" />
-          <h1 className="text-xs font-bold">Home</h1>
-        </div>
-        <div className="px-4 py-4 flex flex-col items-center justify-center">
-          <PlaySquare className="w-6 h-6" />
-          <h1 className="text-xs">Watch</h1>
-        </div>
-        <div className="px-4 py-4 flex flex-col items-center justify-center">
-          <GroupIcon className="w-6 h-6" />
-          <h1 className="text-xs">Groups</h1>
-        </div>
-        <div className="px-4 py-4 flex flex-col items-center justify-center">
-          <ShoppingBag className="w-6 h-6" />
-          <h1 className="text-xs">Marketplace</h1>
-        </div>
-        <div className="px-4 py-4 flex flex-col items-center justify-center">
-          <MapPin className="w-6 h-6" />
-          <h1 className="text-xs">Map</h1>
-        </div>
-      </div> */}
       <div className="bg-background flex items-center justify-center gap-4">
         <div className="px-4 py-4 flex items-center justify-center">
           <h1 className="text-lg font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:origin-center after:transition-transform after:duration-300 after:scale-x-100 text-primary cursor-pointer">Stories</h1>

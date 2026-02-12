@@ -1,9 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { TrendingUp } from "lucide-react";
 import SearchBar from "./search-bar";
+import { useRouter, usePathname } from "next/navigation";
 
 const suggestedUsers = [
     { id: '1', name: 'Sarah Johnson', username: '@sarahj', role: 'CS Student' },
@@ -18,9 +21,14 @@ const trendingTopics = [
 ];
 
 export function RightBar() {
+        const router = useRouter();
+        const pathname = usePathname();
+
+        const isExplorePage = pathname.startsWith('/explore');
+
     return (
-        <aside className="hidden lg:flex lg:w-80 xl:w-96 flex-col gap-6 p-6 sticky top-0 h-screen overflow-y-auto">
-            <div className="relative">
+        <aside className="hidden lg:flex lg:w-80 xl:w-96 flex-col gap-6 p-6 sticky top-0 h-screen overflow-y-auto  custom-scrollbar">
+            <div className={`relative ${isExplorePage ? "hidden" : "block"}`}>
                 <SearchBar />
             </div>
             {/* Login Card */}
@@ -42,7 +50,7 @@ export function RightBar() {
             </Card>
 
             {/* Suggested Users */}
-            {/* <Card>
+            <Card>
                 <CardHeader>
                     <CardTitle className="text-base">Who to follow</CardTitle>
                 </CardHeader>
@@ -62,7 +70,7 @@ export function RightBar() {
                         </div>
                     ))}
                 </CardContent>
-            </Card> */}
+            </Card>
 
             {/* Trending Topics */}
             <Card className="p-0 gap-0 rounded-3xl">
@@ -77,7 +85,7 @@ export function RightBar() {
                         <Link
                             key={index}
                             href={`/explore?q=${encodeURIComponent(topic.tag)}`}
-                            className="block hover:bg-muted hover:text-muted-foreground p-2 transition-colors"
+                            className="block hover:bg-muted hover:text-muted-foreground p-2 px-4 transition-colors"
                         >
                             <div className="font-semibold">{topic.tag}</div>
                             <div className="text-xs text-muted-foreground">{topic.posts}</div>

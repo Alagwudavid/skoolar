@@ -41,17 +41,28 @@ interface SearchBarProps {
   maxWidth?: string;
   placeholder?: string;
   onSearch?: (query: string) => void;
-  isInCommunity?: boolean;
-  communityName?: string;
-  communityLink?: string;
+  value?: string; // Controlled mode: external value
+  onChange?: (value: string) => void; // Controlled mode: external handler
+  showDropdown?: boolean; // Whether to show search results dropdown
+  enableDebounce?: boolean; // Enable debounced search
+  debounceMs?: number; // Debounce delay in milliseconds
 }
 
 export default function SearchBar({
   maxWidth = "max-w-xl",
   placeholder = "Search...",
   onSearch,
+  value: externalValue,
+  onChange: externalOnChange,
+  showDropdown = true,
+  enableDebounce = true,
+  debounceMs = 1500,
 }: SearchBarProps) {
-  const [searchQuery, setSearchQuery] = useState("");
+  // Support both controlled and uncontrolled modes
+  const [internalValue, setInternalValue] = useState("");
+  const isControlled = externalValue !== undefined;
+  const searchQuery = isControlled ? externalValue : internalValue;
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [searchResults, setSearchResults] = useState<any>(null);
@@ -146,7 +157,15 @@ export default function SearchBar({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setSearchQuery(value);
+
+    // Update value based on controlled/uncontrolled mode
+    if (isControlled) {
+      externalOnChange?.(value);
+    } else {
+      setInternalValue(value);
+    }
+
+    // Immediate callback for external filtering
     onSearch?.(value);
 
     // Clear previous timeout
@@ -154,27 +173,40 @@ export default function SearchBar({
       clearTimeout(searchTimeoutRef.current);
     }
 
-    if (value.trim()) {
+    // Only handle dropdown search if enabled
+    if (showDropdown && value.trim()) {
       setIsSearching(true);
       setSearchResults(null);
 
-      // Debounce search with 2-5 seconds (using 3 seconds as middle ground)
-      searchTimeoutRef.current = setTimeout(() => {
+      // Debounce search for dropdown results
+      if (enableDebounce) {
+        searchTimeoutRef.current = setTimeout(() => {
+          setSearchResults(mockSearchResults(value));
+          setIsSearching(false);
+        }, debounceMs);
+      } else {
         setSearchResults(mockSearchResults(value));
         setIsSearching(false);
-      }, 1500);
+      }
     } else {
       setSearchResults(null);
       setIsSearching(false);
     }
   };
 
+
   const handleFocus = () => {
     setIsDropdownOpen(true);
   };
 
   const handleClearSearch = () => {
-    setSearchQuery("");
+    if (isControlled) {
+      externalOnChange?.("");
+    } else {
+      setInternalValue("");
+    }
+
+    onSearch?.("");
     setSearchResults(null);
     setIsSearching(false);
     if (searchTimeoutRef.current) {
