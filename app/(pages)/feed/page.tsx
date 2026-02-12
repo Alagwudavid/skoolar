@@ -82,7 +82,7 @@ export default function FeedPage() {
       {/* Posts Feed */}
       <div className="divide-y border rounded-4xl overflow-hidden" >
         {posts.map((post) => (
-          <article key={post.id} className="p-4 hover:bg-muted/50 transition-colors cursor-pointer">
+          <article key={post.id} className="p-4 cursor-pointer">
             <div className="flex gap-3">
               {/* Avatar */}
               <Link href={`/users/${post.user.username}`}>
@@ -124,29 +124,29 @@ export default function FeedPage() {
                     <Image src={post.image} alt="Post image" fill className="object-cover" />
                   </div>
                 )}
+
+                {/* Action Buttons */}
+                <div className="flex items-center gap-3 mt-4">
+                  <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-blue-500 rounded-full cursor-pointer">
+                    <MessageCircle className="h-5 w-5" />
+                    <span className="text-xs">{post.comments}</span>
+                  </Button>
+
+                  <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-green-500 rounded-full cursor-pointer">
+                    <Repeat2 className="h-5 w-5" />
+                    <span className="text-xs">{post.reposts}</span>
+                  </Button>
+
+                  <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-red-500 rounded-full cursor-pointer">
+                    <Heart className="h-5 w-5" />
+                    <span className="text-xs">{post.likes}</span>
+                  </Button>
+
+                  <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-blue-500 rounded-full cursor-pointer">
+                    <Send className="h-5 w-5" />
+                  </Button>
+                </div>
               </div>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="grid grid-cols-4 mt-3 w-full">
-              <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-blue-500 hover:bg-blue-500/10 rounded-3xl cursor-pointer">
-                <MessageCircle className="h-5 w-5" />
-                <span className="text-xs">{post.comments}</span>
-              </Button>
-
-              <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-green-500 hover:bg-green-500/10 rounded-3xl cursor-pointer">
-                <Repeat2 className="h-5 w-5" />
-                <span className="text-xs">{post.reposts}</span>
-              </Button>
-
-              <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-red-500 hover:bg-red-500/10 rounded-3xl cursor-pointer">
-                <Heart className="h-5 w-5" />
-                <span className="text-xs">{post.likes}</span>
-              </Button>
-
-              <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-blue-500 hover:bg-blue-500/10 rounded-3xl cursor-pointer">
-                <Send className="h-5 w-5" />
-              </Button>
             </div>
           </article>
         ))}

@@ -196,13 +196,13 @@ export default function SearchBar({
             value={searchQuery}
             onChange={handleChange}
             onFocus={handleFocus}
-            className={`w-full bg-background text-foreground ${isInCommunity ? "pl-22 lg:pl-40" : "pl-10"} pr-12 py-2 rounded-full border focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400`}
+            className={`w-full bg-background text-foreground ${isInCommunity ? "pl-22 lg:pl-40" : "pl-10"} pr-12 py-2 rounded-full border focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent placeholder-gray-400`}
           />
 
           {/* Clear Button or Loading Indicator */}
           <div className="absolute right-2 top-1/2 transform -translate-y-1/2">
             {isSearching ? (
-              <div className="w-5 h-5 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+              <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin" />
             ) : searchQuery ? (
               <button
                 onClick={handleClearSearch}

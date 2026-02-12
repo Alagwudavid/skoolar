@@ -12,7 +12,8 @@ import {
   ShoppingBag,
   MapPin,
   Home as HomeIcon,
-  GraduationCap as UniversityIcon
+  GraduationCap as UniversityIcon,
+  Settings2
 } from "lucide-react";
 import { mainNav } from "@/config/nav";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -152,13 +153,13 @@ export function Sidebar() {
         </div>
 
         {/* Post Button */}
-        <Button
+        {/* <Button
           size="lg"
-          className="w-full mt-4 rounded-full text-lg font-bold h-12 hover:bg-secondary/80"
+          className="w-full mt-4 rounded-full text-lg font-bold h-12 hover:bg-primary/80"
           asChild
         >
           <Link href="/posts/create">Post</Link>
-        </Button>
+        </Button> */}
       </nav>
 
       {/* User Profile */}
@@ -167,13 +168,8 @@ export function Sidebar() {
           href="/profile"
           className="flex items-center gap-3 p-3 rounded-full hover:bg-muted hover:text-foreground transition-colors"
         >
-          <Avatar>
-            <AvatarFallback className="bg-secondary text-secondary-foreground">U</AvatarFallback>
-          </Avatar>
-          <div className="flex flex-col flex-1 min-w-0">
-            <span className="font-semibold text-sm truncate">User Name</span>
-            <span className="text-xs text-muted-foreground truncate">@username</span>
-          </div>
+          <Settings2 className="h-7 w-7" />
+          <span>Menu</span>
         </Link>
       </div>
     </aside>
