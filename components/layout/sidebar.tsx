@@ -105,6 +105,24 @@ export function Sidebar() {
             const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
             const Icon = isActive && item.activeIcon ? item.activeIcon : item.icon;
 
+            if (item.title === "Profile") {
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    "flex items-center gap-3 px-4 py-3 rounded-full text-xl transition-colors hover:bg-muted w-full",
+                    isActive && "font-bold"
+                  )}
+                >
+                  <Avatar className="h-7 w-7">
+                    <AvatarFallback className="bg-secondary text-secondary-foreground">U</AvatarFallback>
+                  </Avatar>
+                  <span>{item.title}</span>
+                </Link>
+              );
+            }
+
             return (
               <Link
                 key={item.href}
@@ -160,7 +178,7 @@ export function Sidebar() {
         </div>
       </nav>
 
-      {/* User Profile */}
+      {/* User Preference Menu */}
       <div className="p-4">
         <DropdownMenu onOpenChange={(open) => { if (!open) setShowAppearanceMenu(false); }}>
           <DropdownMenuTrigger asChild>
