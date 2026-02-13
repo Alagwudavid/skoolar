@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { TrendingUp } from "lucide-react";
+import { TrendingUp, X } from "lucide-react";
 import SearchBar from "./search-bar";
 import { useRouter, usePathname } from "next/navigation";
 
@@ -74,10 +74,10 @@ export function RightBar() {
 
             {/* Trending Topics */}
             <Card className="p-0 gap-0 rounded-3xl">
-                <CardHeader className="pt-3 pb-2! border-b px-3">
-                    <CardTitle className="text-base flex items-center gap-2">
-                        <TrendingUp className="h-5 w-5" />
+                <CardHeader className="pt-3 pb-2! border-b px-4">
+                    <CardTitle className="text-base flex items-center justify-between gap-2">
                         Trending
+                        <X className="h-5 w-5" />
                     </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-0 divide-y p-0 overflow-hidden">
@@ -95,9 +95,9 @@ export function RightBar() {
                 <CardFooter className="pt-1! pb-1! border-t w-full">
                     <Link
                         href={`/tags`}
-                        className="block w-full text-center p-2 transition-colors"
+                        className="block w-full text-center p-2 hover:text-primary transition-colors font-semibold"
                     >
-                        <div className="font-semibold">View all</div>
+                        View all
                     </Link>
                 </CardFooter>
             </Card>

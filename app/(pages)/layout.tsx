@@ -1,6 +1,7 @@
 import { Sidebar } from "@/components/layout/sidebar";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { RightBar } from "@/components/layout/rightbar";
+import { TopNav } from "@/components/layout/top-nav";
 
 export default function PlatformLayout({
   children,
@@ -14,6 +15,8 @@ export default function PlatformLayout({
       
       {/* Main Content Area */}
       <main className="flex-1 pb-16 md:pb-0 max-w-3xl">
+        {/* Top Nav */}
+        <TopNav />
         {children}
       </main>
 

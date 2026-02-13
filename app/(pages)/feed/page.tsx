@@ -75,18 +75,17 @@ export default function FeedPage() {
   return (
     <div className="max-w-xl mx-auto">
       <div className="bg-background flex items-center justify-center gap-4">
-        <div className="px-4 py-4 flex items-center justify-center">
-          <h1 className="text-lg font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:origin-center after:transition-transform after:duration-300 after:scale-x-100 text-primary cursor-pointer">Stories</h1>
+        <div className="px-4 pb-4 sm:py-4 flex items-center justify-center">
+          <h1 className="text-lg font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:origin-center after:transition-transform after:duration-300 after:scale-x-100 text-primary cursor-pointer">Reels</h1>
         </div>
-        <div className="px-4 py-4 flex items-center justify-center">
+        <div className="px-4 pb-4 sm:py-4 flex items-center justify-center">
           <h1 className="text-lg font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-primary cursor-pointer">Watch</h1>
         </div>
       </div>
-      <div className="mb-4 flex items-center gap-2 relative">
-        <div className="h-50 w-35 border rounded-2xl relative grid grid-rows-2 overflow-hidden">
-          <div className="bg-primary"></div>
-          <div className="bg-muted relative">
-            <h1 className="text-xs font-bold absolute bottom-2 left-1/4">Create story</h1>
+      <div className="mb-4 flex items-center gap-2 relative overflow-hidden">
+        <div className="h-50 w-35 border rounded-2xl relative overflow-hidden">
+          <div className="bg-muted h-full w-full relative">
+            <h1 className="text-sm font-bold absolute bottom-2 left-1/4">Create reel</h1>
           </div>
           <div className="absolute top-[40%] left-[40%] w-8 h-8 p-2 rounded-full bg-white flex items-center justify-center">
             <PlusIcon className="w-6 h-6 text-black" />
@@ -99,7 +98,7 @@ export default function FeedPage() {
           <div className="bg-muted relative h-full">
             <Image src={"/stories/s_1.png"} width={120} height={240} alt="Status of User 1" className="w-full h-full" />
             <div className="w-full h-full inset-0 bg-black/50 absolute top-0 z-10" />
-            <h1 className="text-white text-xs font-bold absolute bottom-2 left-2 z-20">User 1</h1>
+            <h1 className="text-white text-sm font-bold absolute bottom-2 left-2 z-20">User 1</h1>
           </div>
         </div>
         <div className="h-50 w-35 border rounded-2xl flex flex-col relative overflow-hidden">
@@ -109,7 +108,7 @@ export default function FeedPage() {
           <div className="bg-muted relative h-full">
             <Image src={"/stories/s_2.png"} width={120} height={240} alt="Status of User 2" className="w-full h-full" />
             <div className="w-full h-full inset-0 bg-black/50 absolute top-0 z-10" />
-            <h1 className="text-white text-xs font-bold absolute bottom-2 left-2 z-20">User 2</h1>
+            <h1 className="text-white text-sm font-bold absolute bottom-2 left-2 z-20">User 2</h1>
           </div>
         </div>
         <div className="h-50 w-35 border rounded-2xl flex flex-col relative overflow-hidden">
@@ -119,7 +118,7 @@ export default function FeedPage() {
           <div className="bg-muted relative h-full">
             <Image src={"/stories/s_3.png"} width={120} height={240} alt="Status of User 3" className="w-full h-full" />
             <div className="w-full h-full inset-0 bg-black/50 absolute top-0 z-10" />
-            <h1 className="text-white text-xs font-bold absolute bottom-2 left-2 z-20">User 3</h1>
+            <h1 className="text-white text-sm font-bold absolute bottom-2 left-2 z-20">User 3</h1>
           </div>
         </div>
         <div className="absolute top-[40%] -right-4 w-8 h-8 p-2 rounded-full bg-foreground flex items-center justify-center z-20 cursor-pointer group shadow-sm shadow-muted">
@@ -197,7 +196,7 @@ export default function FeedPage() {
         ))}
       </div>
       <div className="w-full p-4 flex items-center justify-center">
-        <Button size="lg" className="rounded-full hover:bg-secondary/80" asChild>
+        <Button size="lg" className="rounded-full" asChild>
           <Link href="/auth/signup">Load more</Link>
         </Button>
       </div>
