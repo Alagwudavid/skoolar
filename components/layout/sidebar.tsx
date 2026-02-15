@@ -28,23 +28,15 @@ import {
 } from "lucide-react";
 import { mainNav } from "@/config/nav";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { RIcons } from "../icons/collection";
 import { AiIcon, ActiveAiIcon } from "../icons";
 const moreMenuItems = [
-  {
-    title: "Ads Manager",
-    href: "/ads",
-    icon: RIcons.TrendsUp,
-    activeIcon: RIcons.TrendsUp,
-  },
   {
     title: "AI",
     href: "/ai",
@@ -76,10 +68,16 @@ const moreMenuItems = [
     activeIcon: HomeIcon,
   },
   {
-    title: "Universities",
+    title: "Schools",
     href: "/universities",
     icon: UniversityIcon,
     activeIcon: UniversityIcon,
+  },
+  {
+    title: "Ads Manager",
+    href: "/ads",
+    icon: RIcons.TrendsUp,
+    activeIcon: RIcons.TrendsUp,
   },
 ];
 

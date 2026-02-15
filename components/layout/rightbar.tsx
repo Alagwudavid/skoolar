@@ -50,26 +50,37 @@ export function RightBar() {
             </Card>
 
             {/* Suggested Users */}
-            <Card>
-                <CardHeader>
-                    <CardTitle className="text-base">Who to follow</CardTitle>
+            <Card className="p-0 gap-0 rounded-3xl">
+                <CardHeader className="pt-3 pb-2! border-b px-4">
+                    <CardTitle className="text-base flex items-center justify-between gap-2 ">
+                        Who To Follow
+                        <X className="h-5 w-5" />
+                    </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-0 divide-y p-0 overflow-hidden">
                     {suggestedUsers.map((user) => (
-                        <div key={user.id} className="flex items-center justify-between">
+                        <Link key={user.id} href={"#"} className="flex items-center justify-between hover:bg-muted/50 hover:text-muted-foreground p-2 px-4 transition-colors group">
                             <div className="flex items-center gap-3">
                                 <Avatar>
                                     <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
                                 </Avatar>
                                 <div className="flex flex-col">
-                                    <span className="text-sm font-semibold">{user.name}</span>
+                                    <span className="text-sm font-semibold group-hover:text-primary">{user.name}</span>
                                     <span className="text-xs text-muted-foreground">{user.username}</span>
                                 </div>
                             </div>
                             <Button size="sm" variant="outline">Follow</Button>
-                        </div>
+                        </Link>
                     ))}
                 </CardContent>
+                <CardFooter className="pt-1! pb-1! border-t w-full">
+                    <Link
+                        href={`/tags`}
+                        className="block w-full text-center p-2 hover:text-primary transition-colors font-semibold"
+                    >
+                        View all
+                    </Link>
+                </CardFooter>
             </Card>
 
             {/* Trending Topics */}
@@ -85,7 +96,7 @@ export function RightBar() {
                         <Link
                             key={index}
                             href={`/explore?q=${encodeURIComponent(topic.tag)}`}
-                            className="block hover:bg-muted hover:text-muted-foreground p-2 px-4 transition-colors"
+                            className="block hover:bg-muted/50 hover:text-muted-foreground p-2 px-4 transition-colors"
                         >
                             <div className="font-semibold">{topic.tag}</div>
                             <div className="text-xs text-muted-foreground">{topic.posts}</div>

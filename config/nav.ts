@@ -1,5 +1,6 @@
 import { NavItem } from "@/types";
 import { HomeIcon, ActiveHomeIcon, CompassIcon, ActiveCompassIcon, ChatIcon, ActiveChatIcon, GroupIcon, ActiveGroupIcon, OpportunitiesIcon, ActiveOpportunitiesIcon, PlusIcon, ActivePlusIcon, UserIcon, ActiveUserIcon } from "@/components/icons";
+import { Bell, BellDot, PlaySquare } from "lucide-react";
 
 export const siteConfig = {
   name: "Skoolar",
@@ -14,6 +15,12 @@ export const mainNav: NavItem[] = [
     activeIcon: ActiveHomeIcon,
   },
   {
+    title: "Watch",
+    href: "/watch",
+    icon: PlaySquare,
+    activeIcon: PlaySquare,
+  },
+  {
     title: "Discover",
     href: "/explore",
     icon: CompassIcon,
@@ -24,6 +31,12 @@ export const mainNav: NavItem[] = [
     href: "/messages",
     icon: ChatIcon,
     activeIcon: ActiveChatIcon,
+  },
+  {
+    title: "Notification",
+    href: "/notification",
+    icon: Bell,
+    activeIcon: BellDot,
   },
   {
     title: "Groups",

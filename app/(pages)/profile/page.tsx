@@ -98,8 +98,8 @@ const posts = [
 ];
 
     return (
-        <div className="max-w-xl mx-auto sm:pr-4">
-            <div className="">
+        <div className="container max-w-4xl py-8">
+            <div className="sm:pr-4">
                 {/* Header */}
                 <div className="sticky top-0 z-10 backdrop-blur-lg bg-background/80">
                     <div className="px-4 py-4">

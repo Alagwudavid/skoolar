@@ -51,43 +51,41 @@ const mockNews = [
     id: '1',
     title: 'How to ace technical interviews',
     content: 'Just finished my 10th technical interview this season. Here are my top tips for success: 1) Practice on LeetCode daily 2) Mock interviews with friends 3) Study system design...',
-    type: 'Article',
-    tags: ['career', 'interviews', 'tech'],
-    author: { id: '1', name: 'Alex Rivera', avatar: 'A' },
+    // type: 'Article',
+    // tags: ['career', 'interviews', 'tech'],
+    // author: { id: '1', name: 'Alex Rivera', avatar: 'A' },
     createdAt: '2026-02-07',
-    likes: 432,
-    comments: 89,
+    views: 432,
+    // comments: 89,
   },
   {
     id: '2',
     title: 'New scholarships for STEM students',
     content: 'Excited to share that the National STEM Foundation just announced 50 new full-ride scholarships for underrepresented students in tech! Applications open March 1st.',
-    type: 'Achievement',
-    tags: ['scholarships', 'stem', 'opportunities'],
-    author: { id: '2', name: 'Dr. Maria Santos', avatar: 'M' },
+    // type: 'Achievement',
+    // tags: ['scholarships', 'stem', 'opportunities'],
+    // author: { id: '2', name: 'Dr. Maria Santos', avatar: 'M' },
     createdAt: '2026-02-06',
-    likes: 1203,
-    comments: 234,
+    views: 1203,
+    // comments: 234,
   },
   {
     id: '3',
     title: 'Question: Best coding bootcamp for beginners?',
     content: 'I\'m looking to transition into software engineering. Does anyone have recommendations for beginner-friendly bootcamps? Budget is around $10k.',
-    type: 'Question',
-    tags: ['coding', 'bootcamp', 'career-change'],
-    author: { id: '3', name: 'Jamie Chen', avatar: 'J' },
+    // type: 'Question',
+    // tags: ['coding', 'bootcamp', 'career-change'],
+    // author: { id: '3', name: 'Jamie Chen', avatar: 'J' },
     createdAt: '2026-02-05',
-    likes: 78,
-    comments: 156,
+    views: 78,
+    // comments: 156,
   },
 ];
 
 const trendingTopics = [
-  { tag: 'Explore', count: '2.4K newss' },
-  { tag: '#InternshipSeason', count: '2.4K newss' },
-  { tag: '#CodeDaily', count: '1.8K newss' },
-  { tag: '#ScholarshipAlert', count: '1.2K newss' },
-  { tag: '#TechCareers', count: '987 newss' },
+    { id: 1, tag: '#TechInternships', posts: '1.2K posts' },
+    { id: 2, tag: '#ScholarshipTips', posts: '850 posts' },
+    { id: 3, tag: '#CareerAdvice', posts: '2.1K posts' },
 ];
 
 const posts = [
@@ -159,47 +157,90 @@ export default function ExplorePage() {
 
   const filteredNews = newss.filter((news) =>
     news.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    news.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    news.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+    news.content.toLowerCase().includes(searchQuery.toLowerCase())
+    // news.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
   return (
-    <div className='max-w-xl mx-auto space-y-4 py-4'>
+    <div className='max-w-xl mx-auto sm:space-y-4 sm:py-4'>
       {/* Header */}
+      <div className="bg-background flex items-center gap-4 overflow-x-auto custom-scrollbar">
+        <div className="px-4 pb-4 sm:py-4 flex items-center justify-center">
+          <h1 className="text-lg font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:origin-center after:transition-transform after:duration-300 after:scale-x-100 text-primary cursor-pointer">Explore</h1>
+        </div>
+        <div className="px-4 pb-4 sm:py-4 flex items-center justify-center">
+          <h1 className="text-lg font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-primary cursor-pointer">Trending</h1>
+        </div>
+        <div className="px-4 pb-4 sm:py-4 flex items-center justify-center">
+          <h1 className="text-lg font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-primary cursor-pointer">News</h1>
+        </div>
+        <div className="px-4 pb-4 sm:py-4 flex items-center justify-center">
+          <h1 className="text-lg font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-primary cursor-pointer">Topics</h1>
+        </div>
+        <div className="px-4 pb-4 sm:py-4 flex items-center justify-center">
+          <h1 className="text-lg font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-primary cursor-pointer">Opportunities</h1>
+        </div>
+        <div className="px-4 pb-4 sm:py-4 flex items-center justify-center">
+          <h1 className="text-lg font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-primary cursor-pointer">Posts</h1>
+        </div>
+      </div>
+
       <div className="p-4 sm:p-0">
-        <SearchBar />
+        <SearchBar
+            // maxWidth="max-w-sm"
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={setSearchQuery}
+            showDropdown={false}
+        />
       </div>
 
-      {/* Trending Topics */}
-      <div className="p-4 sm:p-0 flex flex-wrap gap-2 items-center">
-        {trendingTopics.map((topic, index) => (
-          <Link key={index} href={`/explore?q=${encodeURIComponent(topic.tag)}`}>
-            <Badge variant="secondary" className="cursor-pointer px-3 py-2 rounded-md transition-colors">
-              {topic.tag}
-            </Badge>
-          </Link>
-        ))}
-      </div>
-
+      {/* Trending News */}
       <div className="space-y-2 p-4 sm:p-0">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-lg sm:text-xl font-bold mb-2 text-foreground">Trending</h2>
+            <h2 className="text-lg sm:text-xl font-bold mb-2 text-foreground">Today&apos;s News</h2>
           </div>
           <Button variant="link" className='' asChild>
-            <Link href="/opportunities" className='flex items-center gap-2'>
+            <Link href="/news" className='flex items-center gap-2'>
               View All
               <ChevronRight className='w-5 h-5' />
             </Link>
           </Button>
         </div>
-        <div className="h-60 w-full border rounded-2xl flex flex-col bg-muted relative overflow-hidden">
-          <Image src={"/stories/s_1.png"} width={120} height={240} alt="Status of User 3" className="w-full h-full" />
-          <div className="w-full h-full inset-0 bg-black/50 absolute top-0 z-10" />
-          <h1 className="text-white text-lg font-bold absolute bottom-2 left-2 z-20">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
+        <div className="divide-y border rounded-4xl overflow-hidden">
+          {filteredNews.map((news) => (
+            // <Link key={news.id} href={`/news/${news.id}`}>
+            <article key={news.id} className="p-4 cursor-pointer hover:bg-muted/50 transition-colors">
+              <div className="flex gap-3">
+                {/* Avatar */}
+                <div className='w-20 h-20 rounded-2xl bg-muted'></div>
+
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  {/* Post Content */}
+                  <h3 className="font-bold text-lg mb-1">{news.title}</h3>
+                  <p className="text-muted-foreground line-clamp-2 text-sm mb-2">
+                    {news.content}
+                  </p>
+
+                  {/* User Info */}
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="font-semibold text-sm">{news.views} views</span>
+                    <span className="text-muted-foreground">·</span>
+                    <span className="text-muted-foreground text-sm">
+                      {new Date(news.createdAt).toLocaleDateString()}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </article>
+            // </Link>
+          ))}
         </div>
       </div>
 
+      {/* Trending Opportunities */}
       <div className="space-y-2 p-4 sm:p-0">
         <div className="flex items-center justify-between">
           <div>
@@ -236,77 +277,30 @@ export default function ExplorePage() {
         </div>
       </div>
 
+      {/* Trending Topics */}
       <div className="space-y-2 p-4 sm:p-0">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-lg sm:text-xl font-bold mb-2 text-foreground">Today&apos;s News</h2>
+            <h2 className="text-lg sm:text-xl font-bold mb-2 text-foreground">Trending Topics</h2>
           </div>
           <Button variant="link" className='' asChild>
-            <Link href="/opportunities" className='flex items-center gap-2'>
+            <Link href="/explore/topics" className='flex items-center gap-2'>
               View All
               <ChevronRight className='w-5 h-5' />
             </Link>
           </Button>
         </div>
         <div className="divide-y border rounded-4xl overflow-hidden">
-          {filteredNews.map((news) => (
-            // <Link key={news.id} href={`/news/${news.id}`}>
-            <article key={news.id} className="p-4 cursor-pointer transition-colors h-full">
+          {trendingTopics.map((topic) => (
+            <article key={topic.id} className="p-4 cursor-pointer hover:bg-muted/50 transition-colors">
               <div className="flex gap-3">
-                {/* Avatar */}
-                <Avatar className="h-10 w-10">
-                  <AvatarFallback>{news.author.avatar}</AvatarFallback>
-                </Avatar>
-
                 {/* Content */}
                 <div className="flex-1 min-w-0">
-                  {/* User Info */}
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="font-semibold">{news.author.name}</span>
-                    <span className="text-muted-foreground">·</span>
-                    <span className="text-muted-foreground text-sm">
-                      {new Date(news.createdAt).toLocaleDateString()}
-                    </span>
-                  </div>
-
                   {/* Post Content */}
-                  <h3 className="font-bold text-lg mb-1">{news.title}</h3>
+                  <h3 className="font-bold text-lg mb-1">{topic.tag}</h3>
                   <p className="text-muted-foreground line-clamp-2 text-sm mb-2">
-                    {news.content}
+                    {topic.posts}
                   </p>
-
-                  {/* Tags */}
-                  {news.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-1 mb-2">
-                      {news.tags.map((tag) => (
-                        <Badge key={tag} variant="secondary" className="text-xs">
-                          #{tag}
-                        </Badge>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* Action Buttons */}
-                  <div className="hidden grid grid-cols-4 mt-3 w-full">
-                    <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-blue-500 hover:bg-blue-500/10 rounded-3xl cursor-pointer">
-                      <MessageCircle className="h-5 w-5" />
-                      <span className="text-xs">{news.comments}</span>
-                    </Button>
-
-                    <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-green-500 hover:bg-green-500/10 rounded-3xl cursor-pointer">
-                      <Repeat2 className="h-5 w-5" />
-                      <span className="text-xs">0</span>
-                    </Button>
-
-                    <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-red-500 hover:bg-red-500/10 rounded-3xl cursor-pointer">
-                      <Heart className="h-5 w-5" />
-                      <span className="text-xs">{news.likes}</span>
-                    </Button>
-
-                    <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-blue-500 hover:bg-blue-500/10 rounded-3xl cursor-pointer">
-                      <Send className="h-5 w-5" />
-                    </Button>
-                  </div>
                 </div>
               </div>
             </article>
@@ -315,13 +309,14 @@ export default function ExplorePage() {
         </div>
       </div>
 
+      {/* Trending Posts */}
       <div className="space-y-2 p-4 sm:p-0">
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-lg sm:text-xl font-bold mb-2 text-foreground">For You</h2>
           </div>
           <Button variant="link" className='' asChild>
-            <Link href="/opportunities" className='flex items-center gap-2'>
+            <Link href="/feed/global" className='flex items-center gap-2'>
               View All
               <ChevronRight className='w-5 h-5' />
             </Link>
@@ -330,7 +325,7 @@ export default function ExplorePage() {
         {/* Posts Feed */}
         <div className="divide-y border rounded-4xl overflow-hidden" >
           {posts.map((post) => (
-            <article key={post.id} className="p-4 cursor-pointer">
+            <article key={post.id} className="p-4 cursor-pointer hover:bg-muted/50 transition-colors">
               <div className="flex gap-3">
                 {/* Avatar */}
                 <Link href={`/users/${post.user.username}`}>

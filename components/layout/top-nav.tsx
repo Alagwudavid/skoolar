@@ -10,7 +10,7 @@ import { TopNavList } from "@/config/top-nav";
 import { mainNav } from "@/config/nav";
 import { RIcons } from "../icons/collection";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetOverlay, SheetTrigger } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
 import {
   Settings,
@@ -89,7 +89,7 @@ export function TopNav() {
     <>
       <div className="sticky backdrop-blur-lg bg-background/80 top-0 right-0 z-50 px-4 flex h-16 w-full items-center justify-between md:hidden">
         <Link href="/" className="flex items-center gap-1 font-bold text-xl">
-          <RIcons.Brand className="h-10 w-10" />
+          <RIcons.BrandText className="h-6 w-25 text-primary" />
         </Link>
         <div className="flex items-center gap-4">
           {TopNavList.map((item) => {
@@ -117,8 +117,9 @@ export function TopNav() {
                 </Avatar>
               </button>
             </SheetTrigger>
-            <SheetContent side="bottom" className="h-[85vh] overflow-y-auto px-0 rounded-t-3xl" title="Profile Menu">
-              <div className="flex flex-col gap-4 pb-6">
+            <SheetOverlay />
+            <SheetContent side="bottom" className="h-[85vh] overflow-y-auto px-0 mx-2 border rounded-t-3xl hide-scrollbar" title="Profile Menu" showCloseButton={true}>
+              <div className="flex flex-col pb-6">
                 {/* Profile Section */}
                 <Link
                   href="/profile"
@@ -130,8 +131,8 @@ export function TopNav() {
                       <AvatarFallback className="bg-secondary text-secondary-foreground text-lg">U</AvatarFallback>
                     </Avatar>
                     <div className="flex flex-col">
-                      <span className="font-semibold text-lg">David Alagwu</span>
-                      <span className="text-sm text-muted-foreground">@alagwudavid</span>
+                      <span className="font-semibold text-lg">Demo User</span>
+                      <span className="text-sm text-muted-foreground">@demo_user</span>
                     </div>
                   </div>
                   <ChevronRight className="h-5 w-5 text-muted-foreground" />
@@ -258,7 +259,7 @@ export function TopNav() {
                 <Separator />
 
                 {/* Footer Links */}
-                <div className="flex flex-col px-6">
+                <div className="flex flex-col px-6 py-4">
                   <div className="flex flex-wrap gap-2 text-sm text-muted-foreground">
                     {footerLinks.map((link, index) => (
                       <React.Fragment key={link.href}>
@@ -281,8 +282,8 @@ export function TopNav() {
                 <Separator />
 
                 {/* Log Out */}
-                <div className="px-6">
-                  <button className="flex items-center gap-4 py-2 text-base hover:text-destructive transition-colors">
+                <div className="w-full">
+                  <button className="flex items-center gap-4 w-full px-6 py-2 text-base hover:bg-muted hover:text-destructive cursor-pointer transition-colors">
                     <LogOut className="h-6 w-6" />
                     <span>Log out</span>
                   </button>
