@@ -39,8 +39,8 @@ export const mainNav: NavItem[] = [
     activeIcon: BellDot,
   },
   {
-    title: "Groups",
-    href: "/groups",
+    title: "Communities",
+    href: "/communities",
     icon: GroupIcon,
     activeIcon: ActiveGroupIcon,
   },
