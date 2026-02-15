@@ -112,9 +112,9 @@ export default async function WatchDetailPage({ params }: { params: Promise<{ sl
                                 </div>
                                 <CardDescription>{meta.description}</CardDescription>
                             </div>
-                            <Button 
-                            // onClick={() => {}}
-                             size="lg">
+                            <Button
+                                // onClick={() => {}}
+                                size="lg">
                                 Follow
                             </Button>
                         </div>
