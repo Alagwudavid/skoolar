@@ -113,7 +113,7 @@ export default function WatchPage() {
                         <Link key={watch.id} href={`/watch/${watch.slug}`}>
                             <Card className="h-full hover:bg-muted/50 transition-colors py-0 overflow-hidden gap-3 border-0">
                                 <div className='max-w-96 w-full h-50 rounded-2xl border bg-muted/50 overflow-hidden'>
-                                    <Image src={watch.coverImage} width={320} height={240} alt="Status of User 3" className="w-full h-full" />
+                                    <Image src={watch.coverImage ?? "/videos/v_1.jpg"} width={320} height={240} alt="Status of User 3" className="w-full h-full" />
                                 </div>
                                 <CardHeader className='pb-0'>
                                     <div className="flex items-start justify-between">

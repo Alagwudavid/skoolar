@@ -96,7 +96,7 @@ export default async function WatchDetailPage({ params }: { params: Promise<{ sl
         <div className="container max-w-4xl py-8">
             <div className="space-y-6 p-4">
                 <div className='max-w-5xl w-full h-105 rounded-2xl border bg-muted/50 overflow-hidden'>
-                    <Image src={watchData.coverImage ?? null} width={320} height={240} alt="Status of User 3" className="w-full h-full aspect-video" />
+                    <Image src={watchData.coverImage ?? "/videos/v_1.jpg"} width={320} height={240} alt="Status of User 3" className="w-full h-full aspect-video" />
                 </div>
 
                 <Card>
