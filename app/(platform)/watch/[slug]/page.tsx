@@ -38,39 +38,18 @@ export default async function WatchDetailPage({ params }: { params: Promise<{ sl
     const { slug } = await params
     // const ImgSrc = watchData.coverImage.src || coverImage;
 
-    const watchData: Watch = [
-        {
-            id: '1',
-            coverImage: "/videos/v_1.jpg",
-            // coverImageSrc: Promise<coverImage.src>,
-            name: 'Computer Science Students',
-            description: 'A community for CS students to discuss algorithms, projects, and career advice',
-            slug: slug,
-            type: 'public',
-            members: 1243,
-            posts: 567
-        },
-        {
-            id: '2',
-            coverImage: "/videos/v_2.jpg",
-            name: 'AI & Machine Learning',
-            description: 'Exploring the world of artificial intelligence and ML',
-            slug: slug,
-            type: 'public',
-            members: 892,
-            posts: 345
-        },
-        {
-            id: '3',
-            coverImage: "/videos/v_3.jpg",
-            name: 'Stanford Class of 2026',
-            description: 'Private watch for Stanford students',
-            slug: slug,
-            type: 'private',
-            members: 234,
-            posts: 189
-        }
-    ]
+    // Mock data - in production, fetch based on slug
+    const watchData: Watch = {
+        id: '1',
+        coverImage: "/videos/v_1.jpg",
+        // coverImageSrc: Promise<coverImage.src>,
+        name: 'Computer Science Students',
+        description: 'A community for CS students to discuss algorithms, projects, and career advice',
+        slug: slug,
+        type: 'public',
+        members: 1243,
+        posts: 567
+    }
 
     // Mock data
     const meta = {
