@@ -99,7 +99,7 @@ export default function WatchPage() {
                             Private
                         </Button>
                     </div>
-                    
+
                     <Button asChild className='rounded-full px-3 py-2'>
                         <Link href="/watch/create">
                             <PlusIcon className="w-6 h-6" />
