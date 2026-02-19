@@ -71,18 +71,76 @@ const posts = [
   },
 ];
 
-export default function FeedPage() {
+export default function FollowingFeedPage() {
   return (
     <div className="max-w-2xl mx-auto">
-      <div className="bg-background flex items-center justify-between gap-4 mb-4">
+      <div className="bg-background flex items-center justify-between gap-4">
         <div className="px-4 pb-4 sm:py-4 flex items-center justify-center">
-          <h1 className="text-lg font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:origin-center after:transition-transform after:duration-300 after:scale-x-100 text-primary cursor-pointer">For You</h1>
+          <Link href={"/feed"} className="text-lg font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-primary cursor-pointer">For You</Link>
         </div>
         <div className="px-4 pb-4 sm:py-4 flex items-center justify-center">
-          <Link href={"/feed/following"} className="text-lg font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-primary cursor-pointer">Following</Link>
+          <h1 className="text-lg font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:origin-center after:transition-transform after:duration-300 after:scale-x-100 text-primary cursor-pointer">Following</h1>
         </div>
         <div className="px-4 pb-4 sm:py-4 flex items-center justify-center">
           <Link href={"/feed/communities"} className="text-lg font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-primary cursor-pointer">Community</Link>
+        </div>
+      </div>
+      <div className="mb-4 flex items-center gap-2 relative overflow-hidden">
+        <div className="h-50 w-35 border rounded-2xl relative overflow-hidden">
+          <div className="absolute top-2 left-2 z-20 border-2 border-primary rounded-full w-10 h-10 p-0.5">
+            <Avatar className="h-full w-full">
+              <AvatarImage src={"/stories/u.png"}></AvatarImage>
+              <AvatarFallback>U</AvatarFallback>
+            </Avatar>
+            <div className="absolute bottom-0 right-0 z-30 w-4 h-4 rounded-full bg-foreground flex items-center justify-center">
+              <PlusIcon className="w-4 h-4 text-background" />
+            </div>
+          </div>
+          <div className="bg-muted h-full w-full relative">
+            <h1 className="text-sm font-bold absolute bottom-2 left-2">Create reel</h1>
+          </div>
+        </div>
+        <div className="h-50 w-35 border rounded-2xl flex flex-col relative overflow-hidden">
+          <div className="absolute top-2 left-2 z-20 border-2 border-primary rounded-full w-10 h-10 p-0.5">
+            <Avatar className="h-full w-full">
+              <AvatarImage src={"/stories/u_1.png"} alt="user image 1"></AvatarImage>
+              <AvatarFallback>U1</AvatarFallback>
+            </Avatar>
+          </div>
+          <div className="bg-muted relative h-full">
+            <Image src={"/stories/s_1.png"} width={120} height={240} alt="Status of User 1" className="w-full h-full" />
+            <div className="w-full h-full inset-0 bg-black/50 absolute top-0 z-10" />
+            <h1 className="text-white text-sm font-bold absolute bottom-2 left-2 z-20">User 1</h1>
+          </div>
+        </div>
+        <div className="h-50 w-35 border rounded-2xl flex flex-col relative overflow-hidden">
+          <div className="absolute top-2 left-2 z-20 border-2 border-primary rounded-full w-10 h-10 p-0.5">
+            <Avatar className="h-full w-full">
+              <AvatarImage src={"/stories/u_2.png"} alt="user image 2"></AvatarImage>
+              <AvatarFallback>U2</AvatarFallback>
+            </Avatar>
+          </div>
+          <div className="bg-muted relative h-full">
+            <Image src={"/stories/s_2.png"} width={120} height={240} alt="Status of User 2" className="w-full h-full" />
+            <div className="w-full h-full inset-0 bg-black/50 absolute top-0 z-10" />
+            <h1 className="text-white text-sm font-bold absolute bottom-2 left-2 z-20">User 2</h1>
+          </div>
+        </div>
+        <div className="h-50 w-35 border rounded-2xl flex flex-col relative overflow-hidden">
+          <div className="absolute top-2 left-2 z-20 border-2 border-primary rounded-full w-10 h-10 p-0.5">
+            <Avatar className="h-full w-full">
+              <AvatarImage src={"/stories/u_3.png"} alt="user image 3"></AvatarImage>
+              <AvatarFallback>U3</AvatarFallback>
+            </Avatar>
+          </div>
+          <div className="bg-muted relative h-full">
+            <Image src={"/stories/s_3.png"} width={120} height={240} alt="Status of User 3" className="w-full h-full" />
+            <div className="w-full h-full inset-0 bg-black/50 absolute top-0 z-10" />
+            <h1 className="text-white text-sm font-bold absolute bottom-2 left-2 z-20">User 3</h1>
+          </div>
+        </div>
+        <div className="absolute top-[40%] -right-4 w-8 h-8 p-2 rounded-full bg-foreground flex items-center justify-center z-20 cursor-pointer group shadow-sm shadow-muted">
+          <ChevronRight className="w-6 h-6 text-background group-hover:text-primary" />
         </div>
       </div>
       {/* Posts Feed */}

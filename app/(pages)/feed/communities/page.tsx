@@ -11,6 +11,11 @@ import { PlusIcon } from "@/components/icons/regular";
 const posts = [
   {
     id: '1',
+    community: {
+      name: 'University of Nigeria, Nsukka, Enugu',
+      username: 'UNN_NSK',
+      avatar: 'UNN',
+    },
     user: {
       name: 'Sarah Johnson',
       username: 'sarahj',
@@ -26,6 +31,11 @@ const posts = [
   },
   {
     id: '2',
+    community: {
+      name: 'Computer Dept. Unilag, Nigeria',
+      username: 'Comp_Unilag',
+      avatar: 'CDU',
+    },
     user: {
       name: 'Tech Internships Hub',
       username: 'techinternships',
@@ -41,6 +51,11 @@ const posts = [
   },
   {
     id: '3',
+    community: {
+      name: 'Mechanical. IMSU, Nigeria',
+      username: 'Mech_Imsu',
+      avatar: 'MIM',
+    },
     user: {
       name: 'Mike Chen',
       username: 'mchen',
@@ -54,35 +69,20 @@ const posts = [
     reposts: 78,
     image: null,
   },
-  {
-    id: '4',
-    user: {
-      name: 'Career Advisor Emma',
-      username: 'careeradvice',
-      avatar: 'E',
-      verified: true,
-    },
-    content: 'Hot take: Your resume matters way less than you think. What really matters:\n\n1. Networking\n2. Projects that show passion\n3. Clear communication skills\n4. Being genuinely curious\n\nThoughts?',
-    timestamp: '11h',
-    likes: 1205,
-    comments: 387,
-    reposts: 234,
-    image: null,
-  },
 ];
 
-export default function FeedPage() {
+export default function CommunitiesFeedPage() {
   return (
-    <div className="max-w-2xl mx-auto">
-      <div className="bg-background flex items-center justify-between gap-4 mb-4">
+    <div className="container max-w-4xl mx-auto">
+      <div className="bg-background flex items-center justify-between gap-4">
         <div className="px-4 pb-4 sm:py-4 flex items-center justify-center">
-          <h1 className="text-lg font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:origin-center after:transition-transform after:duration-300 after:scale-x-100 text-primary cursor-pointer">For You</h1>
+          <Link href={"/feed"} className="text-lg font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-primary cursor-pointer">For You</Link>
         </div>
         <div className="px-4 pb-4 sm:py-4 flex items-center justify-center">
           <Link href={"/feed/following"} className="text-lg font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-primary cursor-pointer">Following</Link>
         </div>
         <div className="px-4 pb-4 sm:py-4 flex items-center justify-center">
-          <Link href={"/feed/communities"} className="text-lg font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-primary cursor-pointer">Community</Link>
+          <h1 className="text-lg font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:origin-center after:transition-transform after:duration-300 after:scale-x-100 text-primary cursor-pointer">Community</h1>
         </div>
       </div>
       {/* Posts Feed */}
@@ -90,12 +90,17 @@ export default function FeedPage() {
         {posts.map((post) => (
           <article key={post.id} className="p-4 cursor-pointer">
             <div className="flex gap-3">
-              {/* Avatar */}
-              <Link href={`/users/${post.user.username}`}>
-                <Avatar className="h-10 w-10">
-                  <AvatarFallback>{post.user.avatar}</AvatarFallback>
-                </Avatar>
-              </Link>
+              <div className="">
+                {/* Avatar */}
+                <Link href={`/users/${post.user.username}`} className="relative h-12 w-fit">
+                  <Avatar className="h-10 w-10">
+                    <AvatarFallback className="rounded">{post.community.avatar}</AvatarFallback>
+                  </Avatar>
+                  <Avatar className="h-5 w-5 absolute bottom-0 right-0">
+                    <AvatarFallback>{post.user.avatar}</AvatarFallback>
+                  </Avatar>
+                </Link>
+              </div>
 
               {/* Content */}
               <div className="flex-1 min-w-0">
