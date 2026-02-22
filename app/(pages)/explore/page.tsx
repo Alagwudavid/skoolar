@@ -218,20 +218,19 @@ export default function ExplorePage() {
 
                 {/* Content */}
                 <div className="flex-1 min-w-0">
-                  {/* Post Content */}
-                  <h3 className="font-bold text-lg mb-1">{news.title}</h3>
-                  <p className="text-muted-foreground line-clamp-2 text-sm mb-2">
-                    {news.content}
-                  </p>
-
                   {/* User Info */}
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="font-semibold text-sm">{news.views} views</span>
+                    <span className="text-sm">{news.views} views</span>
                     <span className="text-muted-foreground">·</span>
                     <span className="text-muted-foreground text-sm">
                       {new Date(news.createdAt).toLocaleDateString()}
                     </span>
                   </div>
+                  {/* Post Content */}
+                  <h3 className="font-bold text-lg mb-1">{news.title}</h3>
+                  <p className="text-muted-foreground line-clamp-2 text-sm mb-2">
+                    {news.content}
+                  </p>
                 </div>
               </div>
             </article>

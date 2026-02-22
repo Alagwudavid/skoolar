@@ -73,3 +73,17 @@ export const LearnerIcon = (props: React.SVGProps<SVGSVGElement>) => (
 export const ActiveLearnerIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M3 17.15V10q0-.8.588-1.35t1.387-.5q1.975.3 3.763 1.163T12 11.55q1.475-1.375 3.263-2.238t3.762-1.162q.8-.05 1.388.5T21 10v7.15q0 .8-.525 1.363t-1.325.612q-1.6.25-3.1.825t-2.8 1.525q-.275.225-.587.337t-.663.113t-.663-.112t-.587-.338q-1.3-.95-2.8-1.525t-3.1-.825q-.8-.05-1.325-.612T3 17.15m6.175-9.325Q8 6.65 8 5t1.175-2.825T12 1t2.825 1.175T16 5t-1.175 2.825T12 9T9.175 7.825"></path></svg>
 );
+
+export const SearchIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={48} height={48} viewBox="0 0 48 48" {...props}><g fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth={4}><path d="M21 38c9.389 0 17-7.611 17-17S30.389 4 21 4S4 11.611 4 21s7.611 17 17 17Z"></path><path strokeLinecap="round" d="M26.657 14.343A7.98 7.98 0 0 0 21 12a7.98 7.98 0 0 0-5.657 2.343m17.879 18.879l8.485 8.485"></path></g></svg>
+);
+export const ActiveSearchIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={48} height={48} viewBox="0 0 48 48" {...props}><defs><mask id="SVG2D5J8dbD"><g fill="none" strokeLinejoin="round" strokeWidth={4}><path fill="#fff" stroke="#fff" d="M21 38c9.389 0 17-7.611 17-17S30.389 4 21 4S4 11.611 4 21s7.611 17 17 17Z"></path><path stroke="#000" strokeLinecap="round" d="M26.657 14.343A7.98 7.98 0 0 0 21 12a7.98 7.98 0 0 0-5.657 2.343"></path><path stroke="#fff" strokeLinecap="round" d="m33.222 33.222l8.485 8.485"></path></g></mask></defs><path fill="currentColor" d="M0 0h48v48H0z" mask="url(#SVG2D5J8dbD)"></path></svg>
+);
+
+export const AtIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M12 3.25A8.75 8.75 0 0 0 3.25 12A8.65 8.65 0 0 0 12 20.75a.75.75 0 0 0 0-1.5A7.17 7.17 0 0 1 4.75 12A7.26 7.26 0 0 1 12 4.75c4.81 0 7.25 2.44 7.25 7.25v1.38a1.46 1.46 0 1 1-2.91 0v-5a.75.75 0 0 0-1.5 0v.34A4.3 4.3 0 0 0 12 7.66a4.34 4.34 0 0 0 0 8.68a4.3 4.3 0 0 0 3.24-1.49a2.95 2.95 0 0 0 5.51-1.47V12c0-5.64-3.11-8.75-8.75-8.75m0 11.59A2.84 2.84 0 1 1 14.84 12A2.85 2.85 0 0 1 12 14.84"></path></svg>
+);
+export const ActiveAtIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}><circle cx={12} cy={12} r={4}></circle><path d="M16 12v1a1 1 0 0 0 6 0v-1a10 10 0 1 0-4 8"></path></g></svg>
+);

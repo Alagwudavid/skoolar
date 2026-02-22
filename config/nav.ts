@@ -1,5 +1,5 @@
 import { NavItem } from "@/types";
-import { HomeIcon, ActiveHomeIcon, CompassIcon, ActiveCompassIcon, ChatIcon, ActiveChatIcon, GroupIcon, ActiveGroupIcon, OpportunitiesIcon, ActiveOpportunitiesIcon, PlusIcon, ActivePlusIcon, UserIcon, ActiveUserIcon, LearnerIcon, ActiveLearnerIcon } from "@/components/icons";
+import { HomeIcon, ActiveHomeIcon, SearchIcon, ActiveSearchIcon, ChatIcon, ActiveChatIcon, GroupIcon, ActiveGroupIcon, OpportunitiesIcon, ActiveOpportunitiesIcon, PlusIcon, ActivePlusIcon, UserIcon, ActiveUserIcon, LearnerIcon, ActiveLearnerIcon } from "@/components/icons";
 import { Bell, BellDot, PlaySquare } from "lucide-react";
 
 export const siteConfig = {
@@ -15,16 +15,28 @@ export const mainNav: NavItem[] = [
     activeIcon: ActiveHomeIcon,
   },
   {
+    title: "Learn",
+    href: "/learn",
+    icon: LearnerIcon,
+    activeIcon: ActiveLearnerIcon,
+  },
+  {
     title: "Watch",
     href: "/watch",
     icon: PlaySquare,
     activeIcon: PlaySquare,
   },
   {
-    title: "Discover",
+    title: "Opportunities",
+    href: "/opportunities",
+    icon: OpportunitiesIcon,
+    activeIcon: ActiveOpportunitiesIcon,
+  },
+  {
+    title: "Search",
     href: "/explore",
-    icon: CompassIcon,
-    activeIcon: ActiveCompassIcon,
+    icon: SearchIcon,
+    activeIcon: ActiveSearchIcon,
   },
   {
     title: "Chat",
@@ -44,28 +56,16 @@ export const mainNav: NavItem[] = [
     icon: GroupIcon,
     activeIcon: ActiveGroupIcon,
   },
-  {
-    title: "Opportunities",
-    href: "/opportunities",
-    icon: OpportunitiesIcon,
-    activeIcon: ActiveOpportunitiesIcon,
-  },
-  {
-    title: "Learn",
-    href: "/learn",
-    icon: LearnerIcon,
-    activeIcon: ActiveLearnerIcon,
-  },
   // {
   //   title: "Create",
   //   href: "/posts/create",
   //   icon: PlusIcon,
   //   activeIcon: ActivePlusIcon,
   // },
-  {
-    title: "Profile",
-    href: "/profile",
-    icon: UserIcon,
-    activeIcon: ActiveUserIcon,
-  },
+  // {
+  //   title: "Profile",
+  //   href: "/profile",
+  //   icon: UserIcon,
+  //   activeIcon: ActiveUserIcon,
+  // },
 ];

@@ -24,7 +24,8 @@ import {
   ChevronLeft,
   Sun,
   Monitor,
-  Check
+  Check,
+  Ellipsis
 } from "lucide-react";
 import { mainNav } from "@/config/nav";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -35,8 +36,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { RIcons } from "../icons/collection";
-import { AiIcon, ActiveAiIcon } from "../icons";
+import { AiIcon, ActiveAiIcon, AtIcon, ActiveAtIcon } from "../icons";
 const moreMenuItems = [
+  {
+    title: "Following",
+    href: "/users/following",
+    icon: AtIcon,
+    activeIcon: ActiveAtIcon,
+  },
   {
     title: "AI",
     href: "/ai",
@@ -180,10 +187,16 @@ export function Sidebar() {
       <div className="p-4">
         <DropdownMenu onOpenChange={(open) => { if (!open) setShowAppearanceMenu(false); }}>
           <DropdownMenuTrigger asChild>
-            <button className="flex items-center gap-3 p-3 rounded-full hover:bg-muted hover:text-foreground transition-colors w-full">
+            <button className="flex items-center justify-between gap-3 p-3 rounded-full hover:bg-muted hover:text-foreground transition-colors w-full">
               {/* <RIcons.Preference className="h-7 w-7" /> */}
-              <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" className="h-7 w-7"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 17h7M5 12h14M5 7h14"></path></svg>
-              <span className="text-xl">Menu</span>
+              {/* <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" className="h-7 w-7"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 17h7M5 12h14M5 7h14"></path></svg>
+              <span className="text-xl">Menu</span> */}
+              
+                  <Avatar className="h-10 w-10">
+                    <AvatarFallback className="bg-secondary text-secondary-foreground">U</AvatarFallback>
+                  </Avatar>
+                  <span className="text-xl flex-1 text-start">Profile</span>
+                  <Ellipsis className="w-5 h-5"/>
             </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent
