@@ -26,7 +26,7 @@ export function Navbar() {
             <div className="container flex h-16 px-4 items-center justify-between mx-auto">
                 <Link href="/" className="flex items-center gap-1 font-bold text-xl">
                     <RIcons.Brand className="h-8 w-8" />
-                    <RIcons.BrandText className="h-6 w-30" />
+                    <RIcons.BrandText className={`h-6 w-30  ${isScrolled ? 'text-foreground' : 'text-background'}`} />
                 </Link>
                 <nav className={`hidden md:flex items-center gap-6 ${isScrolled ? 'text-foreground' : 'text-background'
                     }`}>
@@ -47,7 +47,7 @@ export function Navbar() {
                     <Button
                         variant={isScrolled ? "ghost" : "outline"}
                         size="default"
-                        className={`rounded-full ${!isScrolled ? 'border-background text-foreground hover:bg-background hover:text-foreground' : ''
+                        className={`rounded-full sm:px-6 sm:py-3 ${!isScrolled ? 'border-background text-foreground hover:bg-background hover:text-foreground' : 'border'
                             }`}
                         asChild
                     >
@@ -55,7 +55,7 @@ export function Navbar() {
                     </Button>
                     <Button
                         size="default"
-                        className='rounded-full'
+                        className='rounded-full sm:px-6 sm:py-3'
                         asChild
                     >
                         <Link href="/auth/signup">Sign Up</Link>

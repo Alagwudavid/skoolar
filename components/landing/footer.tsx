@@ -34,6 +34,7 @@ const LogoText = (props: React.SVGProps<SVGSVGElement>) => (
       imageRendering: "auto",
       fillRule: "evenodd",
       clipRule: "evenodd",
+      opacity: "5%",
     }}
     {...props}
   >
@@ -44,24 +45,24 @@ const LogoText = (props: React.SVGProps<SVGSVGElement>) => (
 );
 export function Footer() {
     return (
-        <footer className="bg-black text-white mt-20 rounded-t-[82px] overflow-hidden">
-            <div className="container mx-auto p-10 sm:px-20 sm:pt-20">
+        <footer className="h-full bg-black text-white mt-20 overflow-hidden">
+            <div className="container mx-auto p-10 sm:px-20 sm:py-15 relative bg-no-repeat">
                 <div className="grid md:grid-cols-4 gap-8">
                     <div>
                         <div className="flex items-center gap-2 font-bold text-xl mb-4">
                             <LogoIcon className="h-6 w-25 text-foreground" />
                         </div>
-                        <p className="text-sm opacity-90 mb-4">
+                        <p className="text-base opacity-90 mb-4">
                             Connecting students with opportunities worldwide.
                         </p>
-                        <p className="text-sm opacity-90 mb-4">
+                        <p className="text-base opacity-90 mb-4">
                             © 2026 Skoolar, LLC.
                         </p>
                     </div>
 
                     <div>
                         <h4 className="font-semibold mb-4">Company</h4>
-                        <ul className="space-y-2 text-sm opacity-90">
+                        <ul className="space-y-2 text-base opacity-90">
                             <li><Link href="/about" className=" font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-primary">About Us</Link></li>
                             <li><Link href="/contact" className=" font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-primary">Contact</Link></li>
                             <li><Link href="/careers" className=" font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-primary">Careers</Link></li>
@@ -70,7 +71,7 @@ export function Footer() {
 
                     <div>
                         <h4 className="font-semibold mb-4">Support</h4>
-                        <ul className="space-y-2 text-sm opacity-90">
+                        <ul className="space-y-2 text-base opacity-90">
                             <li><Link href="/help" className=" font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-primary">Help Center</Link></li>
                             <li><Link href="/terms" className=" font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-primary">Terms of Service</Link></li>
                             <li><Link href="/privacy" className=" font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-primary">Privacy Policy</Link></li>
@@ -93,9 +94,9 @@ export function Footer() {
                     </div>
                 </div>
 
-                <div className="mt-8 pt-8 text-center text-sm opacity-50">
-                    <LogoText className="h-fit w-full max-w-5xl text-muted-foreground lg:-mb-18 mx-auto" />
-                </div>
+                {/* <div className="absolute left-0 right-0 -z-10 text-center text-base opacity-5">
+                    <LogoText className="h-fit w-full max-w-5xl text-muted-foreground mx-auto" />
+                </div> */}
             </div>
         </footer>
     )

@@ -12,38 +12,38 @@ import SearchBar from '@/components/layout/search-bar';
 import Image from 'next/image';
 
 const featuredOpportunities = [
-  {
-    id: '1',
-    type: 'Internship',
-    title: 'Software Engineering Intern',
-    organization: 'Tech Corp',
-    location: 'San Francisco, CA',
-    price: '$5,000/month'
-  },
-  {
-    id: '2',
-    type: 'Scholarship',
-    title: 'Merit-Based Scholarship 2026',
-    organization: 'Stanford University',
-    location: 'Remote',
-    price: 'Full Tuition'
-  },
-  {
-    id: '3',
-    type: 'Placement',
-    title: 'Graduate Software Developer',
-    organization: 'Innovation Labs',
-    location: 'New York, NY',
-    price: '$95K/year'
-  },
-  {
-    id: '4',
-    type: 'Internship',
-    title: 'Data Science Intern',
-    organization: 'Analytics Inc',
-    location: 'Boston, MA',
-    price: '$4,500/month'
-  }
+    {
+        id: '1',
+        type: 'Internship',
+        title: 'Software Engineering Intern',
+        organization: 'Tech Corp',
+        location: 'San Francisco, CA',
+        duration: '4-6 months'
+    },
+    {
+        id: '2',
+        type: 'Scholarship',
+        title: 'Merit-Based Scholarship 2026',
+        organization: 'Stanford University',
+        location: 'Remote',
+        duration: '3 months'
+    },
+    {
+        id: '3',
+        type: 'Placement',
+        title: 'Graduate Software Developer',
+        organization: 'Innovation Labs',
+        location: 'New York, NY',
+        duration: '4-6 months'
+    },
+    {
+        id: '4',
+        type: 'Internship',
+        title: 'Data Science Intern',
+        organization: 'Analytics Inc',
+        location: 'Boston, MA',
+        duration: '6 months'
+    }
 ]
 
 const mockNews = [
@@ -269,7 +269,7 @@ export default function ExplorePage() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="font-semibold text-foreground">{opportunity.price}</div>
+                  <div className="font-semibold text-foreground">{opportunity.duration}</div>
                 </CardContent>
               </Card>
             </Link>

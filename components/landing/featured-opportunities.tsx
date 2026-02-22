@@ -11,7 +11,7 @@ const featuredOpportunities = [
         title: 'Software Engineering Intern',
         organization: 'Tech Corp',
         location: 'San Francisco, CA',
-        price: '$5,000/month'
+        duration: '4-6 months'
     },
     {
         id: '2',
@@ -19,7 +19,7 @@ const featuredOpportunities = [
         title: 'Merit-Based Scholarship 2026',
         organization: 'Stanford University',
         location: 'Remote',
-        price: 'Full Tuition'
+        duration: '3 months'
     },
     {
         id: '3',
@@ -27,7 +27,7 @@ const featuredOpportunities = [
         title: 'Graduate Software Developer',
         organization: 'Innovation Labs',
         location: 'New York, NY',
-        price: '$95K/year'
+        duration: '4-6 months'
     },
     {
         id: '4',
@@ -35,7 +35,7 @@ const featuredOpportunities = [
         title: 'Data Science Intern',
         organization: 'Analytics Inc',
         location: 'Boston, MA',
-        price: '$4,500/month'
+        duration: '6 months'
     }
 ]
 
@@ -71,7 +71,7 @@ export function FeaturedOpportunities() {
                                 </CardDescription>
                             </CardHeader>
                             <CardContent>
-                                <div className="font-semibold text-foreground">{opportunity.price}</div>
+                                <div className="font-semibold text-foreground">{opportunity.duration}</div>
                             </CardContent>
                         </Card>
                     </Link>

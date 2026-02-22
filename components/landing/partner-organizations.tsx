@@ -11,18 +11,23 @@ const partnerOrganizations = [
 
 export function PartnerOrganizations() {
   return (
-    <section className="py-12">
-      <div className="container mx-auto">
-        <h3 className="text-center text-sm font-semibold text-foreground mb-8 capitalize">
-          TRUSTED BY LEADING ORGANIZATIONS
-        </h3>
-        <div className="grid grid-cols-3 md:grid-cols-6 gap-8 items-center justify-items-center">
+    <section className="py-12 overflow-hidden bg-bacground text-foreground">
+      <div className="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] group">
+        <div className="flex gap-12 shrink-0 animate-marquee group-hover:paused">
           {partnerOrganizations.map((partner, index) => (
-            <div key={index} className="text-center">
-              <div className="w-16 h-16 rounded-full bg-[#87f335] flex items-center justify-center mb-2 mx-auto">
+            <div key={index} className="flex flex-col items-center gap-2 min-w-max">
+              <div className="w-40 h-20 bg-[#87f335] flex items-center justify-center">
                 <Building2 className="h-8 w-8 text-white" />
               </div>
-              <div className="text-xs font-medium">{partner.name}</div>
+            </div>
+          ))}
+        </div>
+        <div className="ml-12 flex gap-12 shrink-0 animate-marquee group-hover:paused" aria-hidden="true">
+          {partnerOrganizations.map((partner, index) => (
+            <div key={index} className="flex flex-col items-center gap-2 min-w-max">
+              <div className="w-40 h-20 bg-[#87f335] flex items-center justify-center">
+                <Building2 className="h-8 w-8 text-white" />
+              </div>
             </div>
           ))}
         </div>

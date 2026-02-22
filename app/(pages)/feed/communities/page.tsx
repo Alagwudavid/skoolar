@@ -74,7 +74,7 @@ const posts = [
 export default function CommunitiesFeedPage() {
   return (
     <div className="container max-w-4xl mx-auto">
-      <div className="bg-background flex items-center justify-between gap-4">
+      <div className="bg-background flex items-center gap-4">
         <div className="px-4 pb-4 sm:py-4 flex items-center justify-center">
           <Link href={"/feed"} className="text-lg font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-primary cursor-pointer">For You</Link>
         </div>
@@ -82,7 +82,7 @@ export default function CommunitiesFeedPage() {
           <Link href={"/feed/following"} className="text-lg font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-primary cursor-pointer">Following</Link>
         </div>
         <div className="px-4 pb-4 sm:py-4 flex items-center justify-center">
-          <h1 className="text-lg font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:origin-center after:transition-transform after:duration-300 after:scale-x-100 text-primary cursor-pointer">Community</h1>
+          <h1 className="text-lg font-bold relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:origin-center after:transition-transform after:duration-300 after:scale-x-100 text-primary cursor-pointer">Community</h1>
         </div>
       </div>
       {/* Posts Feed */}

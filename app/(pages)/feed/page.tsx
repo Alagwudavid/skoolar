@@ -7,6 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { GroupIcon, HomeIcon } from "@/components/icons";
 import { PlusIcon } from "@/components/icons/regular";
+import CreatePostModal from "@/components/layout/create-post";
 
 const posts = [
   {
@@ -74,9 +75,10 @@ const posts = [
 export default function FeedPage() {
   return (
     <div className="max-w-2xl mx-auto">
-      <div className="bg-background flex items-center justify-between gap-4 mb-4">
+      <CreatePostModal />
+      <div className="bg-background flex items-center gap-4 mb-4">
         <div className="px-4 pb-4 sm:py-4 flex items-center justify-center">
-          <h1 className="text-lg font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:origin-center after:transition-transform after:duration-300 after:scale-x-100 text-primary cursor-pointer">For You</h1>
+          <h1 className="text-lg font-bold relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:origin-center after:transition-transform after:duration-300 after:scale-x-100 text-primary cursor-pointer">For You</h1>
         </div>
         <div className="px-4 pb-4 sm:py-4 flex items-center justify-center">
           <Link href={"/feed/following"} className="text-lg font-medium relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-primary after:rounded-full after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100 hover:text-primary cursor-pointer">Following</Link>

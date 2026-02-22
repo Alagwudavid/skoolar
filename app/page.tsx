@@ -4,11 +4,12 @@ import { HeroSection } from '@/components/landing/hero-section'
 import { FeaturedOpportunities } from '@/components/landing/featured-opportunities'
 import { TopInstitutions } from '@/components/landing/top-institutions'
 import { PartnerOrganizations } from '@/components/landing/partner-organizations'
-import { HowItWorks } from '@/components/landing/how-it-works'
-import { FeaturesSection } from '@/components/landing/features-section'
+import { OpportunitiesSection, LearningResourcesSection } from '@/components/landing/more-section'
+import { GrowthSection } from '@/components/landing/growth-section'
 import { TestimonialsSection } from '@/components/landing/testimonials-section'
 import { Footer } from '@/components/landing/footer'
-import { WaitlistSection } from '@/components/landing/waitlist-section'
+import { LoginSection } from '@/components/landing/login-section'
+import { DownloadSection } from '@/components/landing/download-section'
 
 export default function Home() {
   return (
@@ -16,12 +17,15 @@ export default function Home() {
       <AnnouncementBanner />
       <Navbar />
       <HeroSection />
+      <PartnerOrganizations />
+      {/* <GrowthSection /> */}
       <FeaturedOpportunities />
       <TopInstitutions />
-      <PartnerOrganizations />
-      <HowItWorks />
+      <OpportunitiesSection />
+      <LearningResourcesSection />
       {/* <FeaturesSection /> */}
-      <WaitlistSection />
+      <LoginSection />
+      <DownloadSection />
       {/* <TestimonialsSection /> */}
       <Footer />
     </div>
