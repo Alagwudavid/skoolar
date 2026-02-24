@@ -8,6 +8,7 @@ import Image from "next/image";
 import { GroupIcon, HomeIcon } from "@/components/icons";
 import { PlusIcon } from "@/components/icons/regular";
 import CreatePostModal from "@/components/layout/create-post";
+import { useState } from "react";
 
 const posts = [
   {
@@ -73,8 +74,14 @@ const posts = [
 ];
 
 export default function FeedPage() {
+  const [openPostMenuId, setOpenPostMenuId] = useState<string | null>(null)
+
+  const handleOpenPostMenu = (e: React.MouseEvent, postId: string) => {
+    e.stopPropagation()
+    setOpenPostMenuId(openPostMenuId === postId ? null : postId)
+  }
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="max-w-xl mx-auto">
       <CreatePostModal />
       <div className="bg-background flex items-center gap-4 mb-4">
         <div className="px-4 pb-4 sm:py-4 flex items-center justify-center">
@@ -88,7 +95,8 @@ export default function FeedPage() {
         </div>
       </div>
       {/* Posts Feed */}
-      <div className="divide-y border rounded-4xl overflow-hidden" >
+      {/* <div className="divide-y border rounded-4xl overflow-hidden" > */}
+      <div className="divide-y overflow-hidden" >
         {posts.map((post) => (
           <article key={post.id} className="p-4 cursor-pointer">
             <div className="flex gap-3">
@@ -110,13 +118,18 @@ export default function FeedPage() {
                     {post.user.verified && (
                       <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" className="h-5 w-5 text-lime-500"><path fill="currentColor" fillRule="evenodd" d="M12 21a9 9 0 1 0 0-18a9 9 0 0 0 0 18m-.232-5.36l5-6l-1.536-1.28l-4.3 5.159l-2.225-2.226l-1.414 1.414l3 3l.774.774z" clipRule="evenodd"></path></svg>
                     )}
-                    {/* <span className="text-muted-foreground">@{post.user.username}</span> */}
-                    <span className="text-muted-foreground">·</span>
-                    <span className="text-muted-foreground">{post.timestamp}</span>
                   </div>
-                  <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full">
-                    <MoreHorizontal className="h-5 w-5" />
-                  </Button>
+                  <div className="relative">
+                    <Button onClick={(e) => handleOpenPostMenu(e, post.id)} variant="ghost" size="icon" className="h-8 w-8 rounded-full hover:text-primary">
+                      <MoreHorizontal className="h-5 w-5" />
+                    </Button>
+                    {openPostMenuId === post.id && (
+                      <div className="absolute right-2 p-3 rounded-sm bg-muted border w-50">
+                        <div>Menu opened</div>
+                      </div>
+                    )}
+                  </div>
+
                 </div>
 
                 {/* Post Content */}
@@ -130,27 +143,23 @@ export default function FeedPage() {
                     <Image src={post.image} alt="Post image" fill className="object-cover" />
                   </div>
                 )}
-
-                {/* Action Buttons */}
-                <div className="flex items-center gap-3 mt-4">
-                  <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-blue-500 rounded-full cursor-pointer">
-                    <MessageCircle className="h-5 w-5" />
-                    <span className="text-xs">{post.comments}</span>
-                  </Button>
-
-                  <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-green-500 rounded-full cursor-pointer">
-                    <Repeat2 className="h-5 w-5" />
-                    <span className="text-xs">{post.reposts}</span>
-                  </Button>
-
-                  <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-red-500 rounded-full cursor-pointer">
-                    <Heart className="h-5 w-5" />
-                    <span className="text-xs">{post.likes}</span>
-                  </Button>
-
-                  <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-blue-500 rounded-full cursor-pointer">
-                    <Share className="h-5 w-5" />
-                  </Button>
+                <div className="w-full flex items-center">
+                  <div className="mt-3 rounded-2xl overflow-hidden hover:bg-muted border relative w-full h-96">
+                  </div>
+                </div>
+                <div className="flex items-center justify-between gap-3 mt-4">
+                  <span className="text-muted-foreground">{post.timestamp}</span>
+                  {/* Action Buttons */}
+                  <div className="flex items-center gap-3">
+                    <Button variant="ghost" size="sm" className="gap-2 text-foreground hover:text-red-500 rounded-none bg-transparent hover:bg-transparent! cursor-pointer">
+                      <Heart className="h-5! w-5!" />
+                      <span className="text-sm">{post.likes}</span>
+                    </Button>
+                    <Button variant="ghost" size="sm" className="gap-2 text-foreground hover:text-blue-500 rounded-full bg-transparent hover:bg-transparent! cursor-pointer">
+                      <MessageCircle className="h-5! w-5!" />
+                      <span className="text-xs">{post.comments}</span>
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>

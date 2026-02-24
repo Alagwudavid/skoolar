@@ -147,7 +147,7 @@ export function Sidebar() {
           <button
             onClick={() => setShowMore(!showMore)}
             className={cn(
-              "flex items-center gap-4 px-4 py-3 rounded-full text-xl transition-colors hover:bg-muted cursor-pointer w-full text-left"
+              "flex items-center gap-4 px-4 py-3 rounded-full text-xl transition-colors bg-primary text-primary-foreground hover:bg-primary/70 cursor-pointer w-full text-left"
             )}
           >
             <RIcons.ChevronDown className={cn(

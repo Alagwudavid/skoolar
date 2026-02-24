@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { XIcon } from "lucide-react"
+import { X, XIcon } from "lucide-react"
 import * as SheetPrimitive from "@radix-ui/react-dialog"
 import * as VisuallyHiddenPrimitive from "@radix-ui/react-visually-hidden"
 
@@ -37,7 +37,7 @@ function SheetOverlay({
     <SheetPrimitive.Overlay
       data-slot="sheet-overlay"
       className={cn(
-        "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-primary/10 backdrop-blur-xs",
+        "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/10 backdrop-blur-xs",
         className
       )}
       {...props}
@@ -86,8 +86,14 @@ function SheetContent({
           </VisuallyHiddenPrimitive.Root>
         )}
         {showCloseButton && (
-          <div className="bg-background p-2 w-full flex items-center justify-center">
-            <SheetPrimitive.Close className="w-20 h-2 rounded-lg bg-muted hover:bg-primary cursor-pointer"></SheetPrimitive.Close>
+          // <div className="bg-background p-2 w-full flex items-center justify-center">
+          //   <SheetPrimitive.Close className="w-20 h-2 rounded-lg bg-muted hover:bg-primary cursor-pointer"></SheetPrimitive.Close>
+          // </div>
+          <div className="bg-background p-2 w-full flex items-center justify-end">
+            <SheetPrimitive.Close className="w-10 h-10 p-2 rounded-sm border bg-background shadow-xs hover:bg-muted hover:text-primary dark:bg-input/30 dark:border-input dark:hover:bg-input/50">
+              <X className="w-6 h-6" />
+              <span className="sr-only">Close</span>
+            </SheetPrimitive.Close>
           </div>
         )}
         {children}

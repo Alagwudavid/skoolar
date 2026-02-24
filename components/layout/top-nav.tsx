@@ -258,6 +258,16 @@ export function TopNav() {
 
                 <Separator />
 
+                {/* Log Out */}
+                <div className="w-full">
+                  <button className="flex items-center gap-4 w-full px-6 py-2 text-base hover:bg-muted hover:text-destructive cursor-pointer transition-colors">
+                    <LogOut className="h-6 w-6" />
+                    <span>Log out</span>
+                  </button>
+                </div>
+
+                <Separator />
+
                 {/* Footer Links */}
                 <div className="flex flex-col px-6 py-4">
                   <div className="flex flex-wrap gap-2 text-sm text-muted-foreground">
@@ -277,16 +287,6 @@ export function TopNav() {
                   <div className="text-sm text-muted-foreground mt-3">
                     © 2026 Skoolar. All rights reserved.
                   </div>
-                </div>
-
-                <Separator />
-
-                {/* Log Out */}
-                <div className="w-full">
-                  <button className="flex items-center gap-4 w-full px-6 py-2 text-base hover:bg-muted hover:text-destructive cursor-pointer transition-colors">
-                    <LogOut className="h-6 w-6" />
-                    <span>Log out</span>
-                  </button>
                 </div>
               </div>
             </SheetContent>
