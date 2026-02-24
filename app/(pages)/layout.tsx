@@ -3,6 +3,8 @@ import { MobileNav } from "@/components/layout/mobile-nav";
 import { RightBar } from "@/components/layout/rightbar";
 import { TopNav } from "@/components/layout/top-nav";
 
+export const dynamic = 'force-dynamic';
+
 export default function PlatformLayout({
   children,
 }: {
@@ -12,7 +14,7 @@ export default function PlatformLayout({
     <div className="flex min-h-screen flex-col md:flex-row bg-background">
       {/* Left Sidebar */}
       <Sidebar />
-      
+
       {/* Main Content Area */}
       <main className="flex-1 pb-16 md:pb-0 max-w-3xl">
         {/* Top Nav */}
