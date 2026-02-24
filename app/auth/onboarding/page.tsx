@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useUser } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -10,6 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 
 export default function OnboardingPage() {
   const router = useRouter();
+  const { user, isLoaded } = useUser();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     userType: '',
@@ -35,23 +37,31 @@ export default function OnboardingPage() {
   };
 
   const handleSubmit = async () => {
+    if (!user) return;
     setLoading(true);
     try {
-      const response = await fetch('/api/auth/onboarding', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+      // Store onboarding data in Clerk's public metadata
+      await user.update({
+        unsafeMetadata: {
+          onboarded: true,
+          userType: formData.userType,
+          bio: formData.bio,
+          institution: formData.institution,
+          fieldOfStudy: formData.fieldOfStudy,
+          graduationYear: formData.graduationYear,
+          location: formData.location,
+          skills: formData.skills,
+        },
       });
-
-      if (response.ok) {
-        router.push('/feed');
-      }
+      router.push('/feed');
     } catch (err) {
       console.error('Onboarding error:', err);
     } finally {
       setLoading(false);
     }
   };
+
+  if (!isLoaded) return null;
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
@@ -65,9 +75,8 @@ export default function OnboardingPage() {
             {[1, 2, 3].map((s) => (
               <div
                 key={s}
-                className={`h-2 flex-1 rounded-full ${
-                  s <= step ? 'bg-blue-600' : 'bg-gray-200'
-                }`}
+                className={`h-2 flex-1 rounded-full ${s <= step ? 'bg-blue-600' : 'bg-gray-200'
+                  }`}
               />
             ))}
           </div>
