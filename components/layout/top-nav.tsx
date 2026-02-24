@@ -2,14 +2,15 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useTheme } from "next-themes";
+import { useUser, useClerk } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
 import { TopNavList } from "@/config/top-nav";
 import { mainNav } from "@/config/nav";
 import { RIcons } from "../icons/collection";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Sheet, SheetContent, SheetOverlay, SheetTrigger } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -76,9 +77,16 @@ const footerLinks = [
 
 export function TopNav() {
   const pathname = usePathname();
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [showThemeMenu, setShowThemeMenu] = useState(false);
   const { theme, setTheme } = useTheme();
+  const { user } = useUser();
+  const { signOut } = useClerk();
+
+  const initials = user?.firstName?.[0] ?? user?.emailAddresses?.[0]?.emailAddress?.[0]?.toUpperCase() ?? "U";
+  const displayName = user?.fullName ?? user?.emailAddresses?.[0]?.emailAddress ?? "User";
+  const username = user?.username ? `@${user.username}` : user?.emailAddresses?.[0]?.emailAddress ?? "";
 
   // Filter out items that are already shown in top nav
   const hiddenMainNavItems = mainNav.filter(
@@ -113,7 +121,8 @@ export function TopNav() {
             <SheetTrigger asChild>
               <button className="focus:outline-none">
                 <Avatar className="h-10 w-10">
-                  <AvatarFallback className="bg-secondary text-secondary-foreground">U</AvatarFallback>
+                  <AvatarImage src={user?.imageUrl} alt={user?.fullName ?? ''} />
+                  <AvatarFallback className="bg-secondary text-secondary-foreground">{initials}</AvatarFallback>
                 </Avatar>
               </button>
             </SheetTrigger>
@@ -128,11 +137,12 @@ export function TopNav() {
                 >
                   <div className="flex items-center gap-3">
                     <Avatar className="h-14 w-14">
-                      <AvatarFallback className="bg-secondary text-secondary-foreground text-lg">U</AvatarFallback>
+                      <AvatarImage src={user?.imageUrl} alt={user?.fullName ?? ''} />
+                      <AvatarFallback className="bg-secondary text-secondary-foreground text-lg">{initials}</AvatarFallback>
                     </Avatar>
                     <div className="flex flex-col">
-                      <span className="font-semibold text-lg">Demo User</span>
-                      <span className="text-sm text-muted-foreground">@demo_user</span>
+                      <span className="font-semibold text-lg">{displayName}</span>
+                      <span className="text-sm text-muted-foreground">{username}</span>
                     </div>
                   </div>
                   <ChevronRight className="h-5 w-5 text-muted-foreground" />
@@ -260,7 +270,10 @@ export function TopNav() {
 
                 {/* Log Out */}
                 <div className="w-full">
-                  <button className="flex items-center gap-4 w-full px-6 py-2 text-base hover:bg-muted hover:text-destructive cursor-pointer transition-colors">
+                  <button
+                    className="flex items-center gap-4 w-full px-6 py-2 text-base hover:bg-muted hover:text-destructive cursor-pointer transition-colors"
+                    onClick={() => { setOpen(false); signOut(() => router.push("/")); }}
+                  >
                     <LogOut className="h-6 w-6" />
                     <span>Log out</span>
                   </button>

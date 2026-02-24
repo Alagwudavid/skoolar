@@ -7,6 +7,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { TrendingUp, X } from "lucide-react";
 import SearchBar from "./search-bar";
 import { useRouter, usePathname } from "next/navigation";
+import { useAuth } from "@clerk/nextjs";
 
 const suggestedUsers = [
     { id: '1', name: 'Sarah Johnson', username: '@sarahj', role: 'CS Student' },
@@ -23,6 +24,7 @@ const trendingTopics = [
 export function RightBar() {
     const router = useRouter();
     const pathname = usePathname();
+    const { isSignedIn } = useAuth();
 
     const isExplorePage = pathname.startsWith('/explore');
 
@@ -31,23 +33,25 @@ export function RightBar() {
             <div className={`relative ${isExplorePage ? "hidden" : "block"}`}>
                 <SearchBar />
             </div>
-            {/* Login Card */}
-            <Card className="rounded-3xl">
-                <CardHeader>
-                    <CardTitle>Log in or sign up</CardTitle>
-                    <CardDescription>
-                        See what people are talking about and join the conversation.
-                    </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                    <Button className="w-full" size="lg" asChild>
-                        <Link href="/auth/signup">Sign up</Link>
-                    </Button>
-                    <Button variant="outline" className="w-full hover:text-foreground" size="lg" asChild>
-                        <Link href="/auth/signin">Log in</Link>
-                    </Button>
-                </CardContent>
-            </Card>
+            {/* Login Card — only shown to guests */}
+            {!isSignedIn && (
+                <Card className="rounded-3xl">
+                    <CardHeader>
+                        <CardTitle>Log in or sign up</CardTitle>
+                        <CardDescription>
+                            See what people are talking about and join the conversation.
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-3">
+                        <Button className="w-full" size="lg" asChild>
+                            <Link href="/auth/signup">Sign up</Link>
+                        </Button>
+                        <Button variant="outline" className="w-full hover:text-foreground" size="lg" asChild>
+                            <Link href="/auth/signin">Log in</Link>
+                        </Button>
+                    </CardContent>
+                </Card>
+            )}
 
             {/* Suggested Users */}
             <Card className="p-0 gap-0 rounded-3xl">

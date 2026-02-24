@@ -4,6 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useTheme } from "next-themes";
+import { useUser, useClerk } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import {
   ChevronDown,
@@ -28,7 +30,7 @@ import {
   Ellipsis
 } from "lucide-react";
 import { mainNav } from "@/config/nav";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -93,6 +95,13 @@ export function Sidebar() {
   const [showMore, setShowMore] = useState(false);
   const [showAppearanceMenu, setShowAppearanceMenu] = useState(false);
   const { theme, setTheme } = useTheme();
+  const { user } = useUser();
+  const { signOut } = useClerk();
+  const router = useRouter();
+
+  const initials = user?.firstName?.[0] ?? user?.emailAddresses?.[0]?.emailAddress?.[0]?.toUpperCase() ?? "U";
+  const displayName = user?.fullName ?? user?.emailAddresses?.[0]?.emailAddress ?? "Profile";
+  const username = user?.username ?? user?.emailAddresses?.[0]?.emailAddress ?? "";
 
   return (
     <aside className="hidden h-screen w-64 xl:w-72 flex-col bg-background md:flex sticky top-0 overflow-y-auto custom-scrollbar">
@@ -121,7 +130,8 @@ export function Sidebar() {
                   )}
                 >
                   <Avatar className="h-7 w-7">
-                    <AvatarFallback className="bg-secondary text-secondary-foreground">U</AvatarFallback>
+                    <AvatarImage src={user?.imageUrl} alt={user?.fullName ?? ''} />
+                    <AvatarFallback className="bg-secondary text-secondary-foreground">{initials}</AvatarFallback>
                   </Avatar>
                   <span>{item.title}</span>
                 </Link>
@@ -191,12 +201,13 @@ export function Sidebar() {
               {/* <RIcons.Preference className="h-7 w-7" /> */}
               {/* <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" className="h-7 w-7"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 17h7M5 12h14M5 7h14"></path></svg>
               <span className="text-xl">Menu</span> */}
-              
-                  <Avatar className="h-10 w-10">
-                    <AvatarFallback className="bg-secondary text-secondary-foreground">U</AvatarFallback>
-                  </Avatar>
-                  <span className="text-xl flex-1 text-start">Profile</span>
-                  <Ellipsis className="w-5 h-5"/>
+
+              <Avatar className="h-10 w-10">
+                <AvatarImage src={user?.imageUrl} alt={user?.fullName ?? ''} />
+                <AvatarFallback className="bg-secondary text-secondary-foreground">{initials}</AvatarFallback>
+              </Avatar>
+              <span className="text-xl flex-1 text-start">{displayName}</span>
+              <Ellipsis className="w-5 h-5" />
             </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent
@@ -246,8 +257,11 @@ export function Sidebar() {
                 </div>
                 {/* <DropdownMenuSeparator /> */}
                 <div className="p-2">
-                  <DropdownMenuItem className="flex items-center gap-3 p-2 px-3 text-base cursor-pointer">
-                    {/* <LogOut className="h-5 w-5 hover:text-foreground" /> */}
+                  <DropdownMenuItem
+                    className="flex items-center gap-3 p-2 px-3 text-base cursor-pointer text-destructive focus:text-destructive"
+                    onSelect={() => signOut(() => router.push("/"))}
+                  >
+                    <LogOut className="h-5 w-5" />
                     <span>Log out</span>
                   </DropdownMenuItem>
                 </div>

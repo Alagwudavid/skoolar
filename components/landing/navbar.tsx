@@ -2,12 +2,17 @@
 
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { BookOpen } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { RIcons } from "../icons/collection";
+import { useAuth, useUser } from '@clerk/nextjs';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 export function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false)
+    const { isSignedIn } = useAuth();
+    const { user } = useUser();
+
+    const initials = user?.firstName?.[0] ?? user?.emailAddresses?.[0]?.emailAddress?.[0]?.toUpperCase() ?? 'U';
 
     useEffect(() => {
         const handleScroll = () => {
@@ -44,22 +49,42 @@ export function Navbar() {
                     </Link>
                 </nav>
                 <div className="flex items-center gap-2">
-                    <Button
-                        variant={isScrolled ? "ghost" : "outline"}
-                        size="default"
-                        className={`rounded-full sm:px-6 sm:py-3 ${!isScrolled ? 'border-background text-foreground hover:bg-background hover:text-foreground' : 'border'
-                            }`}
-                        asChild
-                    >
-                        <Link href="/auth/signin">Sign In</Link>
-                    </Button>
-                    <Button
-                        size="default"
-                        className='rounded-full sm:px-6 sm:py-3'
-                        asChild
-                    >
-                        <Link href="/auth/signup">Sign Up</Link>
-                    </Button>
+                    {isSignedIn ? (
+                        <>
+                            <Button
+                                size="default"
+                                className='rounded-full sm:px-6 sm:py-3'
+                                asChild
+                            >
+                                <Link href="/feed">Go to Feed</Link>
+                            </Button>
+                            <Link href="/profile">
+                                <Avatar className="h-9 w-9">
+                                    <AvatarImage src={user?.imageUrl} alt={user?.fullName ?? 'Profile'} />
+                                    <AvatarFallback className="bg-secondary text-secondary-foreground">{initials}</AvatarFallback>
+                                </Avatar>
+                            </Link>
+                        </>
+                    ) : (
+                        <>
+                            <Button
+                                variant={isScrolled ? "ghost" : "outline"}
+                                size="default"
+                                className={`rounded-full sm:px-6 sm:py-3 ${!isScrolled ? 'border-background text-foreground hover:bg-background hover:text-foreground' : 'border'
+                                    }`}
+                                asChild
+                            >
+                                <Link href="/auth/signin">Sign In</Link>
+                            </Button>
+                            <Button
+                                size="default"
+                                className='rounded-full sm:px-6 sm:py-3'
+                                asChild
+                            >
+                                <Link href="/auth/signup">Sign Up</Link>
+                            </Button>
+                        </>
+                    )}
                 </div>
             </div>
         </header>

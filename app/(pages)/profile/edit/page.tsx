@@ -1,65 +1,127 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useUser } from '@clerk/nextjs'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 export default function EditProfilePage() {
     const router = useRouter()
+    const { user, isLoaded } = useUser()
     const [loading, setLoading] = useState(false)
+    const [error, setError] = useState('')
     const [formData, setFormData] = useState({
-        name: 'John Doe',
-        bio: 'Computer Science student | AI enthusiast | Building cool stuff',
-        location: 'San Francisco, CA',
-        school: 'Stanford University',
-        website: 'https://johndoe.dev',
+        firstName: '',
+        lastName: '',
+        bio: '',
+        location: '',
+        institution: '',
+        website: '',
         linkedin: '',
         github: '',
         twitter: ''
     })
 
+    useEffect(() => {
+        if (!isLoaded || !user) return
+        const meta = (user.unsafeMetadata ?? {}) as Record<string, string>
+        setFormData({
+            firstName: user.firstName ?? '',
+            lastName: user.lastName ?? '',
+            bio: meta.bio ?? '',
+            location: meta.location ?? '',
+            institution: meta.institution ?? '',
+            website: meta.website ?? '',
+            linkedin: meta.linkedin ?? '',
+            github: meta.github ?? '',
+            twitter: meta.twitter ?? ''
+        })
+    }, [isLoaded, user])
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
+        if (!user) return
         setLoading(true)
+        setError('')
 
         try {
-            // TODO: Implement update in Supabase
-            // await supabase.from('users').update(formData).eq('id', userId)
+            await user.update({
+                firstName: formData.firstName,
+                lastName: formData.lastName,
+                unsafeMetadata: {
+                    ...((user.unsafeMetadata ?? {}) as Record<string, string>),
+                    bio: formData.bio,
+                    location: formData.location,
+                    institution: formData.institution,
+                    website: formData.website,
+                    linkedin: formData.linkedin,
+                    github: formData.github,
+                    twitter: formData.twitter,
+                }
+            })
             router.push('/profile')
-        } catch (error) {
-            console.error('Failed to update profile:', error)
+        } catch (err: unknown) {
+            const msg = err instanceof Error ? err.message : 'Failed to update profile'
+            setError(msg)
         } finally {
             setLoading(false)
         }
     }
 
+    if (!isLoaded) return null
+
+    const initials = (formData.firstName?.[0] ?? '') + (formData.lastName?.[0] ?? '') || user?.emailAddresses?.[0]?.emailAddress?.[0]?.toUpperCase() || 'U'
+
     return (
-        <div className="container max-w-2xl p-6">
+        <div className="container max-w-2xl py-8 px-4">
             <Card>
                 <CardHeader>
                     <CardTitle>Edit Profile</CardTitle>
                     <CardDescription>Update your profile information</CardDescription>
                 </CardHeader>
                 <CardContent>
+                    {error && (
+                        <div className="mb-4 rounded-md bg-destructive/10 px-4 py-3 text-sm text-destructive">
+                            {error}
+                        </div>
+                    )}
+                    <div className="flex items-center gap-4 mb-6">
+                        <Avatar className="h-20 w-20">
+                            <AvatarImage src={user?.imageUrl} alt={user?.fullName ?? ''} />
+                            <AvatarFallback className="text-xl">{initials}</AvatarFallback>
+                        </Avatar>
+                        <div className="text-sm text-muted-foreground">Profile photo is managed via your Clerk account settings.</div>
+                    </div>
                     <form onSubmit={handleSubmit} className="space-y-4">
-                        <div className="space-y-2">
-                            <Label htmlFor="name">Name</Label>
-                            <Input
-                                id="name"
-                                value={formData.name}
-                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                required
-                            />
+                        <div className="grid md:grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                                <Label htmlFor="firstName">First Name</Label>
+                                <Input
+                                    id="firstName"
+                                    value={formData.firstName}
+                                    onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                                    required
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="lastName">Last Name</Label>
+                                <Input
+                                    id="lastName"
+                                    value={formData.lastName}
+                                    onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                                />
+                            </div>
                         </div>
 
                         <div className="space-y-2">
                             <Label htmlFor="bio">Bio</Label>
-                            <textarea
+                            <Textarea
                                 id="bio"
-                                className="w-full min-h-[100px] px-3 py-2 border rounded-md"
                                 placeholder="Tell us about yourself"
                                 value={formData.bio}
                                 onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
@@ -78,12 +140,12 @@ export default function EditProfilePage() {
                             </div>
 
                             <div className="space-y-2">
-                                <Label htmlFor="school">School/University</Label>
+                                <Label htmlFor="institution">School/University</Label>
                                 <Input
-                                    id="school"
+                                    id="institution"
                                     placeholder="Your school name"
-                                    value={formData.school}
-                                    onChange={(e) => setFormData({ ...formData, school: e.target.value })}
+                                    value={formData.institution}
+                                    onChange={(e) => setFormData({ ...formData, institution: e.target.value })}
                                 />
                             </div>
                         </div>
