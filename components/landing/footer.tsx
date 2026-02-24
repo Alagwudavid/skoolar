@@ -45,7 +45,7 @@ const LogoText = (props: React.SVGProps<SVGSVGElement>) => (
 );
 export function Footer() {
     return (
-        <footer className="h-full bg-black text-white mt-20 overflow-hidden">
+        <footer className="h-full bg-black text-white overflow-hidden">
             <div className="container mx-auto p-10 sm:px-20 sm:py-15 relative bg-no-repeat">
                 <div className="grid md:grid-cols-4 gap-8">
                     <div>
