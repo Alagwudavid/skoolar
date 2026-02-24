@@ -5,11 +5,15 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import Link from 'next/link'
-import { Heart, MessageCircle, MoreHorizontal, Repeat2, Send } from 'lucide-react'
+import { ArrowLeft, Ellipsis, Heart, MessageCircle, MoreHorizontal, Repeat2, Send } from 'lucide-react'
 import Image from 'next/image'
 import { useUser } from '@clerk/nextjs'
+import { useRouter } from 'next/navigation'
+import { MapPinIcon } from '@/components/icons/regular'
+import instituteImage from "@/public/institutes/1631325653420.png";
 
 export default function MyProfilePage() {
+  const router = useRouter();
   const { user, isLoaded } = useUser();
 
   if (!isLoaded) return null;
@@ -97,17 +101,24 @@ export default function MyProfilePage() {
   ];
 
   return (
-    <div className="container max-w-4xl py-8">
-      <div className="sm:pr-4">
+    <div className="container max-w-xl mx-auto lg:pb-8">
+      <div className="sm:pr-4 space-y-4">
         {/* Header */}
-        <div className="sticky top-0 z-10 backdrop-blur-lg bg-background/80">
-          <div className="px-4 py-4">
-            <h1 className="text-xl font-bold">Profile</h1>
+        <div className="sticky top-0 z-10 backdrop-blur-lg bg-background/80 flex items-center justify-between gap-4 border-b px-4 py-2">
+          <Button variant={"outline"} onClick={() => router.back()}>
+            <ArrowLeft className="h-5 w-5" />
+            <span className=''>Back</span>
+          </Button>
+          <div className="">
+            <h1 className="text-lg font-semibold">Profile</h1>
           </div>
+          <Button variant={"outline"} size={"icon"} className="h-8 w-8 rounded-full">
+            <Ellipsis className="h-5 w-5" />
+            <span className='sr-only'>profile menu</span>
+          </Button>
         </div>
 
         <Card className="rounded-none pt-0 border-0 shadow-none">
-          <div className='h-50 w-full bg-secondary rounded-4xl'></div>
           <CardHeader>
             <div className="flex items-start gap-6">
               <Avatar className="h-24 w-24">
@@ -120,14 +131,24 @@ export default function MyProfilePage() {
                     <CardTitle className="text-2xl">{displayName}</CardTitle>
                     <CardDescription>@{username}</CardDescription>
                   </div>
-                  <Button className='hover:bg-secondary/80' asChild>
+                  <Button className='bg-muted dark:bg-secondary/80 hover:bg-primary!' variant={"ghost"} asChild>
                     <Link href="/profile/edit">Edit Profile</Link>
                   </Button>
                 </div>
                 {bio && <p className="mt-3 text-sm">{bio}</p>}
                 <div className="flex flex-wrap gap-3 mt-3 text-sm text-muted-foreground">
-                  {location && <span>📍 {location}</span>}
-                  {school && <span>🎓 {school}</span>}
+                  {location && 
+                    <div className="flex items-center gap-1">
+                      <MapPinIcon className="inline-block h-4 w-4" />
+                      <span className="text-sm text-foreground">{location}</span>
+                    </div>
+                  }
+                  {school && 
+                    <div className="flex items-center gap-1">
+                      <Image src={instituteImage} alt="Institution" className="inline-block h-5 w-5 mr-1 rounded object-cover" />
+                      <span>{school}</span>
+                    </div>
+                  }
                   {website && (
                     <a href={website} target="_blank" rel="noopener noreferrer" className="hover:underline">
                       🔗 {website}
@@ -139,8 +160,8 @@ export default function MyProfilePage() {
           </CardHeader>
           <CardContent>
             <div className="flex gap-6 text-sm">
-              <span><span className="font-semibold">0</span> Followers</span>
-              <span><span className="font-semibold">0</span> Following</span>
+              <Link href={"/profile/followers"} className='hover:underline'><span className="font-semibold">0</span> Followers</Link>
+              <Link href={"/profile/following"} className='hover:underline'><span className="font-semibold">0</span> Following</Link>
               <span><span className="font-semibold">{posts.length}</span> Posts</span>
             </div>
           </CardContent>
@@ -197,9 +218,6 @@ export default function MyProfilePage() {
                       {post.user.verified && (
                         <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" className="h-5 w-5 text-lime-500"><path fill="currentColor" fillRule="evenodd" d="M12 21a9 9 0 1 0 0-18a9 9 0 0 0 0 18m-.232-5.36l5-6l-1.536-1.28l-4.3 5.159l-2.225-2.226l-1.414 1.414l3 3l.774.774z" clipRule="evenodd"></path></svg>
                       )}
-                      {/* <span className="text-muted-foreground">@{post.user.username}</span> */}
-                      <span className="text-muted-foreground">·</span>
-                      <span className="text-muted-foreground">{post.timestamp}</span>
                     </div>
                     <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full">
                       <MoreHorizontal className="h-5 w-5" />
@@ -218,26 +236,23 @@ export default function MyProfilePage() {
                     </div>
                   )}
 
-                  {/* Action Buttons */}
-                  <div className="flex items-center gap-3 mt-4">
-                    <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-blue-500 rounded-full cursor-pointer">
-                      <MessageCircle className="h-5 w-5" />
-                      <span className="text-xs">{post.comments}</span>
-                    </Button>
-
-                    <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-green-500 rounded-full cursor-pointer">
-                      <Repeat2 className="h-5 w-5" />
-                      <span className="text-xs">{post.reposts}</span>
-                    </Button>
-
-                    <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-red-500 rounded-full cursor-pointer">
-                      <Heart className="h-5 w-5" />
-                      <span className="text-xs">{post.likes}</span>
-                    </Button>
-
-                    <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-blue-500 rounded-full cursor-pointer">
-                      <Send className="h-5 w-5" />
-                    </Button>
+                  <div className="w-full flex items-center">
+                    <div className="mt-3 rounded-2xl overflow-hidden hover:bg-muted border relative w-full h-96">
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between gap-3 mt-4">
+                    <span className="text-muted-foreground">{post.timestamp}</span>
+                    {/* Action Buttons */}
+                    <div className="flex items-center gap-3">
+                      <Button variant="ghost" size="sm" className="gap-2 text-foreground hover:text-red-500 rounded-none bg-transparent hover:bg-transparent! cursor-pointer">
+                        <Heart className="h-5! w-5!" />
+                        <span className="text-sm">{post.likes}</span>
+                      </Button>
+                      <Button variant="ghost" size="sm" className="gap-2 text-foreground hover:text-blue-500 rounded-full bg-transparent hover:bg-transparent! cursor-pointer">
+                        <MessageCircle className="h-5! w-5!" />
+                        <span className="text-xs">{post.comments}</span>
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>

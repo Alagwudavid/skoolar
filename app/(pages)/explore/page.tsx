@@ -49,14 +49,14 @@ const featuredOpportunities = [
 const mockNews = [
   {
     id: '1',
-    title: 'How to ace technical interviews',
-    content: 'Just finished my 10th technical interview this season. Here are my top tips for success: 1) Practice on LeetCode daily 2) Mock interviews with friends 3) Study system design...',
+    title: 'How to ace technical interviews: Tips from a 10x candidate',
+    content: 'Just finished my 10th technical interview this season. Here are my top tips for success: 1) Practice on LeetCode daily 2) Mock interlikes with friends 3) Study system design...',
     // type: 'Article',
-    // tags: ['career', 'interviews', 'tech'],
-    // author: { id: '1', name: 'Alex Rivera', avatar: 'A' },
+    // tags: ['career', 'interlikes', 'tech'],
+    author: { id: '1', name: 'UNN Gists', avatar: 'U' },
     createdAt: '2026-02-07',
-    views: 432,
-    // comments: 89,
+    likes: 432,
+    comments: 89,
   },
   {
     id: '2',
@@ -64,10 +64,10 @@ const mockNews = [
     content: 'Excited to share that the National STEM Foundation just announced 50 new full-ride scholarships for underrepresented students in tech! Applications open March 1st.',
     // type: 'Achievement',
     // tags: ['scholarships', 'stem', 'opportunities'],
-    // author: { id: '2', name: 'Dr. Maria Santos', avatar: 'M' },
+    author: { id: '2', name: 'Makoko Girls', avatar: 'M' },
     createdAt: '2026-02-06',
-    views: 1203,
-    // comments: 234,
+    likes: 1203,
+    comments: 234,
   },
   {
     id: '3',
@@ -75,10 +75,10 @@ const mockNews = [
     content: 'I\'m looking to transition into software engineering. Does anyone have recommendations for beginner-friendly bootcamps? Budget is around $10k.',
     // type: 'Question',
     // tags: ['coding', 'bootcamp', 'career-change'],
-    // author: { id: '3', name: 'Jamie Chen', avatar: 'J' },
+    author: { id: '3', name: 'TheTrustMedia', avatar: 'T' },
     createdAt: '2026-02-05',
-    views: 78,
-    // comments: 156,
+    likes: 78,
+    comments: 156,
   },
 ];
 
@@ -214,23 +214,34 @@ export default function ExplorePage() {
             <article key={news.id} className="p-4 cursor-pointer hover:bg-muted/50 transition-colors">
               <div className="flex gap-3">
                 {/* Avatar */}
-                <div className='w-20 h-20 rounded-2xl bg-muted'></div>
+                <div className='w-28 h-20 rounded-2xl bg-muted'></div>
 
                 {/* Content */}
                 <div className="flex-1 min-w-0">
                   {/* User Info */}
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="text-sm">{news.views} views</span>
-                    <span className="text-muted-foreground">·</span>
+                    {/* Avatar */}
+                    <Avatar className="h-5 w-5 rounded">
+                      <AvatarFallback className='rounded'>{news.author.avatar}</AvatarFallback>
+                    </Avatar>
                     <span className="text-muted-foreground text-sm">
-                      {new Date(news.createdAt).toLocaleDateString()}
+                      {news.author.name}
                     </span>
                   </div>
                   {/* Post Content */}
-                  <h3 className="font-bold text-lg mb-1">{news.title}</h3>
-                  <p className="text-muted-foreground line-clamp-2 text-sm mb-2">
+                  <h3 className="font-bold text-lg mb-1 line-clamp-2">{news.title}</h3>
+                  {/* <p className="text-muted-foreground line-clamp-2 text-sm mb-2">
                     {news.content}
-                  </p>
+                  </p> */}
+                  <div className="flex items-center gap-2 mb-1 text-muted-foreground text-sm">
+                    <span>{news.likes} likes</span>
+                    <span>·</span>
+                    <span>{news.comments} comments</span>
+                    <span>·</span>
+                    <span>
+                      {new Date(news.createdAt).toLocaleDateString()}
+                    </span>
+                  </div>
                 </div>
               </div>
             </article>

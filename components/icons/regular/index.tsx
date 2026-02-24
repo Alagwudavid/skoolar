@@ -12,3 +12,6 @@ export const PlusIcon = (props: React.SVGProps<SVGSVGElement>) => (
 export const LearnerIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M3 17.15V10q0-.8.588-1.35t1.387-.5q1.975.3 3.763 1.163T12 11.55q1.475-1.375 3.263-2.238t3.762-1.162q.8-.05 1.388.5T21 10v7.15q0 .8-.525 1.363t-1.325.612q-1.6.25-3.1.825t-2.8 1.525q-.275.225-.587.337t-.663.113t-.663-.112t-.587-.338q-1.3-.95-2.8-1.525t-3.1-.825q-.8-.05-1.325-.612T3 17.15m6.175-9.325Q8 6.65 8 5t1.175-2.825T12 1t2.825 1.175T16 5t-1.175 2.825T12 9T9.175 7.825"></path></svg>
 );
+export const MapPinIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><path fill="currentColor" fillRule="evenodd" d="m11.54 22.351l.07.04l.028.016a.76.76 0 0 0 .723 0l.028-.015l.071-.041q.091-.053.255-.153c.217-.133.524-.33.89-.589a19.6 19.6 0 0 0 2.682-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 0 0-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.6 19.6 0 0 0 2.682 2.282a17 17 0 0 0 1.145.742M12 13.5a3 3 0 1 0 0-6a3 3 0 0 0 0 6" clipRule="evenodd"></path></svg>
+);
