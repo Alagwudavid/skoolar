@@ -1,4 +1,4 @@
-import { ArrowRight, Download } from "lucide-react";
+import { ArrowDown, ArrowRight, Download } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import mobileLaptopMockup from "@/public/mobile_tablet_mockup.png";
@@ -32,8 +32,8 @@ export function DownloadSection() {
               href="/auth/signup"
               className="px-6 py-3 rounded-3xl bg-secondary hover:bg-secondary/80 text-white font-semibold flex items-center justify-center transition gap-2 whitespace-nowrap cursor-pointer"
             >
+              <ArrowDown className="w-5 h-5" />
               Apk Download
-              <ArrowRight className="w-5 h-5" />
             </Link>
             <Link
               href="/auth/signin"

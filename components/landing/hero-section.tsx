@@ -23,7 +23,7 @@ export function HeroSection() {
 
   return (
     <section className="relative w-full pt-9">
-      <div className="relative bg-[#55ba08] rounded-b-[82px] overflow-hidden py-10"
+      <div className="relative bg-[#55ba08] sm:rounded-b-[82px] rounded-b-2xl overflow-hidden py-10"
       >
         <Image
           src="/c7238ed4f6c3f25f169eb9561ad4e2fd.jpg"

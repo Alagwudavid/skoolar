@@ -5,7 +5,7 @@ import { OpportunitiesIcon } from '../icons'
 
 export function OpportunitiesSection() {
     return (
-        <section className="w-full bg-foreground py-16 px-6 md:py-24 md:px-12 lg:px-20 overflow-hidden rounded-t-[82px]">
+        <section className="w-full bg-foreground py-16 px-6 md:py-24 md:px-12 lg:px-20 overflow-hidden sm:rounded-t-[82px] rounded-t-4xl">
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                 {/* Left Column - Content */}
                 <div className="flex flex-col justify-center">
@@ -57,7 +57,7 @@ export function OpportunitiesSection() {
 
 export function LearningResourcesSection() {
     return (
-        <section className="w-full bg-foreground py-16 px-6 md:py-24 md:px-12 lg:px-20 overflow-hidden rounded-b-[82px]">
+        <section className="w-full bg-foreground py-16 px-6 md:py-24 md:px-12 lg:px-20 overflow-hidden sm:rounded-b-[82px] rounded-b-2xl">
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                 {/* Left Column - Images */}
                 <div className="relative w-full max-w-xl mx-auto lg:max-w-none">
