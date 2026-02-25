@@ -20,10 +20,10 @@ export const BottomNav: MobileNavItem[] = [
     activeIcon: ActiveCompassIcon,
   },
   {
-    title: "Chat",
-    href: "/messages",
-    icon: ChatIcon,
-    activeIcon: ActiveChatIcon,
+    title: "Create",
+    href: "/create",
+    icon: PlusIcon,
+    activeIcon: ActivePlusIcon,
   },
   {
     title: "Groups",

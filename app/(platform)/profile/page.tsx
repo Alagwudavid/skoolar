@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation'
 import { MapPinIcon } from '@/components/icons/regular'
 import instituteImage from "@/public/institutes/1631325653420.png";
 import { BrandGithubIcon, BrandLinkedInIcon, BrandTwitterIcon, BrandLinkIcon } from '@/components/icons/collection'
+import Tooltip from '@/components/tooltip'
 
 export default function MyProfilePage() {
   const router = useRouter();
@@ -32,11 +33,11 @@ export default function MyProfilePage() {
   const twitter = meta.twitter ?? '';
 
   const socialLinks = [
-    { href: `"www.linkedin.com/${linkedin}`, label: 'LinkedIn', icon: BrandLinkedInIcon({ className: 'inline-block h-6 w-6' }) },
-    { href: `www.github.com/${github}`, label: 'GitHub', icon: BrandGithubIcon({ className: 'inline-block h-6 w-6' }) },
-    { href: `www.x.com/${twitter}`, label: 'Twitter / X', icon: BrandTwitterIcon({ className: 'inline-block h-6 w-6' }) },
-    { href: website, label: website, icon: BrandLinkIcon({ className: 'inline-block h-6 w-6' }) },
-  ].filter(s => s.href);
+    linkedin && { href: `www.linkedin.com/in/${linkedin}`, label: 'LinkedIn', icon: BrandLinkedInIcon({ className: 'inline-block h-6 w-6' }) },
+    github && { href: `www.github.com/${github}`, label: 'GitHub', icon: BrandGithubIcon({ className: 'inline-block h-6 w-6' }) },
+    twitter && { href: `www.x.com/${twitter}`, label: 'Twitter / X', icon: BrandTwitterIcon({ className: 'inline-block h-6 w-6' }) },
+    website && { href: website, label: website, icon: BrandLinkIcon({ className: 'inline-block h-6 w-6' }) },
+  ].filter(Boolean) as { href: string; label: string; icon: React.ReactNode }[];
 
   const recentPosts = [
     {
@@ -165,31 +166,39 @@ export default function MyProfilePage() {
             </div>
           </CardHeader>
           <CardContent>
-            <div className="flex gap-6 text-sm">
+            <div className="flex gap-6 text-sm mb-4">
               <Link href={"/profile/followers"} className='hover:underline'><span className="font-semibold">0</span> Followers</Link>
               <Link href={"/profile/following"} className='hover:underline'><span className="font-semibold">0</span> Following</Link>
               <span><span className="font-semibold">{posts.length}</span> Posts</span>
             </div>
             {socialLinks.length > 0 && (
-              <div className="flex flex-wrap gap-3 mt-3 text-sm">
+              <div className="flex flex-wrap gap-3 text-sm">
                 {socialLinks.map((s) => {
-  const url = s.href.startsWith("http")
-    ? s.href
-    : `https://${s.href}`;
-
-  return (
-    <Link
-      key={s.href}
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={s.label}
-      className="flex items-center gap-1 text-muted-foreground transition-colors hover:text-foreground hover:underline"
-    >
-      {s.icon}
-    </Link>
-  );
-})}
+                  const url = s.href.startsWith("http")
+                    ? s.href
+                    : `https://${s.href}`;
+                  // Extract the username/slug after the last slash
+                  let slug = s.href;
+                  try {
+                    const u = new URL(url);
+                    slug = u.pathname.split('/').filter(Boolean).pop() || u.hostname;
+                  } catch {
+                    slug = s.href.split('/').filter(Boolean).pop() || s.href;
+                  }
+                  return (
+                    <Tooltip key={s.href} label={slug} position="bottom">
+                      <Link
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={s.label}
+                        className="flex items-center gap-1 text-muted-foreground transition-colors hover:text-foreground"
+                      >
+                        {s.icon}
+                      </Link>
+                    </Tooltip>
+                  );
+                })}
               </div>
             )}
           </CardContent>
