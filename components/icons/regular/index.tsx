@@ -18,3 +18,6 @@ export const MapPinIcon = (props: React.SVGProps<SVGSVGElement>) => (
 export const WebBrowserIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}><path d="M2 12h20M12 2a15 15 0 0 0 0 20a15 15 0 0 0 0-20"></path><circle cx={12} cy={12} r={10}></circle></g></svg>
 );
+export const MenuIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+);

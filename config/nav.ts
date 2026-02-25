@@ -38,15 +38,15 @@ export const mainNav: NavItem[] = [
     icon: SearchIcon,
     activeIcon: ActiveSearchIcon,
   },
+  // {
+  //   title: "Chat",
+  //   href: "/messages",
+  //   icon: ChatIcon,
+  //   activeIcon: ActiveChatIcon,
+  // },
   {
-    title: "Chat",
-    href: "/messages",
-    icon: ChatIcon,
-    activeIcon: ActiveChatIcon,
-  },
-  {
-    title: "Notification",
-    href: "/notification",
+    title: "Activity",
+    href: "/activity",
     icon: Bell,
     activeIcon: BellDot,
   },
@@ -62,10 +62,10 @@ export const mainNav: NavItem[] = [
   //   icon: PlusIcon,
   //   activeIcon: ActivePlusIcon,
   // },
-  // {
-  //   title: "Profile",
-  //   href: "/profile",
-  //   icon: UserIcon,
-  //   activeIcon: ActiveUserIcon,
-  // },
+  {
+    title: "Profile",
+    href: "/profile",
+    icon: UserIcon,
+    activeIcon: ActiveUserIcon,
+  },
 ];

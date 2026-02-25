@@ -35,10 +35,12 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { RIcons } from "../icons/collection";
 import { AiIcon, ActiveAiIcon, AtIcon, ActiveAtIcon } from "../icons";
+import { MenuIcon } from "../icons/regular";
 const moreMenuItems = [
   {
     title: "Following",
@@ -197,21 +199,13 @@ export function Sidebar() {
       <div className="p-4">
         <DropdownMenu onOpenChange={(open) => { if (!open) setShowAppearanceMenu(false); }}>
           <DropdownMenuTrigger asChild>
-            <button className="flex items-center justify-between gap-3 p-3 rounded-full hover:bg-muted hover:text-foreground transition-colors w-full">
-              {/* <RIcons.Preference className="h-7 w-7" /> */}
-              {/* <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" className="h-7 w-7"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 17h7M5 12h14M5 7h14"></path></svg>
-              <span className="text-xl">Menu</span> */}
-
-              <Avatar className="h-10 w-10">
-                <AvatarImage src={user?.imageUrl} alt={user?.fullName ?? ''} />
-                <AvatarFallback className="bg-secondary text-secondary-foreground">{initials}</AvatarFallback>
-              </Avatar>
-              <span className="text-xl flex-1 text-start">{displayName}</span>
-              <Ellipsis className="w-5 h-5" />
+            <button className="flex items-center gap-3 px-5 py-3 rounded-full hover:bg-muted hover:text-foreground transition-colors w-full">
+              <MenuIcon className="h-6 w-6" />
+              <span className="text-lg">Menu</span>
             </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent
-            className="w-72 p-0 rounded-2xl bg-muted text-foreground ml-2"
+            className="w-60 p-0 rounded-2xl bg-muted text-foreground"
             align="end"
             side="top"
             sideOffset={16}
@@ -255,7 +249,7 @@ export function Sidebar() {
                     </Link>
                   </DropdownMenuItem>
                 </div>
-                {/* <DropdownMenuSeparator /> */}
+                <DropdownMenuSeparator />
                 <div className="p-2">
                   <DropdownMenuItem
                     className="flex items-center gap-3 p-2 px-3 text-base cursor-pointer text-destructive focus:text-destructive"

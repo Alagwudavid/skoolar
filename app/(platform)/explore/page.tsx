@@ -162,7 +162,7 @@ export default function ExplorePage() {
   );
 
   return (
-    <div className='max-w-xl mx-auto sm:space-y-4 sm:py-4'>
+    <div className='container mx-auto sm:space-y-4 sm:p-4'>
       {/* Header */}
       <div className="bg-background flex items-center gap-4 overflow-x-auto custom-scrollbar">
         <div className="px-4 pb-4 sm:py-4 flex items-center justify-center">
