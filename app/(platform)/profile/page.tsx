@@ -11,6 +11,7 @@ import { useUser } from '@clerk/nextjs'
 import { useRouter } from 'next/navigation'
 import { MapPinIcon } from '@/components/icons/regular'
 import instituteImage from "@/public/institutes/1631325653420.png";
+import { BrandGithubIcon, BrandLinkedInIcon, BrandTwitterIcon, BrandLinkIcon } from '@/components/icons/collection'
 
 export default function MyProfilePage() {
   const router = useRouter();
@@ -26,6 +27,16 @@ export default function MyProfilePage() {
   const location = meta.location ?? '';
   const school = meta.institution ?? '';
   const website = meta.website ?? '';
+  const linkedin = meta.linkedin ?? '';
+  const github = meta.github ?? '';
+  const twitter = meta.twitter ?? '';
+
+  const socialLinks = [
+    { href: `"www.linkedin.com/${linkedin}`, label: 'LinkedIn', icon: BrandLinkedInIcon({ className: 'inline-block h-6 w-6' }) },
+    { href: `www.github.com/${github}`, label: 'GitHub', icon: BrandGithubIcon({ className: 'inline-block h-6 w-6' }) },
+    { href: `www.x.com/${twitter}`, label: 'Twitter / X', icon: BrandTwitterIcon({ className: 'inline-block h-6 w-6' }) },
+    { href: website, label: website, icon: BrandLinkIcon({ className: 'inline-block h-6 w-6' }) },
+  ].filter(s => s.href);
 
   const recentPosts = [
     {
@@ -136,24 +147,19 @@ export default function MyProfilePage() {
                   </Button>
                 </div>
                 {bio && <p className="mt-3 text-sm">{bio}</p>}
-                <div className="flex flex-wrap gap-3 mt-3 text-sm text-muted-foreground">
-                  {location && 
+                <div className="flex flex-wrap gap-4 mt-3 text-sm text-muted-foreground">
+                  {location &&
                     <div className="flex items-center gap-1">
                       <MapPinIcon className="inline-block h-4 w-4" />
                       <span className="text-sm text-foreground">{location}</span>
                     </div>
                   }
-                  {school && 
+                  {school &&
                     <div className="flex items-center gap-1">
                       <Image src={instituteImage} alt="Institution" className="inline-block h-5 w-5 mr-1 rounded object-cover" />
                       <span>{school}</span>
                     </div>
                   }
-                  {website && (
-                    <a href={website} target="_blank" rel="noopener noreferrer" className="hover:underline">
-                      🔗 {website}
-                    </a>
-                  )}
                 </div>
               </div>
             </div>
@@ -164,6 +170,28 @@ export default function MyProfilePage() {
               <Link href={"/profile/following"} className='hover:underline'><span className="font-semibold">0</span> Following</Link>
               <span><span className="font-semibold">{posts.length}</span> Posts</span>
             </div>
+            {socialLinks.length > 0 && (
+              <div className="flex flex-wrap gap-3 mt-3 text-sm">
+                {socialLinks.map((s) => {
+  const url = s.href.startsWith("http")
+    ? s.href
+    : `https://${s.href}`;
+
+  return (
+    <Link
+      key={s.href}
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={s.label}
+      className="flex items-center gap-1 text-muted-foreground transition-colors hover:text-foreground hover:underline"
+    >
+      {s.icon}
+    </Link>
+  );
+})}
+              </div>
+            )}
           </CardContent>
         </Card>
 

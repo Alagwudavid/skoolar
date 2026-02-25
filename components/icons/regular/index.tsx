@@ -21,3 +21,10 @@ export const WebBrowserIcon = (props: React.SVGProps<SVGSVGElement>) => (
 export const MenuIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
 );
+export const VerifiedIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><path fill="oklch(76.8% 0.233 130.85)" fillRule="evenodd" d="M12 21a9 9 0 1 0 0-18a9 9 0 0 0 0 18m-.232-5.36l5-6l-1.536-1.28l-4.3 5.159l-2.225-2.226l-1.414 1.414l3 3l.774.774z" clipRule="evenodd"></path></svg>
+);
+export const ResourcesIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><g fill="none" stroke="currentColor" strokeWidth={1.5}><path d="M2.5 6c0-1.54 0-2.31.347-2.876c.194-.317.46-.583.777-.777C4.189 2 4.96 2 6.5 2s2.31 0 2.876.347c.317.194.583.46.777.777c.347.565.347 1.336.347 2.876s0 2.31-.347 2.876c-.194.317-.46.583-.777.777C8.811 10 8.04 10 6.5 10s-2.31 0-2.876-.347a2.35 2.35 0 0 1-.777-.777C2.5 8.311 2.5 7.54 2.5 6Zm1.282 8.782c1.047-1.047 1.57-1.57 2.19-1.72a2.26 2.26 0 0 1 1.056 0c.62.15 1.143.673 2.19 1.72s1.57 1.57 1.72 2.19a2.3 2.3 0 0 1 0 1.056c-.15.62-.673 1.144-1.72 2.19s-1.57 1.57-2.19 1.72a2.26 2.26 0 0 1-1.056 0c-.62-.15-1.143-.673-2.19-1.72s-1.57-1.57-1.72-2.19a2.26 2.26 0 0 1 0-1.056c.15-.62.673-1.144 1.72-2.19ZM14 18c0-1.54 0-2.31.347-2.876c.194-.317.46-.583.777-.777C15.689 14 16.46 14 18 14s2.31 0 2.877.347c.316.194.582.46.776.777C22 15.689 22 16.46 22 18s0 2.31-.347 2.877a2.36 2.36 0 0 1-.776.776C20.31 22 19.54 22 18 22s-2.31 0-2.876-.347a2.35 2.35 0 0 1-.777-.776C14 20.31 14 19.54 14 18Z"></path><path strokeLinecap="round" strokeLinejoin="round" d="M18 2v8m4-4h-8"></path></g></svg>
+);
+

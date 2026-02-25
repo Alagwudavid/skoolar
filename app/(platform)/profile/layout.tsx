@@ -12,21 +12,12 @@ export default function PlatformLayout({
 }) {
   return (
     <div className="flex min-h-screen flex-col md:flex-row bg-background">
-      {/* Left Sidebar */}
-      {/* <Sidebar /> */}
-
       {/* Main Content Area */}
       <main className="flex-1 pb-16 md:pb-0 max-w-3xl">
-        {/* Top Nav */}
-        <TopNav />
         {children}
       </main>
-
       {/* Right Sidebar */}
       <RightBar />
-
-      {/* Mobile Nav */}
-      {/* <MobileNav /> */}
     </div>
   );
 }

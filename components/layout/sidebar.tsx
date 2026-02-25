@@ -39,7 +39,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { RIcons } from "../icons/collection";
-import { AiIcon, ActiveAiIcon, AtIcon, ActiveAtIcon } from "../icons";
+import { AiIcon, ActiveAiIcon, AtIcon, ActiveAtIcon, GroupIcon, ActiveGroupIcon } from "../icons";
 import { MenuIcon } from "../icons/regular";
 const moreMenuItems = [
   {
@@ -47,6 +47,12 @@ const moreMenuItems = [
     href: "/users/following",
     icon: AtIcon,
     activeIcon: ActiveAtIcon,
+  },
+  {
+    title: "Communities",
+    href: "/communities",
+    icon: GroupIcon,
+    activeIcon: ActiveGroupIcon,
   },
   {
     title: "AI",
@@ -116,7 +122,7 @@ export function Sidebar() {
 
       {/* Navigation */}
       <nav className="flex-1 px-2">
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-2">
           {mainNav.map((item) => {
             const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
             const Icon = isActive && item.activeIcon ? item.activeIcon : item.icon;
@@ -146,7 +152,7 @@ export function Sidebar() {
                 href={item.href}
                 className={cn(
                   "flex items-center gap-4 px-4 py-3 rounded-full text-xl transition-colors hover:bg-muted w-full",
-                  isActive && "font-bold"
+                  isActive && "font-bold text-primary"
                 )}
               >
                 <Icon className="h-7 w-7" />
@@ -159,14 +165,14 @@ export function Sidebar() {
           <button
             onClick={() => setShowMore(!showMore)}
             className={cn(
-              "flex items-center gap-4 px-4 py-3 rounded-full text-xl transition-colors bg-primary text-primary-foreground hover:bg-primary/70 cursor-pointer w-full text-left"
+              "flex items-center gap-4 px-4 py-2.5 rounded-full text-xl transition-colors bg-primary text-primary-foreground hover:bg-primary/70 cursor-pointer w-fit text-left"
             )}
           >
             <RIcons.ChevronDown className={cn(
               "h-7 w-7 transition-transform",
               showMore && "rotate-180"
             )} />
-            <span>See more</span>
+            <span>More</span>
           </button>
 
           {/* Additional Menu Items */}
