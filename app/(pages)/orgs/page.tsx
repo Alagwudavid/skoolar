@@ -8,16 +8,29 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Skeleton } from '@/components/ui/skeleton';
+import { getOrganizations } from '@/actions/organizations';
+import { Building2, MapPin, Users, Globe } from 'lucide-react';
+
+type OrgType = 'school' | 'university' | 'company' | 'nonprofit';
+
+const TYPE_LABELS: Record<OrgType, string> = {
+  school: '🎓 School',
+  university: '🏛️ University',
+  company: '🏢 Company',
+  nonprofit: '🤝 Non-Profit',
+};
 
 interface Organization {
   id: string;
   name: string;
-  type: 'school' | 'company';
-  logo?: string;
-  description: string;
-  location: string;
-  memberCount: number;
-  opportunitiesCount: number;
+  type: OrgType;
+  logo_url?: string | null;
+  description?: string | null;
+  location?: string | null;
+  website_url?: string | null;
+  is_verified: boolean;
+  organization_members: { count: number }[];
 }
 
 export default function OrganizationsPage() {
@@ -25,110 +38,113 @@ export default function OrganizationsPage() {
   const [orgs, setOrgs] = useState<Organization[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
-  const [filterType, setFilterType] = useState<'all' | 'school' | 'company'>('all');
+  const [filterType, setFilterType] = useState<'all' | OrgType>('all');
 
   useEffect(() => {
-    fetchOrganizations();
+    getOrganizations().then(({ orgs }) => {
+      setOrgs(orgs as Organization[]);
+      setLoading(false);
+    });
   }, []);
 
-  const fetchOrganizations = async () => {
-    try {
-      const response = await fetch('/api/orgs');
-      if (response.ok) {
-        const data = await response.json();
-        setOrgs(data);
-      }
-    } catch (err) {
-      console.error('Error fetching organizations:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const filteredOrgs = orgs.filter((org) => {
-    const matchesSearch = org.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      org.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch =
+      org.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (org.description ?? '').toLowerCase().includes(searchQuery.toLowerCase());
     const matchesType = filterType === 'all' || org.type === filterType;
     return matchesSearch && matchesType;
   });
 
   return (
-    <div className="container max-w-6xl py-8">
-      <div className="mb-8 flex items-center justify-between">
+    <div className="container max-w-6xl py-8 px-4">
+      <div className="mb-8 flex items-center justify-between gap-4">
         <div>
-          <h1 className="mb-2 text-3xl font-bold">Organizations</h1>
-          <p className="text-gray-600">
-            Discover schools and companies on Skoolar
+          <h1 className="mb-1 text-3xl font-bold">Organizations</h1>
+          <p className="text-muted-foreground">
+            Discover schools, universities, and companies on Skoolar
           </p>
         </div>
         <Button onClick={() => router.push('/orgs/create')}>
-          + Create Organization
+          + Register Org
         </Button>
       </div>
 
-      <div className="mb-6 flex flex-col gap-4 md:flex-row">
+      <div className="mb-6 flex flex-col gap-4 md:flex-row flex-wrap">
         <Input
           placeholder="Search organizations..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="md:flex-1"
+          className="md:max-w-sm"
         />
-        <div className="flex gap-2">
-          <Button
-            variant={filterType === 'all' ? 'default' : 'outline'}
-            onClick={() => setFilterType('all')}
-          >
-            All
-          </Button>
-          <Button
-            variant={filterType === 'school' ? 'default' : 'outline'}
-            onClick={() => setFilterType('school')}
-          >
-            Schools
-          </Button>
-          <Button
-            variant={filterType === 'company' ? 'default' : 'outline'}
-            onClick={() => setFilterType('company')}
-          >
-            Companies
-          </Button>
+        <div className="flex gap-2 flex-wrap">
+          {(['all', 'school', 'university', 'company', 'nonprofit'] as const).map((t) => (
+            <Button
+              key={t}
+              variant={filterType === t ? 'default' : 'outline'}
+              onClick={() => setFilterType(t)}
+              className="capitalize"
+              size="sm"
+            >
+              {t === 'all' ? 'All' : TYPE_LABELS[t as OrgType].split(' ')[1]}
+            </Button>
+          ))}
         </div>
       </div>
 
       {loading ? (
-        <div>Loading...</div>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {Array.from({ length: 6 }).map((_, i) => <Skeleton key={i} className="h-44 rounded-xl" />)}
+        </div>
+      ) : filteredOrgs.length === 0 ? (
+        <div className="flex flex-col items-center gap-3 py-16 text-muted-foreground">
+          <Building2 className="w-10 h-10 opacity-40" />
+          <p className="text-sm">No organizations found.</p>
+          <Button asChild size="sm">
+            <Link href="/orgs/create">Register one</Link>
+          </Button>
+        </div>
       ) : (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {filteredOrgs.map((org) => (
-            <Link key={org.id} href={`/orgs/${org.id}`}>
-              <Card className="h-full hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <div className="flex items-start gap-4">
-                    <Avatar className="h-16 w-16">
-                      <AvatarImage src={org.logo} />
-                      <AvatarFallback>{org.name[0]}</AvatarFallback>
-                    </Avatar>
-                    <div className="flex-1">
-                      <CardTitle className="line-clamp-1">{org.name}</CardTitle>
-                      <Badge className="mt-1">
-                        {org.type === 'school' ? '🎓 School' : '🏢 Company'}
-                      </Badge>
+          {filteredOrgs.map((org) => {
+            const memberCount = org.organization_members?.[0]?.count ?? 0;
+            return (
+              <Link key={org.id} href={`/orgs/${org.id}`}>
+                <Card className="h-full hover:shadow-lg transition-shadow hover:bg-muted/30">
+                  <CardHeader>
+                    <div className="flex items-start gap-4">
+                      <Avatar className="h-14 w-14">
+                        <AvatarImage src={org.logo_url ?? undefined} />
+                        <AvatarFallback>{org.name[0]}</AvatarFallback>
+                      </Avatar>
+                      <div className="flex-1 min-w-0">
+                        <CardTitle className="line-clamp-1 flex items-center gap-1.5">
+                          {org.name}
+                          {org.is_verified && <span title="Verified" className="text-primary">✓</span>}
+                        </CardTitle>
+                        <Badge variant="secondary" className="mt-1 text-xs">
+                          {TYPE_LABELS[org.type]}
+                        </Badge>
+                      </div>
                     </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="mb-4 line-clamp-2 text-sm text-gray-600">
-                    {org.description}
-                  </p>
-                  <div className="space-y-1 text-sm text-gray-500">
-                    <p>📍 {org.location}</p>
-                    <p>👥 {org.memberCount} members</p>
-                    <p>💼 {org.opportunitiesCount} opportunities</p>
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
+                  </CardHeader>
+                  <CardContent>
+                    <p className="mb-3 line-clamp-2 text-sm text-muted-foreground">
+                      {org.description ?? 'No description'}
+                    </p>
+                    <div className="space-y-1 text-xs text-muted-foreground">
+                      {org.location && (
+                        <p className="flex items-center gap-1"><MapPin className="w-3 h-3" />{org.location}</p>
+                      )}
+                      <p className="flex items-center gap-1"><Users className="w-3 h-3" />{memberCount.toLocaleString()} members</p>
+                      {org.website_url && (
+                        <p className="flex items-center gap-1"><Globe className="w-3 h-3" />Website</p>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            );
+          })}
         </div>
       )}
     </div>

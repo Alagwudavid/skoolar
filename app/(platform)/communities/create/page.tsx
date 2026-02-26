@@ -1,121 +1,132 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { createCommunity } from '@/actions/communities'
+import { toast } from 'sonner'
 
-export default function CreateGroupPage() {
+export default function CreateCommunityPage() {
     const router = useRouter()
-    const [loading, setLoading] = useState(false)
-    const [formData, setFormData] = useState({
-        name: '',
-        description: '',
-        type: 'public',
-        category: 'general',
-        rules: ''
-    })
+    const [isPending, startTransition] = useTransition()
+    const [type, setType] = useState('public')
+    const [category, setCategory] = useState('general')
+    const [error, setError] = useState<string | null>(null)
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        setLoading(true)
+        setError(null)
 
-        try {
-            // TODO: Implement create in Supabase
-            // await supabase.from('communities').insert([formData])
-            router.push('/communities')
-        } catch (error) {
-            console.error('Failed to create community:', error)
-        } finally {
-            setLoading(false)
-        }
+        const formData = new FormData(e.currentTarget)
+        formData.set('type', type)
+        formData.set('category', category)
+
+        startTransition(async () => {
+            const result = await createCommunity(formData)
+            if (result?.error) {
+                setError(result.error)
+                toast.error(result.error)
+            }
+        })
     }
 
     return (
         <div className="container max-w-2xl py-8">
             <Card>
                 <CardHeader>
-                    <CardTitle>Create a Group</CardTitle>
+                    <CardTitle>Create a Community</CardTitle>
                     <CardDescription>
-                        Start a new community around shared interests
+                        Start a community around shared interests. You will be the super admin.
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                        <div>
-                            <Label htmlFor="name">Group Name</Label>
+                    <form onSubmit={handleSubmit} className="space-y-5">
+                        <div className="space-y-1.5">
+                            <Label htmlFor="name">Community Name *</Label>
                             <Input
                                 id="name"
+                                name="name"
                                 placeholder="e.g., Computer Science Students"
-                                value={formData.name}
-                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                 required
+                                disabled={isPending}
                             />
                         </div>
 
-                        <div>
+                        <div className="space-y-1.5">
                             <Label htmlFor="description">Description</Label>
-                            <textarea
+                            <Textarea
                                 id="description"
-                                className="w-full min-h-[100px] px-3 py-2 border rounded-md"
+                                name="description"
                                 placeholder="What is this community about?"
-                                value={formData.description}
-                                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                                required
+                                className="min-h-25"
+                                disabled={isPending}
                             />
                         </div>
 
-                        <div>
-                            <Label htmlFor="type">Privacy</Label>
-                            <Select value={formData.type} onValueChange={(value) => setFormData({ ...formData, type: value })}>
-                                <SelectTrigger>
-                                    <SelectValue />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="public">Public - Anyone can join</SelectItem>
-                                    <SelectItem value="private">Private - Approval required</SelectItem>
-                                </SelectContent>
-                            </Select>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="space-y-1.5">
+                                <Label>Privacy</Label>
+                                <Select value={type} onValueChange={setType} disabled={isPending}>
+                                    <SelectTrigger>
+                                        <SelectValue />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="public">Public — Anyone can join</SelectItem>
+                                        <SelectItem value="private">Private — Approval required</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </div>
+
+                            <div className="space-y-1.5">
+                                <Label>Category</Label>
+                                <Select value={category} onValueChange={setCategory} disabled={isPending}>
+                                    <SelectTrigger>
+                                        <SelectValue />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="general">General</SelectItem>
+                                        <SelectItem value="academics">Academics</SelectItem>
+                                        <SelectItem value="technology">Technology</SelectItem>
+                                        <SelectItem value="business">Business</SelectItem>
+                                        <SelectItem value="arts">Arts &amp; Culture</SelectItem>
+                                        <SelectItem value="sports">Sports</SelectItem>
+                                        <SelectItem value="other">Other</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </div>
                         </div>
 
-                        <div>
-                            <Label htmlFor="category">Category</Label>
-                            <Select value={formData.category} onValueChange={(value) => setFormData({ ...formData, category: value })}>
-                                <SelectTrigger>
-                                    <SelectValue />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="general">General</SelectItem>
-                                    <SelectItem value="academics">Academics</SelectItem>
-                                    <SelectItem value="technology">Technology</SelectItem>
-                                    <SelectItem value="business">Business</SelectItem>
-                                    <SelectItem value="arts">Arts & Culture</SelectItem>
-                                    <SelectItem value="sports">Sports</SelectItem>
-                                    <SelectItem value="other">Other</SelectItem>
-                                </SelectContent>
-                            </Select>
-                        </div>
-
-                        <div>
-                            <Label htmlFor="rules">Group Rules (Optional)</Label>
-                            <textarea
+                        <div className="space-y-1.5">
+                            <Label htmlFor="rules">Community Rules</Label>
+                            <Textarea
                                 id="rules"
-                                className="w-full min-h-[100px] px-3 py-2 border rounded-md"
-                                placeholder="Set guidelines for members (one per line)"
-                                value={formData.rules}
-                                onChange={(e) => setFormData({ ...formData, rules: e.target.value })}
+                                name="rules"
+                                placeholder="Optional: Set ground rules for members…"
+                                className="min-h-20"
+                                disabled={isPending}
                             />
                         </div>
 
-                        <div className="flex gap-2 pt-4">
-                            <Button type="submit" disabled={loading}>
-                                {loading ? 'Creating...' : 'Create Group'}
-                            </Button>
-                            <Button type="button" variant="outline" onClick={() => router.back()}>
+                        {error && (
+                            <p className="text-sm text-destructive">{error}</p>
+                        )}
+
+                        <div className="flex gap-3 pt-2">
+                            <Button
+                                type="button"
+                                variant="outline"
+                                onClick={() => router.back()}
+                                disabled={isPending}
+                            >
                                 Cancel
+                            </Button>
+                            <Button type="submit" disabled={isPending} className="flex-1">
+                                {isPending ? 'Creating…' : 'Create Community'}
                             </Button>
                         </div>
                     </form>
