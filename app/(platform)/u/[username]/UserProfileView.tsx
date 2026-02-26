@@ -52,7 +52,7 @@ export default function UserProfileView({
     ].filter(Boolean) as { href: string; label: string; icon: React.ReactNode }[]
 
     return (
-        <div className="container max-w-4xl mx-auto lg:pb-8">
+        <div className="container max-w-4xl mx-auto lg:py-8">
             <div className="sm:p-4 space-y-4">
                 <Card className="rounded-none pt-0 border-0 shadow-none">
                     <CardHeader>

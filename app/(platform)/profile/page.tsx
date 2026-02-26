@@ -52,23 +52,8 @@ export default function MyProfilePage() {
   const postCount = 0;
 
   return (
-    <div className="container max-w-xl mx-auto lg:pb-8">
+    <div className="container max-w-3xl mx-auto lg:py-8">
       <div className="sm:pr-4 space-y-4">
-        {/* Header */}
-        <div className="sticky top-0 z-10 backdrop-blur-lg bg-background/80 flex items-center justify-between gap-4 border-b px-4 py-2">
-          <Button variant={"outline"} onClick={() => router.back()}>
-            <ArrowLeft className="h-5 w-5" />
-            <span className=''>Back</span>
-          </Button>
-          <div className="">
-            <h1 className="text-lg font-semibold">Profile</h1>
-          </div>
-          <Button variant={"outline"} size={"icon"} className="h-8 w-8 rounded-full">
-            <Ellipsis className="h-5 w-5" />
-            <span className='sr-only'>profile menu</span>
-          </Button>
-        </div>
-
         <Card className="rounded-none pt-0 border-0 shadow-none">
           <CardHeader>
             <div className="flex items-start gap-6">
