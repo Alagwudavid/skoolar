@@ -32,7 +32,12 @@ const isAuthRoute = createRouteMatcher([
   '/auth/signup(.*)',
 ]);
 
+// Webhooks must be publicly accessible — skip all Clerk checks
+const isWebhookRoute = createRouteMatcher(['/api/webhooks/(.*)']);
+
 export default clerkMiddleware(async (auth, req) => {
+  if (isWebhookRoute(req)) return NextResponse.next();
+
   // Redirect authenticated users away from auth pages
   if (isAuthRoute(req)) {
     const { userId } = await auth();

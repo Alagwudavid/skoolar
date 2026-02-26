@@ -11,6 +11,7 @@ datasource db {
 // User Profile
 model Profile {
   id          String    @id @default(uuid())
+  clerk_id    String    @unique
   username    String?   @unique
   full_name   String?
   email       String?   @unique
