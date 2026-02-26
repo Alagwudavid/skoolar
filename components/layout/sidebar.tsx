@@ -133,15 +133,18 @@ export function Sidebar() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "flex items-center gap-3 px-4 py-3 rounded-full text-xl transition-colors hover:bg-muted w-full",
+                    "flex items-center gap-3 px-4 py-3 rounded-full transition-colors hover:bg-muted w-full",
                     isActive && "font-bold"
                   )}
                 >
-                  <Avatar className="h-7 w-7">
+                  <Avatar className="h-7 w-7 shrink-0">
                     <AvatarImage src={user?.imageUrl} alt={user?.fullName ?? ''} />
                     <AvatarFallback className="bg-secondary text-secondary-foreground">{initials}</AvatarFallback>
                   </Avatar>
-                  <span>{item.title}</span>
+                  <div className="flex flex-col min-w-0">
+                    <span className="text-base font-semibold leading-tight truncate">{displayName}</span>
+                    <span className="text-sm text-muted-foreground leading-tight truncate">@{username}</span>
+                  </div>
                 </Link>
               );
             }

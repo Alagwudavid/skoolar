@@ -15,9 +15,11 @@ export default function EditProfilePage() {
     const { user, isLoaded } = useUser()
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
+    const [usernameError, setUsernameError] = useState('')
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
+        username: '',
         bio: '',
         location: '',
         institution: '',
@@ -33,6 +35,7 @@ export default function EditProfilePage() {
         setFormData({
             firstName: user.firstName ?? '',
             lastName: user.lastName ?? '',
+            username: user.username ?? '',
             bio: meta.bio ?? '',
             location: meta.location ?? '',
             institution: meta.institution ?? '',
@@ -48,8 +51,10 @@ export default function EditProfilePage() {
         if (!user) return
         setLoading(true)
         setError('')
+        setUsernameError('')
 
         try {
+            // Update profile fields (no username — Clerk requires extra verification for that)
             await user.update({
                 firstName: formData.firstName,
                 lastName: formData.lastName,
@@ -64,13 +69,32 @@ export default function EditProfilePage() {
                     twitter: formData.twitter,
                 }
             })
-            router.push('/profile')
         } catch (err: unknown) {
             const msg = err instanceof Error ? err.message : 'Failed to update profile'
             setError(msg)
-        } finally {
             setLoading(false)
+            return
         }
+
+        // Attempt username update separately only if it changed
+        const currentUsername = user.username ?? ''
+        if (formData.username && formData.username !== currentUsername) {
+            try {
+                await user.update({ username: formData.username })
+            } catch (err: unknown) {
+                const msg = err instanceof Error ? err.message : 'Failed to update username'
+                if (msg.toLowerCase().includes('verification') || msg.toLowerCase().includes('sensitive')) {
+                    setUsernameError('Username change requires additional verification. Please update it via your account security settings.')
+                } else {
+                    setUsernameError(msg)
+                }
+                setLoading(false)
+                return
+            }
+        }
+
+        setLoading(false)
+        router.push('/profile')
     }
 
     if (!isLoaded) return null
@@ -116,6 +140,19 @@ export default function EditProfilePage() {
                                     onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                                 />
                             </div>
+                        </div>
+
+                        <div className="space-y-2">
+                            <Label htmlFor="username">Username</Label>
+                            <Input
+                                id="username"
+                                placeholder="your_username"
+                                value={formData.username}
+                                onChange={(e) => setFormData({ ...formData, username: e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, '') })}
+                            />
+                            {usernameError && (
+                                <p className="text-sm text-destructive">{usernameError}</p>
+                            )}
                         </div>
 
                         <div className="space-y-2">

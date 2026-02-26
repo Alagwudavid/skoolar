@@ -17,6 +17,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Skoolar - Connect with students and opportunities",
   description: "A platform to connect students with opportunities and organizations. Find internships, scholarships, jobs, and more.",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({

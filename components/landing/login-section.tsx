@@ -27,14 +27,14 @@ export function LoginSection() {
           <div className="flex flex-col sm:flex-row gap-3 items-center justify-center">
             <Link
               href="/auth/signup"
-              className="px-6 py-3 rounded-3xl bg-secondary hover:bg-secondary/80 text-white font-semibold flex items-center justify-center transition gap-2 whitespace-nowrap cursor-pointer"
+              className="px-6 py-3 rounded-3xl dark:text-primary! bg-secondary hover:bg-secondary/80 text-white font-semibold flex items-center justify-center transition gap-2 whitespace-nowrap cursor-pointer"
             >
               Sign Up
               <ArrowRight className="w-5 h-5" />
             </Link>
             <Link
               href="/auth/signin"
-              className="px-6 py-3 rounded-3xl border-2 border-secondary text-secondary hover:bg-secondary hover:text-white font-semibold flex items-center justify-center transition gap-2 whitespace-nowrap cursor-pointer"
+              className="px-6 py-3 rounded-3xl border-2 dark:border-primary! dark:text-primary! border-secondary text-secondary hover:bg-secondary hover:text-white font-semibold flex items-center justify-center transition gap-2 whitespace-nowrap cursor-pointer"
             >
               Log In
               <ArrowRight className="w-5 h-5" />

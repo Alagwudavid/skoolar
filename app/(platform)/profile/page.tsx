@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { ArrowLeft, Ellipsis, FileText, Activity, Briefcase, GitMerge, ChevronRight } from 'lucide-react'
+import { ArrowLeft, Ellipsis, FileText, Activity, Briefcase, GitMerge } from 'lucide-react'
 import Image from 'next/image'
 import { useUser } from '@clerk/nextjs'
 import { useRouter } from 'next/navigation'
@@ -15,10 +15,10 @@ import { BrandGithubIcon, BrandLinkedInIcon, BrandTwitterIcon, BrandLinkIcon } f
 import Tooltip from '@/components/tooltip'
 
 const TABS = [
-  { key: 'posts', label: 'Posts', icon: FileText, href: '/profile/posts' },
-  { key: 'activity', label: 'Activity', icon: Activity, href: '/profile/activity' },
-  { key: 'opportunities', label: 'Opportunities', icon: Briefcase, href: '/profile/opportunities' },
-  { key: 'contributions', label: 'Contributions', icon: GitMerge, href: '/profile/contributions' },
+  { key: 'posts', label: 'Posts', icon: FileText },
+  { key: 'activity', label: 'Activity', icon: Activity },
+  { key: 'opportunities', label: 'Opportunities', icon: Briefcase },
+  { key: 'contributions', label: 'Contributions', icon: GitMerge },
 ] as const;
 
 type TabKey = (typeof TABS)[number]['key'];
@@ -147,19 +147,21 @@ export default function MyProfilePage() {
         <div className="sticky top-13 z-10 bg-background/80 backdrop-blur border-b">
           <div className="flex">
             {TABS.map((tab) => {
-              const Icon = tab.icon;
               const isActive = activeTab === tab.key;
               return (
                 <button
                   key={tab.key}
                   onClick={() => setActiveTab(tab.key)}
-                  className={`flex-1 flex flex-col items-center gap-1 py-2.5 text-xs font-medium transition-colors ${isActive
-                      ? 'text-foreground border-b-2 border-foreground'
+                  className={`relative flex-1 py-3 text-sm font-medium transition-colors ${isActive
+                      ? 'text-foreground'
                       : 'text-muted-foreground hover:text-foreground'
                     }`}
                 >
-                  <Icon className="h-4 w-4" />
-                  <span className="hidden sm:block">{tab.label}</span>
+                  {/* <Icon className="w-4 h-4" /> */}
+                  {tab.label}
+                  {isActive && (
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-1 w-14 rounded-full bg-foreground after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100" />
+                  )}
                 </button>
               );
             })}
@@ -173,15 +175,6 @@ export default function MyProfilePage() {
             const Icon = tab.icon;
             return (
               <div key={tab.key}>
-                <div className="flex items-center justify-between px-4 py-3">
-                  <h2 className="font-semibold text-sm">{tab.label}</h2>
-                  <Link
-                    href={tab.href}
-                    className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    View all <ChevronRight className="h-3 w-3" />
-                  </Link>
-                </div>
                 {/* Empty state */}
                 <div className="flex flex-col items-center justify-center gap-3 py-16 text-muted-foreground">
                   <Icon className="h-10 w-10 opacity-30" />
