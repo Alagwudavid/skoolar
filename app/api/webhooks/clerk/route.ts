@@ -1,7 +1,7 @@
 import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { Webhook } from 'svix';
-import { prisma } from '@/lib/prisma';
+import { createClient } from '@/utils/supabase/server';
 
 type ClerkUserEvent = {
     type: 'user.created' | 'user.updated' | 'user.deleted';
@@ -50,6 +50,8 @@ export async function POST(req: Request) {
     const { type, data } = event;
 
     try {
+        const supabase = await createClient();
+
         if (type === 'user.created') {
             const primaryEmail = data.email_addresses.find(
                 (e) => e.id === data.primary_email_address_id
@@ -58,14 +60,12 @@ export async function POST(req: Request) {
             const fullName =
                 [data.first_name, data.last_name].filter(Boolean).join(' ') || null;
 
-            await prisma.profile.create({
-                data: {
-                    clerk_id: data.id,
-                    email: primaryEmail ?? null,
-                    full_name: fullName,
-                    username: data.username ?? null,
-                    avatar_url: data.image_url ?? null,
-                },
+            await supabase.from('profiles').insert({
+                clerk_id: data.id,
+                email: primaryEmail ?? null,
+                full_name: fullName,
+                username: data.username ?? null,
+                avatar_url: data.image_url ?? null,
             });
         }
 
@@ -77,21 +77,16 @@ export async function POST(req: Request) {
             const fullName =
                 [data.first_name, data.last_name].filter(Boolean).join(' ') || null;
 
-            await prisma.profile.update({
-                where: { clerk_id: data.id },
-                data: {
-                    email: primaryEmail ?? null,
-                    full_name: fullName,
-                    username: data.username ?? null,
-                    avatar_url: data.image_url ?? null,
-                },
-            });
+            await supabase.from('profiles').update({
+                email: primaryEmail ?? null,
+                full_name: fullName,
+                username: data.username ?? null,
+                avatar_url: data.image_url ?? null,
+            }).eq('clerk_id', data.id);
         }
 
         if (type === 'user.deleted') {
-            await prisma.profile.delete({
-                where: { clerk_id: data.id },
-            });
+            await supabase.from('profiles').delete().eq('clerk_id', data.id);
         }
     } catch (err) {
         console.error(`[clerk-webhook] Error handling ${type}:`, err);
