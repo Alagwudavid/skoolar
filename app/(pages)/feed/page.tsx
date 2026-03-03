@@ -10,6 +10,8 @@ import { PlusIcon } from "@/components/icons/regular";
 import CreatePostModal from "@/components/layout/create-post";
 import { useState } from "react";
 import { Communities } from "@/components/server/myCommunities";
+import { Trending } from "@/components/server/trendingRow";
+import { BusinessIcon, PremiumIcon } from "@/components/icons/collection";
 
 const posts = [
   {
@@ -84,7 +86,8 @@ export default function FeedPage() {
   }
   return (
     <div className="max-w-xl mx-auto">
-      <Communities />
+      {/* <Communities /> */}
+      <Trending />
       <CreatePostModal />
       <div className="divide-y overflow-hidden" >
         {posts.map((post) => (
@@ -105,9 +108,13 @@ export default function FeedPage() {
                     <Link href={`/users/${post.user.username}`} className="font-semibold hover:underline">
                       {post.user.name}
                     </Link>
-                    {post.user.verified && (
-                      <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" className="h-5 w-5 text-lime-500"><path fill="currentColor" fillRule="evenodd" d="M12 21a9 9 0 1 0 0-18a9 9 0 0 0 0 18m-.232-5.36l5-6l-1.536-1.28l-4.3 5.159l-2.225-2.226l-1.414 1.414l3 3l.774.774z" clipRule="evenodd"></path></svg>
-                    )}
+                    {post.user.verified ? (post.user.isBusiness ? (
+                      <BusinessIcon className="h-5 w-5" />
+                    )
+                    :
+                    (
+                      <PremiumIcon className="h-5 w-5"/>
+                    )) : ""}
                   </div>
                   <div className="relative">
                     <Button onClick={(e) => handleOpenPostMenu(e, post.id)} variant="ghost" size="icon" className="h-8 w-8 rounded-full hover:text-primary">

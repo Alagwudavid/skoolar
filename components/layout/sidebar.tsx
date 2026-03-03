@@ -38,7 +38,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { RIcons } from "../icons/collection";
+import { BusinessIcon, RIcons } from "../icons/collection";
 import { AiIcon, ActiveAiIcon, AtIcon, ActiveAtIcon, GroupIcon, ActiveGroupIcon } from "../icons";
 import { MenuIcon } from "../icons/regular";
 const moreMenuItems = [
@@ -85,11 +85,17 @@ const moreMenuItems = [
     activeIcon: HomeIcon,
   },
   {
-    title: "Schools",
+    title: "For Business",
     href: "/universities",
-    icon: UniversityIcon,
+    icon: BusinessIcon,
     activeIcon: UniversityIcon,
   },
+  // {
+  //   title: "Schools",
+  //   href: "/universities",
+  //   icon: UniversityIcon,
+  //   activeIcon: UniversityIcon,
+  // },
   {
     title: "Ads Manager",
     href: "/ads",
@@ -175,7 +181,8 @@ export function Sidebar() {
               "h-7 w-7 transition-transform",
               showMore && "rotate-180"
             )} />
-            <span>More</span>
+            <span>Coming Soon</span>
+            {/* <span>More</span> */}
           </button>
 
           {/* Additional Menu Items */}
@@ -186,17 +193,18 @@ export function Sidebar() {
                 const Icon = isActive && item.activeIcon ? item.activeIcon : item.icon;
 
                 return (
-                  <Link
+                  <div
                     key={item.href}
-                    href={item.href}
+                    // href={item.href}
                     className={cn(
                       "flex items-center gap-4 px-4 py-3 rounded-full text-xl transition-colors hover:bg-muted",
                       isActive && "font-bold"
                     )}
+                    aria-disabled
                   >
                     <Icon className="h-7 w-7" />
                     <span>{item.title}</span>
-                  </Link>
+                  </div>
                 );
               })}
             </div>

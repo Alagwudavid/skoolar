@@ -1,8 +1,8 @@
 import { NavItem } from "@/types";
-import { HomeIcon, ActiveHomeIcon, SearchIcon, ActiveSearchIcon, ChatIcon, ActiveChatIcon, GroupIcon, ActiveGroupIcon, OpportunitiesIcon, ActiveOpportunitiesIcon, PlusIcon, ActivePlusIcon, UserIcon, ActiveUserIcon, LearnerIcon, ActiveLearnerIcon } from "@/components/icons";
+import { HomeIcon, ActiveHomeIcon, SearchIcon, ActiveSearchIcon, ChatIcon, ActiveChatIcon, GroupIcon, ActiveGroupIcon, OpportunitiesIcon, ActiveOpportunitiesIcon, PlusIcon, ActivePlusIcon, UserIcon, ActiveUserIcon, LearnerIcon, ActiveLearnerIcon, FolderIcon, TicketIcon, ActiveTicketIcon } from "@/components/icons";
 import { Bell, BellDot, PlaySquare } from "lucide-react";
 import { PremiumIcon } from "@/components/icons/collection";
-import { ResourcesIcon } from "@/components/icons/regular";
+import { PlayIcon, ResourcesIcon } from "@/components/icons/regular";
 
 export const siteConfig = {
   name: "Skoolar",
@@ -19,19 +19,19 @@ export const mainNav: NavItem[] = [
   {
     title: "Watch",
     href: "/watch",
-    icon: PlaySquare,
+    icon: PlayIcon,
     activeIcon: PlaySquare,
   },
   {
     title: "Resources",
     href: "/learn",
-    icon: ResourcesIcon,
+    icon: FolderIcon,
   },
   {
     title: "Opportunities",
     href: "/opportunities",
-    icon: OpportunitiesIcon,
-    activeIcon: ActiveOpportunitiesIcon,
+    icon: TicketIcon,
+    activeIcon: ActiveTicketIcon,
   },
   {
     title: "Search",
