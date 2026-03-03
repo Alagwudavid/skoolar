@@ -1,8 +1,21 @@
 "use server";
 
 import { createClient } from "@/utils/supabase/server";
+import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+
+async function getProfileId(): Promise<string | null> {
+    const { userId } = await auth();
+    if (!userId) return null;
+    const supabase = await createClient();
+    const { data } = await supabase
+        .from("profiles")
+        .select("id")
+        .eq("clerk_id", userId)
+        .maybeSingle();
+    return data?.id ?? null;
+}
 
 function generateSlug(name: string): string {
     return name
@@ -15,9 +28,9 @@ function generateSlug(name: string): string {
 
 export async function createOrganization(formData: FormData) {
     const supabase = await createClient();
-    const { data: { user } } = await supabase.auth.getUser();
+    const profileId = await getProfileId();
 
-    if (!user) return { error: "Not authenticated" };
+    if (!profileId) return { error: "Not authenticated" };
 
     const name = formData.get("name") as string;
     const type = formData.get("type") as string;
@@ -56,7 +69,7 @@ export async function createOrganization(formData: FormData) {
         .from("organization_members")
         .insert({
             org_id: org.id,
-            profile_id: user.id,
+            profile_id: profileId,
             role: "owner",
         });
 
@@ -68,22 +81,22 @@ export async function createOrganization(formData: FormData) {
 
 export async function joinOrganization(orgId: string) {
     const supabase = await createClient();
-    const { data: { user } } = await supabase.auth.getUser();
+    const profileId = await getProfileId();
 
-    if (!user) return { error: "Not authenticated" };
+    if (!profileId) return { error: "Not authenticated" };
 
     const { data: existing } = await supabase
         .from("organization_members")
         .select("id")
         .eq("org_id", orgId)
-        .eq("profile_id", user.id)
+        .eq("profile_id", profileId)
         .maybeSingle();
 
     if (existing) return { error: "Already a member" };
 
     const { error } = await supabase.from("organization_members").insert({
         org_id: orgId,
-        profile_id: user.id,
+        profile_id: profileId,
         role: "member",
     });
 
@@ -95,15 +108,15 @@ export async function joinOrganization(orgId: string) {
 
 export async function leaveOrganization(orgId: string) {
     const supabase = await createClient();
-    const { data: { user } } = await supabase.auth.getUser();
+    const profileId = await getProfileId();
 
-    if (!user) return { error: "Not authenticated" };
+    if (!profileId) return { error: "Not authenticated" };
 
     const { data: membership } = await supabase
         .from("organization_members")
         .select("role")
         .eq("org_id", orgId)
-        .eq("profile_id", user.id)
+        .eq("profile_id", profileId)
         .maybeSingle();
 
     if (membership?.role === "owner") {
@@ -114,7 +127,7 @@ export async function leaveOrganization(orgId: string) {
         .from("organization_members")
         .delete()
         .eq("org_id", orgId)
-        .eq("profile_id", user.id);
+        .eq("profile_id", profileId);
 
     if (error) return { error: error.message };
 
@@ -128,15 +141,15 @@ export async function updateOrgMemberRole(
     newRole: "admin" | "moderator" | "member"
 ) {
     const supabase = await createClient();
-    const { data: { user } } = await supabase.auth.getUser();
+    const profileId = await getProfileId();
 
-    if (!user) return { error: "Not authenticated" };
+    if (!profileId) return { error: "Not authenticated" };
 
     const { data: callerMembership } = await supabase
         .from("organization_members")
         .select("role")
         .eq("org_id", orgId)
-        .eq("profile_id", user.id)
+        .eq("profile_id", profileId)
         .maybeSingle();
 
     const callerRole = callerMembership?.role;
@@ -163,15 +176,15 @@ export async function updateOrgMemberRole(
 
 export async function removeOrgMember(orgId: string, targetProfileId: string) {
     const supabase = await createClient();
-    const { data: { user } } = await supabase.auth.getUser();
+    const profileId = await getProfileId();
 
-    if (!user) return { error: "Not authenticated" };
+    if (!profileId) return { error: "Not authenticated" };
 
     const { data: callerMembership } = await supabase
         .from("organization_members")
         .select("role")
         .eq("org_id", orgId)
-        .eq("profile_id", user.id)
+        .eq("profile_id", profileId)
         .maybeSingle();
 
     const callerRole = callerMembership?.role;
@@ -211,7 +224,7 @@ export async function removeOrgMember(orgId: string, targetProfileId: string) {
 
 export async function getOrganization(orgId: string) {
     const supabase = await createClient();
-    const { data: { user } } = await supabase.auth.getUser();
+    const profileId = await getProfileId();
 
     const { data: org, error } = await supabase
         .from("organizations")
@@ -222,12 +235,12 @@ export async function getOrganization(orgId: string) {
     if (error) return { error: error.message, org: null, membership: null };
 
     let membership = null;
-    if (user) {
+    if (profileId) {
         const { data } = await supabase
             .from("organization_members")
             .select("role")
             .eq("org_id", orgId)
-            .eq("profile_id", user.id)
+            .eq("profile_id", profileId)
             .maybeSingle();
         membership = data;
     }

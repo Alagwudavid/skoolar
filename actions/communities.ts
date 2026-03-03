@@ -1,8 +1,21 @@
 "use server";
 
 import { createClient } from "@/utils/supabase/server";
+import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+
+async function getProfileId(): Promise<string | null> {
+  const { userId } = await auth();
+  if (!userId) return null;
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("profiles")
+    .select("id")
+    .eq("clerk_id", userId)
+    .maybeSingle();
+  return data?.id ?? null;
+}
 
 function generateSlug(name: string): string {
   return name
@@ -15,9 +28,9 @@ function generateSlug(name: string): string {
 
 export async function createCommunity(formData: FormData) {
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const profileId = await getProfileId();
 
-  if (!user) return { error: "Not authenticated" };
+  if (!profileId) return { error: "Not authenticated" };
 
   const name = formData.get("name") as string;
   const description = formData.get("description") as string;
@@ -31,7 +44,7 @@ export async function createCommunity(formData: FormData) {
   const slug = `${baseSlug}-${Date.now().toString(36)}`;
 
   const { data: group, error } = await supabase
-    .from("groups")
+    .from("communities")
     .insert({
       name: name.trim(),
       slug,
@@ -39,7 +52,7 @@ export async function createCommunity(formData: FormData) {
       type,
       category,
       rules: rules?.trim() || null,
-      creator_id: user.id,
+      creator_id: profileId,
     })
     .select()
     .single();
@@ -47,9 +60,9 @@ export async function createCommunity(formData: FormData) {
   if (error) return { error: error.message };
 
   // Add creator as super_admin
-  const { error: memberError } = await supabase.from("group_members").insert({
-    group_id: group.id,
-    profile_id: user.id,
+  const { error: memberError } = await supabase.from("community_members").insert({
+    community_id: group.id,
+    profile_id: profileId,
     role: "super_admin",
   });
 
@@ -61,23 +74,23 @@ export async function createCommunity(formData: FormData) {
 
 export async function joinCommunity(groupId: string) {
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const profileId = await getProfileId();
 
-  if (!user) return { error: "Not authenticated" };
+  if (!profileId) return { error: "Not authenticated" };
 
   // Check if already a member
   const { data: existing } = await supabase
-    .from("group_members")
-    .select("id")
-    .eq("group_id", groupId)
-    .eq("profile_id", user.id)
+    .from("community_members")
+    .select("community_id")
+    .eq("community_id", groupId)
+    .eq("profile_id", profileId)
     .maybeSingle();
 
   if (existing) return { error: "Already a member" };
 
-  const { error } = await supabase.from("group_members").insert({
-    group_id: groupId,
-    profile_id: user.id,
+  const { error } = await supabase.from("community_members").insert({
+    community_id: groupId,
+    profile_id: profileId,
     role: "member",
   });
 
@@ -89,16 +102,16 @@ export async function joinCommunity(groupId: string) {
 
 export async function leaveCommunity(groupId: string) {
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const profileId = await getProfileId();
 
-  if (!user) return { error: "Not authenticated" };
+  if (!profileId) return { error: "Not authenticated" };
 
   // Super admin cannot leave — must transfer ownership first
   const { data: membership } = await supabase
-    .from("group_members")
+    .from("community_members")
     .select("role")
-    .eq("group_id", groupId)
-    .eq("profile_id", user.id)
+    .eq("community_id", groupId)
+    .eq("profile_id", profileId)
     .maybeSingle();
 
   if (membership?.role === "super_admin") {
@@ -106,10 +119,10 @@ export async function leaveCommunity(groupId: string) {
   }
 
   const { error } = await supabase
-    .from("group_members")
+    .from("community_members")
     .delete()
-    .eq("group_id", groupId)
-    .eq("profile_id", user.id);
+    .eq("community_id", groupId)
+    .eq("profile_id", profileId);
 
   if (error) return { error: error.message };
 
@@ -123,16 +136,16 @@ export async function updateMemberRole(
   newRole: "moderator" | "member"
 ) {
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const profileId = await getProfileId();
 
-  if (!user) return { error: "Not authenticated" };
+  if (!profileId) return { error: "Not authenticated" };
 
   // Only super_admin can change roles
   const { data: callerMembership } = await supabase
-    .from("group_members")
+    .from("community_members")
     .select("role")
-    .eq("group_id", groupId)
-    .eq("profile_id", user.id)
+    .eq("community_id", groupId)
+    .eq("profile_id", profileId)
     .maybeSingle();
 
   if (callerMembership?.role !== "super_admin") {
@@ -140,9 +153,9 @@ export async function updateMemberRole(
   }
 
   const { error } = await supabase
-    .from("group_members")
+    .from("community_members")
     .update({ role: newRole })
-    .eq("group_id", groupId)
+    .eq("community_id", groupId)
     .eq("profile_id", targetProfileId);
 
   if (error) return { error: error.message };
@@ -153,15 +166,15 @@ export async function updateMemberRole(
 
 export async function removeMember(groupId: string, targetProfileId: string) {
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const profileId = await getProfileId();
 
-  if (!user) return { error: "Not authenticated" };
+  if (!profileId) return { error: "Not authenticated" };
 
   const { data: callerMembership } = await supabase
-    .from("group_members")
+    .from("community_members")
     .select("role")
-    .eq("group_id", groupId)
-    .eq("profile_id", user.id)
+    .eq("community_id", groupId)
+    .eq("profile_id", profileId)
     .maybeSingle();
 
   const canRemove =
@@ -173,9 +186,9 @@ export async function removeMember(groupId: string, targetProfileId: string) {
   // Moderators cannot remove other moderators or super_admin
   if (callerMembership?.role === "moderator") {
     const { data: targetMembership } = await supabase
-      .from("group_members")
+      .from("community_members")
       .select("role")
-      .eq("group_id", groupId)
+      .eq("community_id", groupId)
       .eq("profile_id", targetProfileId)
       .maybeSingle();
 
@@ -188,9 +201,9 @@ export async function removeMember(groupId: string, targetProfileId: string) {
   }
 
   const { error } = await supabase
-    .from("group_members")
+    .from("community_members")
     .delete()
-    .eq("group_id", groupId)
+    .eq("community_id", groupId)
     .eq("profile_id", targetProfileId);
 
   if (error) return { error: error.message };
@@ -201,23 +214,23 @@ export async function removeMember(groupId: string, targetProfileId: string) {
 
 export async function getCommunity(groupId: string) {
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const profileId = await getProfileId();
 
   const { data: group, error } = await supabase
-    .from("groups")
-    .select("*, group_members(count)")
+    .from("communities")
+    .select("*, community_members(count)")
     .eq("id", groupId)
     .single();
 
   if (error) return { error: error.message, group: null, membership: null };
 
   let membership = null;
-  if (user) {
+  if (profileId) {
     const { data } = await supabase
-      .from("group_members")
+      .from("community_members")
       .select("role")
-      .eq("group_id", groupId)
-      .eq("profile_id", user.id)
+      .eq("community_id", groupId)
+      .eq("profile_id", profileId)
       .maybeSingle();
     membership = data;
   }
@@ -229,8 +242,8 @@ export async function getCommunities() {
   const supabase = await createClient();
 
   const { data: groups, error } = await supabase
-    .from("groups")
-    .select("*, group_members(count)")
+    .from("communities")
+    .select("*, community_members(count)")
     .order("created_at", { ascending: false });
 
   if (error) return { error: error.message, groups: [] };
@@ -241,9 +254,9 @@ export async function getCommunityMembers(groupId: string) {
   const supabase = await createClient();
 
   const { data: members, error } = await supabase
-    .from("group_members")
+    .from("community_members")
     .select("*, profile:profiles(id, username, full_name, avatar_url)")
-    .eq("group_id", groupId)
+    .eq("community_id", groupId)
     .order("joined_at", { ascending: true });
 
   if (error) return { error: error.message, members: [] };
@@ -252,13 +265,13 @@ export async function getCommunityMembers(groupId: string) {
 
 export async function sendCommunityMessage(groupId: string, content: string) {
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const profileId = await getProfileId();
 
-  if (!user) return { error: "Not authenticated" };
+  if (!profileId) return { error: "Not authenticated" };
 
-  const { error } = await supabase.from("community_messages").insert({
-    group_id: groupId,
-    sender_id: user.id,
+  const { error } = await supabase.from("messages").insert({
+    community_id: groupId,
+    sender_id: profileId,
     content: content.trim(),
   });
 
