@@ -105,19 +105,19 @@ export function Communities() {
             <div
               key={community.id}
               className={`
-                flex-none w-[300px] md:w-[340px] h-[100px] rounded-xl overflow-hidden flex snap-start transition-all duration-300 bg-muted
+                flex-none w-[300px] md:w-[340px] h-[100px] rounded-xl overflow-hidden flex snap-start transition-all duration-300 bg-secondary
                 `}
                 // ${community.isActive ? 'ring-2 ring-primary bg-muted' : 'bg-muted hover:bg-muted/80'}
             >
               {/* Image Section */}
-              <div className="w-25 h-full bg-white flex items-center justify-center p-2 flex-shrink-0">
-                <Image
+              <div className="w-25 h-full bg-primary flex items-center justify-center p-2 shrink-0">
+                {/* <Image
                   src={community.image}
                   alt={`${community.name} logo`}
                   className="w-full h-full object-contain"
                   width={100}
                   height={100}
-                />
+                /> */}
               </div>
 
               {/* Content Section */}

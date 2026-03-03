@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ClerkProvider } from "@clerk/nextjs";
+import ProfileSync from "@/components/server/profile-sync";
 
 export const metadata: Metadata = {
   title: "Skoolar - Connect with students and opportunities",
@@ -20,6 +21,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <body className="antialiased">
+          <ProfileSync />
           <ThemeProvider
             attribute="class"
             defaultTheme="system"

@@ -17,15 +17,15 @@ export const mainNav: NavItem[] = [
     activeIcon: ActiveHomeIcon,
   },
   {
-    title: "Resources",
-    href: "/learn",
-    icon: ResourcesIcon,
-  },
-  {
     title: "Watch",
     href: "/watch",
     icon: PlaySquare,
     activeIcon: PlaySquare,
+  },
+  {
+    title: "Resources",
+    href: "/learn",
+    icon: ResourcesIcon,
   },
   {
     title: "Opportunities",

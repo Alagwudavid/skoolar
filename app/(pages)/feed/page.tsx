@@ -34,6 +34,7 @@ const posts = [
       username: 'techinternships',
       avatar: 'T',
       verified: true,
+      isBusiness: true,
     },
     content: '🚨 New: Apple Summer 2026 Internship applications are now open! \n\n📍 Positions in Cupertino, Austin, and Seattle\n💰 $8,000/month + housing\n📅 Deadline: March 15\n\nLink in bio to apply!',
     timestamp: '5h',
@@ -91,8 +92,8 @@ export default function FeedPage() {
             <div className="flex gap-3">
               {/* Avatar */}
               <Link href={`/users/${post.user.username}`}>
-                <Avatar className="h-10 w-10">
-                  <AvatarFallback>{post.user.avatar}</AvatarFallback>
+                <Avatar className="h-12 w-12">
+                  <AvatarFallback isBusiness={post.user.isBusiness}>{post.user.avatar}</AvatarFallback>
                 </Avatar>
               </Link>
 
