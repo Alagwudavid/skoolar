@@ -188,12 +188,6 @@ export default function GroupDetailPage({ params }: { params: { id: string } }) 
         </div>
     )
 }
-
-id: params.id,
-    name: 'Computer Science Students',
-        description: 'A community for CS students to discuss algorithms, projects, and career advice',
-            type: 'public' as const,
-                members: 1243,
                     posts: 567,
                         createdAt: '2025-06-15',
                             rules: [

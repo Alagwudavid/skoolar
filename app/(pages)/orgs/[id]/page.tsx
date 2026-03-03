@@ -225,9 +225,6 @@ export default function OrganizationPage() {
     </div>
   );
 }
-logo ?: string;
-description: string;
-location: string;
 website ?: string;
 founded ?: string;
 memberCount: number;
