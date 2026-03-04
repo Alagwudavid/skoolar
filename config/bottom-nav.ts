@@ -1,5 +1,5 @@
 import { MobileNavItem } from "@/types";
-import { HomeIcon, ActiveHomeIcon, CompassIcon, ActiveCompassIcon, ChatIcon, ActiveChatIcon, GroupIcon, ActiveGroupIcon, OpportunitiesIcon, ActiveOpportunitiesIcon, PlusIcon, ActivePlusIcon, UserIcon, ActiveUserIcon, SearchIcon, ActiveSearchIcon } from "@/components/icons";
+import { HomeIcon, ActiveHomeIcon, CompassIcon, ActiveCompassIcon, ChatIcon, ActiveChatIcon, GroupIcon, ActiveGroupIcon, OpportunitiesIcon, ActiveOpportunitiesIcon, PlusIcon, ActivePlusIcon, UserIcon, ActiveUserIcon, SearchIcon, ActiveSearchIcon, ActiveFolderIcon, FolderIcon, ActiveTicketIcon, TicketIcon } from "@/components/icons";
 import { ResourcesIcon } from "@/components/icons/regular";
 
 export const siteConfig = {
@@ -29,12 +29,13 @@ export const BottomNav: MobileNavItem[] = [
   {
     title: "Opportunities",
     href: "/opportunities",
-    icon: OpportunitiesIcon,
-    activeIcon: ActiveOpportunitiesIcon,
+    icon: TicketIcon,
+    activeIcon: ActiveTicketIcon,
   },
   {
     title: "Resources",
     href: "/learn",
-    icon: ResourcesIcon,
+    icon: FolderIcon,
+    activeIcon: ActiveFolderIcon,
   },
 ];
