@@ -68,7 +68,7 @@ export default function WatchPage() {
     // })
 
     return (
-        <div className="container">
+        <div className="w-full max-lg:max-w-5xl mx-auto h-[80vh] sm:h-screen flex items-center justify-center">
             {/* <div className="space-y-6 p-4">
                 <div className="flex gap-4">
                     <SearchBar

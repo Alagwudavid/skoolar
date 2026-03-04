@@ -19,7 +19,7 @@ const VIDEOS: VideoData[] = [
   {
     id: 1,
     image:
-      'https://cdn.magicpatterns.com/uploads/7g3PQsy9iwkahmdLLDx4Sx/image.png',
+      '/videos/v_6.jpg',
     username: 'punnalia',
     caption:
       'Whiz kids C & D 😊🔥👨‍💻 @DaYen_enioℓα 🐱🐸🎭 @Dera 🐸 @Okwukwe ❤️ 👑 #naijaanimation #FlipaClip #punnalia ...',
@@ -127,12 +127,12 @@ export function VideoPlayer() {
   // Dynamic container classes based on orientation
   const containerClasses =
     currentOrientation === 'portrait'
-      ? 'relative bg-neutral-900 sm:rounded-2xl overflow-hidden flex-shrink-0 cursor-pointer group shadow-2xl w-full h-full sm:h-full sm:w-auto sm:aspect-[9/16] sm:max-h-[85vh]'
+      ? 'relative bg-neutral-900 rounded-2xl overflow-hidden flex-shrink-0 cursor-pointer group shadow-2xl w-full h-full sm:h-full sm:w-auto sm:aspect-[9/16] sm:max-h-[85vh]'
       : currentOrientation === 'square'
         ? 'relative bg-neutral-900 sm:rounded-2xl overflow-hidden flex-shrink-0 cursor-pointer group shadow-2xl w-full h-full sm:h-full sm:w-auto sm:aspect-square sm:max-h-[85vh]'
-        : 'relative bg-neutral-900 sm:rounded-2xl overflow-hidden flex-shrink-0 cursor-pointer group shadow-2xl w-full h-full sm:h-full sm:w-auto sm:aspect-video sm:max-h-[85vh]'
+        : 'relative bg-neutral-900 sm:rounded-2xl overflow-hidden flex-shrink-0 cursor-pointer group shadow-2xl w-full h-full sm:h-full sm:w-auto sm:aspect-square lg:aspect-video max-w-4xl sm:max-h-[538px]'
   return (
-    <div className="w-full h-screen bg-black text-white flex items-center justify-center overflow-hidden relative font-sans">
+    <div className="w-full h-full bg-background text-foreground flex items-center justify-center overflow-hidden relative font-sans">
       {/* Main Content Wrapper */}
       <div className="flex flex-row items-center justify-center w-full h-full sm:h-[85vh] max-w-3xl mx-auto relative sm:px-12">
         {/* Video Container - orientation-aware */}
@@ -160,7 +160,10 @@ export function VideoPlayer() {
               }}
               src={video.image}
               alt="Video content"
-              className={`absolute inset-0 w-full h-full ${currentOrientation === 'portrait' ? 'object-cover' : 'object-cover sm:object-contain'}`}
+              className={`absolute inset-0 w-full h-full 
+                ${currentOrientation === 'portrait' ? 'object-cover' : 'object-cover sm:object-contain'}
+                `}
+                // object-cover
             />
           </AnimatePresence>
 
@@ -178,7 +181,7 @@ export function VideoPlayer() {
             exit={{
               opacity: 0,
             }}
-            className="absolute top-3 left-3 z-30 px-2 py-0.5 rounded bg-black/50 backdrop-blur-sm text-[10px] uppercase tracking-wider text-white/70 font-medium pointer-events-none"
+            className="absolute top-3 left-3 z-30 px-2.5 py-1.5 rounded-full bg-black/50 backdrop-blur-sm text-[10px] uppercase tracking-wider text-white/70 font-medium pointer-events-none"
           >
             {currentOrientation === 'portrait'
               ? '9:16'
@@ -250,10 +253,10 @@ export function VideoPlayer() {
           </div>
 
           {/* Progress Bar */}
-          <div className="absolute bottom-0 left-0 w-full h-[2px] sm:h-[3px] bg-white/20 z-30">
+          <div className="absolute bottom-0 left-0 w-full h-1 bg-white/20 z-30">
             <motion.div
               key={video.id}
-              className="h-full bg-[#FE2C55]"
+              className="h-full bg-primary"
               initial={{
                 width: 0,
               }}
@@ -266,10 +269,11 @@ export function VideoPlayer() {
               }}
             />
           </div>
+          <div className="absolute bottom-0 left-0 right-0 h-3/5 bg-gradient-to-t from-black via-black/80 to-transparent translate-y-0"></div>
         </motion.div>
 
         {/* Desktop Action Bar (Beside video container) */}
-        <div className="hidden sm:flex flex-col justify-end h-full ml-6 pb-4 z-30">
+        <div className="hidden sm:flex flex-col justify-center h-full ml-6 z-30">
           <ActionBar
             likes={video.likes}
             comments={video.comments}
@@ -280,7 +284,7 @@ export function VideoPlayer() {
       </div>
 
       {/* Desktop Navigation Chevrons */}
-      <div className="hidden lg:flex flex-col gap-4 absolute right-8 top-1/2 -translate-y-1/2 z-30">
+      <div className="hidden sm:flex flex-col gap-4 absolute max-lg:right-2 lg:right-8 top-1/2 -translate-y-1/2 z-30">
         <motion.button
           whileHover={{
             scale: 1.15,
@@ -289,10 +293,10 @@ export function VideoPlayer() {
             scale: 0.9,
           }}
           onClick={() => goToVideo(-1)}
-          className="w-10 h-10 rounded-full bg-neutral-800/80 flex items-center justify-center hover:bg-neutral-700 transition-colors"
+          className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center hover:bg-secondary/80 transition-colors"
           aria-label="Previous video"
         >
-          <ChevronUp className="w-6 h-6" />
+          <ChevronUp className="w-6 h-6 text-white" />
         </motion.button>
         <motion.button
           whileHover={{
@@ -302,15 +306,15 @@ export function VideoPlayer() {
             scale: 0.9,
           }}
           onClick={() => goToVideo(1)}
-          className="w-10 h-10 rounded-full bg-neutral-800/80 flex items-center justify-center hover:bg-neutral-700 transition-colors"
+          className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center hover:bg-secondary/80 transition-colors"
           aria-label="Next video"
         >
-          <ChevronDown className="w-6 h-6" />
+          <ChevronDown className="w-6 h-6 text-white" />
         </motion.button>
       </div>
 
       {/* Video counter indicator */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-30 lg:hidden">
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-30 sm:hidden">
         {VIDEOS.map((_, i) => (
           <div
             key={i}
