@@ -181,7 +181,7 @@ export function VideoPlayer() {
             exit={{
               opacity: 0,
             }}
-            className="absolute top-3 left-3 z-30 px-2.5 py-1.5 rounded-full bg-black/50 backdrop-blur-sm text-[10px] uppercase tracking-wider text-white/70 font-medium pointer-events-none"
+            className="absolute top-3 left-3 z-30 px-2.5 py-1.5 rounded-full bg-black/50 backdrop-blur-sm text-sm uppercase tracking-wider text-white/70 font-medium pointer-events-none"
           >
             {currentOrientation === 'portrait'
               ? '9:16'
