@@ -105,12 +105,12 @@ export function Trending() {
             <div
               key={trend.id}
               className={`
-                flex-none w-[300px] md:w-[340px] h-[100px] rounded-xl overflow-hidden flex snap-start transition-all duration-300 bg-secondary
+                flex-none w-75 h-fit rounded-xl overflow-hidden flex snap-start transition-all duration-300 bg-secondary p-2 gap-3
                 `}
                 // ${trend.isActive ? 'ring-2 ring-primary bg-muted' : 'bg-muted hover:bg-muted/80'}
             >
               {/* Image Section */}
-              <div className="w-25 h-full bg-primary flex items-center justify-center p-2 shrink-0">
+              <div className="w-12 h-12 bg-primary flex items-center justify-center rounded-lg shrink-0">
                 {/* <Image
                   src={trend.image}
                   alt={`${trend.name} logo`}
@@ -121,15 +121,15 @@ export function Trending() {
               </div>
 
               {/* Content Section */}
-              <div className="flex-1 p-3 flex flex-col justify-center min-w-0">
-                <h3 className="text-white font-bold text-base mb-1 truncate pr-2">
+              <div className="flex-1 flex flex-col justify-center min-w-0">
+                <h3 className="text-white font-bold text-base truncate">
                   {trend.name}
                 </h3>
-                <div className="trend-y-0.5">
-                  <p className="text-gray-400 text-sm truncate">
+                <div className="">
+                  {/* <p className="text-gray-400 text-sm truncate">
                     Members:{' '}
                     <span className="text-gray-300">{trend.position}</span>
-                  </p>
+                  </p> */}
                   <p className="text-gray-400 text-sm truncate">
                     posts:{' '}
                     <span className="text-gray-300">{trend.posts}</span>
