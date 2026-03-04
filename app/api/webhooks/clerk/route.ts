@@ -1,7 +1,7 @@
 import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { Webhook } from 'svix';
-import { createClient } from '@/utils/supabase/server';
+import { createClient } from '@supabase/supabase-js';
 
 type ClerkUserEvent = {
     type: 'user.created' | 'user.updated' | 'user.deleted';
@@ -50,7 +50,10 @@ export async function POST(req: Request) {
     const { type, data } = event;
 
     try {
-        const supabase = await createClient();
+        const supabase = createClient(
+            process.env.NEXT_PUBLIC_SUPABASE_URL!,
+            process.env.SUPABASE_SERVICE_ROLE_KEY!,
+        );
 
         if (type === 'user.created') {
             const primaryEmail = data.email_addresses.find(
@@ -60,13 +63,14 @@ export async function POST(req: Request) {
             const fullName =
                 [data.first_name, data.last_name].filter(Boolean).join(' ') || null;
 
-            await supabase.from('profiles').insert({
+            const { error } = await supabase.from('profiles').insert({
                 clerk_id: data.id,
                 email: primaryEmail ?? null,
                 full_name: fullName,
                 username: data.username ?? null,
                 avatar_url: data.image_url ?? null,
             });
+            if (error) throw error;
         }
 
         if (type === 'user.updated') {
@@ -77,16 +81,18 @@ export async function POST(req: Request) {
             const fullName =
                 [data.first_name, data.last_name].filter(Boolean).join(' ') || null;
 
-            await supabase.from('profiles').update({
+            const { error } = await supabase.from('profiles').update({
                 email: primaryEmail ?? null,
                 full_name: fullName,
                 username: data.username ?? null,
                 avatar_url: data.image_url ?? null,
             }).eq('clerk_id', data.id);
+            if (error) throw error;
         }
 
         if (type === 'user.deleted') {
-            await supabase.from('profiles').delete().eq('clerk_id', data.id);
+            const { error } = await supabase.from('profiles').delete().eq('clerk_id', data.id);
+            if (error) throw error;
         }
     } catch (err) {
         console.error(`[clerk-webhook] Error handling ${type}:`, err);
