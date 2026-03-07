@@ -87,7 +87,7 @@ export default function FeedPage() {
   return (
     <div className="max-w-xl mx-auto">
       {/* <Communities /> */}
-      <Trending />
+      <Trending className="sm:hidden" orientation="horizontal"/>
       <CreatePostModal />
       <div className="divide-y overflow-hidden" >
         {posts.map((post) => (

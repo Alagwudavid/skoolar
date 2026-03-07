@@ -8,6 +8,8 @@ import { TrendingUp, X } from "lucide-react";
 import SearchBar from "./search-bar";
 import { useRouter, usePathname } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
+import { Trending } from "../server/trendingRow";
+import { RefreshCCWIcon } from "../icons/regular";
 
 const suggestedUsers = [
     { id: '1', name: 'Sarah Johnson', username: '@sarahj', role: 'CS Student' },
@@ -29,12 +31,10 @@ export function RightBar() {
     const isExplorePage = pathname.startsWith('/explore');
 
     return (
-        <aside className="hidden lg:flex lg:w-80 xl:w-96 flex-col gap-6 p-6 sticky top-0 h-screen overflow-y-auto custom-scrollbar">
-            <div className={`relative ${isExplorePage ? "hidden" : "block"}`}>
-                <SearchBar />
-            </div>
+        <aside className="hidden lg:flex lg:w-80 xl:w-96 flex-col gap-6 py-6 px-1 sticky top-0 h-screen overflow-y-auto custom-scrollbar">
+            
             {/* Login Card — only shown to guests */}
-            {!isSignedIn && (
+            {!isSignedIn ? (
                 <Card className="rounded-3xl">
                     <CardHeader>
                         <CardTitle>Log in or sign up</CardTitle>
@@ -51,71 +51,85 @@ export function RightBar() {
                         </Button>
                     </CardContent>
                 </Card>
-            )}
+            ) : 
+            (
+                <>
+                    <div className={`relative ${isExplorePage ? "hidden" : "block"}`}>
+                        <SearchBar />
+                    </div>
+                    
+                    <Trending className="max-sm:hidden" orientation="vertical"/>
+                    
+                    {/* Suggested Users */}
+                    <Card className="p-0 gap-0 rounded-3xl bg-muted/50">
+                        <CardHeader className="pt-3 pb-2! border-b px-4">
+                            <CardTitle className="text-base flex items-center justify-between gap-2 ">
+                                Who To Follow
+                                <Button variant="ghost" size="icon" className="h-8 w-8 rounded-lg bg-muted hover:text-primary">
+                                    <RefreshCCWIcon className="h-5 w-5" />
+                                </Button>
+                            </CardTitle>
+                        </CardHeader>
+                        <CardContent className="space-y-0 divide-y p-0 overflow-hidden">
+                            {suggestedUsers.map((user) => (
+                                <Link key={user.id} href={"#"} className="flex items-center justify-between hover:bg-muted/50 hover:text-muted-foreground p-2 px-4 transition-colors group">
+                                    <div className="flex items-center gap-3">
+                                        <Avatar>
+                                            <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+                                        </Avatar>
+                                        <div className="flex flex-col">
+                                            <span className="text-sm font-semibold group-hover:text-primary">{user.name}</span>
+                                            <span className="text-xs text-muted-foreground">{user.username}</span>
+                                        </div>
+                                    </div>
+                                    <Button size="sm" variant="outline">Follow</Button>
+                                </Link>
+                            ))}
+                        </CardContent>
+                        <CardFooter className="pt-1! pb-1! border-t w-full">
+                            <Link
+                                href={`/tags`}
+                                className="block w-full text-center p-2 hover:text-primary transition-colors font-semibold"
+                            >
+                                View all
+                            </Link>
+                        </CardFooter>
+                    </Card>
 
-            {/* Suggested Users */}
-            <Card className="p-0 gap-0 rounded-3xl">
-                <CardHeader className="pt-3 pb-2! border-b px-4">
-                    <CardTitle className="text-base flex items-center justify-between gap-2 ">
-                        Who To Follow
-                        <X className="h-5 w-5" />
-                    </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-0 divide-y p-0 overflow-hidden">
-                    {suggestedUsers.map((user) => (
-                        <Link key={user.id} href={"#"} className="flex items-center justify-between hover:bg-muted/50 hover:text-muted-foreground p-2 px-4 transition-colors group">
-                            <div className="flex items-center gap-3">
-                                <Avatar>
-                                    <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
-                                </Avatar>
-                                <div className="flex flex-col">
-                                    <span className="text-sm font-semibold group-hover:text-primary">{user.name}</span>
-                                    <span className="text-xs text-muted-foreground">{user.username}</span>
-                                </div>
-                            </div>
-                            <Button size="sm" variant="outline">Follow</Button>
-                        </Link>
-                    ))}
-                </CardContent>
-                <CardFooter className="pt-1! pb-1! border-t w-full">
-                    <Link
-                        href={`/tags`}
-                        className="block w-full text-center p-2 hover:text-primary transition-colors font-semibold"
-                    >
-                        View all
-                    </Link>
-                </CardFooter>
-            </Card>
-
-            {/* Trending Topics */}
-            <Card className="p-0 gap-0 rounded-3xl">
-                <CardHeader className="pt-3 pb-2! border-b px-4">
-                    <CardTitle className="text-base flex items-center justify-between gap-2">
-                        Trending
-                        <X className="h-5 w-5" />
-                    </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-0 divide-y p-0 overflow-hidden">
-                    {trendingTopics.map((topic, index) => (
-                        <Link
-                            key={index}
-                            href={`/explore?q=${encodeURIComponent(topic.tag)}`}
-                            className="block hover:bg-muted/50 hover:text-muted-foreground p-2 px-4 transition-colors"
-                        >
-                            <div className="font-semibold">{topic.tag}</div>
-                            <div className="text-xs text-muted-foreground">{topic.posts}</div>
-                        </Link>
-                    ))}
-                </CardContent>
-                <CardFooter className="pt-1! pb-1! border-t w-full">
-                    <Link
-                        href={`/tags`}
-                        className="block w-full text-center p-2 hover:text-primary transition-colors font-semibold"
-                    >
-                        View all
-                    </Link>
-                </CardFooter>
-            </Card>
+                    {/* Trending Topics */}
+                    <Card className="p-0 gap-0 rounded-3xl bg-muted/50">
+                        <CardHeader className="pt-3 pb-2! border-b px-4">
+                            <CardTitle className="text-base flex items-center justify-between gap-2">
+                                Trending
+                                <Button variant="ghost" size="icon" className="h-8 w-8 rounded-lg bg-muted hover:text-primary">
+                                    <RefreshCCWIcon className="h-5 w-5" />
+                                </Button>
+                            </CardTitle>
+                        </CardHeader>
+                        <CardContent className="space-y-0 divide-y p-0 overflow-hidden">
+                            {trendingTopics.map((topic, index) => (
+                                <Link
+                                    key={index}
+                                    href={`/explore?q=${encodeURIComponent(topic.tag)}`}
+                                    className="block hover:bg-muted/50 p-2 px-4 transition-colors"
+                                >
+                                    <div className="font-semibold hover:text-primary">{topic.tag}</div>
+                                    <div className="text-xs text-muted-foreground">{topic.posts}</div>
+                                </Link>
+                            ))}
+                        </CardContent>
+                        <CardFooter className="pt-1! pb-1! border-t w-full">
+                            <Link
+                                href={`/tags`}
+                                className="block w-full text-center p-2 hover:text-primary transition-colors font-semibold"
+                            >
+                                View all
+                            </Link>
+                        </CardFooter>
+                    </Card>
+                </>
+            )
+            }
 
             {/* Footer Links */}
             <div className="flex flex-wrap gap-2 text-sm text-foreground px-2">

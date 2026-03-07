@@ -30,3 +30,7 @@ export const ResourcesIcon = (props: React.SVGProps<SVGSVGElement>) => (
 export const PlayIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><g fill="none" stroke="currentColor" strokeWidth={1.5}><path strokeLinejoin="round" d="M2.5 7.5h19m-4.5-5l-3 5m-4-5l-3 5"></path><path d="M2.5 12c0-4.478 0-6.718 1.391-8.109S7.521 2.5 12 2.5c4.478 0 6.718 0 8.109 1.391S21.5 7.521 21.5 12c0 4.478 0 6.718-1.391 8.109S16.479 21.5 12 21.5c-4.478 0-6.718 0-8.109-1.391S2.5 16.479 2.5 12Z"></path><path strokeLinejoin="round" d="M14.953 14.895c-.151.627-.867 1.07-2.3 1.955c-1.383.856-2.075 1.285-2.633 1.112a1.4 1.4 0 0 1-.61-.392C9 17.12 9 16.247 9 14.5s0-2.62.41-3.07c.17-.186.38-.321.61-.393c.558-.172 1.25.257 2.634 1.113c1.432.886 2.148 1.329 2.3 1.955a1.7 1.7 0 0 1 0 .79Z"></path></g></svg>
 );
+export const RefreshCCWIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" {...props}><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"><path d="M20.5 8c-1.392-3.179-4.823-5-8.522-5C7.299 3 3.453 6.552 3 11.1"/><path d="M16.489 8.4h3.97A.54.54 0 0 0 21 7.86V3.9M3.5 16c1.392 3.179 4.823 5 8.522 5c4.679 0 8.525-3.552 8.978-8.1"/><path d="M7.511 15.6h-3.97a.54.54 0 0 0-.541.54v3.96"/></g></svg>
+);
+
