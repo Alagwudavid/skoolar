@@ -30,11 +30,11 @@ export default function CreatePostModal() {
     const [title, setTitle] = useState('')
     return (
         <div className="mt-4 lg:mt-8">
-            <div className="px-3 pb-3">
+            <div className="">
                 <Button
                     onClick={handleOpenCreatePostModal}
                     variant={"outline"}
-                    className="h-fit w-full p-3 bg-muted rounded-2xl text-muted-foreground/70 text-base flex gap-4 items-center justify-start hover:cursor-pointer"
+                    className="h-fit w-full p-3 border-0 bg-transparent! text-muted-foreground/70 text-base flex gap-4 items-center justify-start hover:cursor-pointer"
                 >
                     <Avatar className="h-8 w-8">
                         <AvatarFallback>U</AvatarFallback>

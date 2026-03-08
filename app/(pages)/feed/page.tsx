@@ -85,7 +85,7 @@ export default function FeedPage() {
     setOpenPostMenuId(openPostMenuId === postId ? null : postId)
   }
   return (
-    <div className="max-w-xl mx-auto">
+    <div className="max-w-xl mx-auto border divide-y">
       {/* <Communities /> */}
       <Trending className="sm:hidden" orientation="horizontal"/>
       <CreatePostModal />
@@ -141,7 +141,7 @@ export default function FeedPage() {
                   </div>
                 )}
                 <div className="w-full flex items-center">
-                  <div className="mt-3 rounded-2xl overflow-hidden hover:bg-muted border relative w-full h-96">
+                  <div className="mt-3 rounded-2xl overflow-hidden hover:bg-muted border relative w-60 h-80">
                   </div>
                 </div>
                 <div className="flex items-center justify-between gap-3 mt-4">
