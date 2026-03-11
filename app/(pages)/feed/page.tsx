@@ -7,7 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { GroupIcon, HomeIcon } from "@/components/icons";
 import { PlusIcon } from "@/components/icons/regular";
-import CreatePostModal from "@/components/layout/create-post";
+import CreatePostModal from "@/components/post/create-post";
 import { useState } from "react";
 import { Communities } from "@/components/server/myCommunities";
 import { Trending } from "@/components/server/trendingRow";
