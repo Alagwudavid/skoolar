@@ -12,6 +12,7 @@ import { useState } from "react";
 import { Communities } from "@/components/server/myCommunities";
 import { Trending } from "@/components/server/trendingRow";
 import { BusinessIcon, PremiumIcon } from "@/components/icons/collection";
+import { FeedDropdown } from "@/components/feed/dropdown";
 
 const posts = [
   {
@@ -87,9 +88,12 @@ export default function FeedPage() {
   return (
     <div className="max-w-xl mx-auto">
       {/* <Communities /> */}
-      <Trending className="sm:hidden" orientation="horizontal"/>
+      <Trending className="sm:hidden" orientation="horizontal" />
       {/* <CreatePostModal /> */}
-      <div className="mt-4 sm:border divide-y sm:rounded-3xl overflow-hidden" >
+      <div className="flex items-center px-4 pt-4 pb-2">
+        <FeedDropdown />
+      </div>
+      <div className="sm:border divide-y sm:rounded-3xl overflow-hidden" >
         {posts.map((post) => (
           <article key={post.id} className="p-4 cursor-pointer">
             <div className="flex gap-3">
@@ -105,18 +109,18 @@ export default function FeedPage() {
                 {/* User Info */}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1">
-                  <div className="flex items-center gap-1">
-                    <Link href={`/users/${post.user.username}`} className="font-semibold hover:underline">
-                      {post.user.name}
-                    </Link>
-                    {post.user.verified ? (post.user.isBusiness ? (
-                      <BusinessIcon className="h-5 w-5" />
-                    )
-                    :
-                    (
-                      <PremiumIcon className="h-5 w-5"/>
-                    )) : ""}
-                  </div>
+                    <div className="flex items-center gap-1">
+                      <Link href={`/users/${post.user.username}`} className="font-semibold hover:underline">
+                        {post.user.name}
+                      </Link>
+                      {post.user.verified ? (post.user.isBusiness ? (
+                        <BusinessIcon className="h-5 w-5" />
+                      )
+                        :
+                        (
+                          <PremiumIcon className="h-5 w-5" />
+                        )) : ""}
+                    </div>
                     <span className="text-muted-foreground">
                       {" • "}{post.timestamp}
                     </span>
@@ -159,7 +163,7 @@ export default function FeedPage() {
                       <span className="text-sm">{post.likes}</span>
                     </Button>
                     <Button variant="ghost" size="sm" className="gap-2 text-foreground hover:text-foreground rounded-3xl shadow-sm cursor-pointer">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" className="h-5! w-5!"><path fill="#009a49" d="M4 5a4 4 0 0 0-4 4v18a4 4 0 0 0 4 4h8V5z"/><path fill="#eee" d="M12 5h12v26H12z"/><path fill="#009a49" d="M32 5h-8v26h8a4 4 0 0 0 4-4V9a4 4 0 0 0-4-4"/></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" className="h-5! w-5!"><path fill="#009a49" d="M4 5a4 4 0 0 0-4 4v18a4 4 0 0 0 4 4h8V5z" /><path fill="#eee" d="M12 5h12v26H12z" /><path fill="#009a49" d="M32 5h-8v26h8a4 4 0 0 0 4-4V9a4 4 0 0 0-4-4" /></svg>
                       <span className="text-sm">{post.comments}</span>
                     </Button>
                     <Button variant="ghost" size="sm" className="gap-2 text-foreground hover:text-foreground rounded-3xl shadow-sm cursor-pointer">

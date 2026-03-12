@@ -40,7 +40,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { BusinessIcon, RIcons } from "../icons/collection";
 import { AiIcon, ActiveAiIcon, AtIcon, ActiveAtIcon, GroupIcon, ActiveGroupIcon } from "../icons";
-import { MenuIcon } from "../icons/regular";
+import { MenuIcon, PlusIcon } from "../icons/regular";
 const moreMenuItems = [
   {
     title: "Following",
@@ -174,7 +174,16 @@ export function Sidebar() {
               </Link>
             );
           })}
-
+          <Link
+          href={"/posts/create"}
+            // onClick={() => setShowMore(!showMore)}
+            className={cn(
+              "flex items-center justify-center gap-4 px-4 py-2 rounded-full text-xl transition-colors bg-primary text-primary-foreground hover:bg-primary/70 cursor-pointer w-full text-left"
+            )}
+          >
+            <PlusIcon className="h-6! w-6!" />
+            <span>Create</span>
+          </Link>
           {/* See More Button */}
           {/* <button
             onClick={() => setShowMore(!showMore)}

@@ -85,7 +85,7 @@ export function Trending({ orientation, className }: { orientation?: string, cla
             <p className="text-foreground">
               Today&#39;s News
             </p>
-            <Button variant="link">
+            <Button variant="link" className="text-foreground">
                 view all
             </Button>
           </CardTitle>

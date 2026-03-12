@@ -65,7 +65,7 @@ export function RightBar() {
                         <CardHeader className="pt-3 pb-2! border-b px-4">
                             <CardTitle className="text-base flex items-center justify-between gap-2 ">
                                 Who To Follow
-                                <Button variant="link">
+                                <Button variant="link" className="text-foreground">
                                     view all
                                 </Button>
                             </CardTitle>
@@ -93,7 +93,7 @@ export function RightBar() {
                         <CardHeader className="pt-3 pb-2! border-b px-4">
                             <CardTitle className="text-base flex items-center justify-between gap-2">
                                 Trending
-                                <Button variant="link">
+                                <Button variant="link" className="text-foreground">
                                     view all
                                 </Button>
                             </CardTitle>
