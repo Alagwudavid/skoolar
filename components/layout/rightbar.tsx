@@ -61,12 +61,12 @@ export function RightBar() {
                     <Trending className="max-sm:hidden" orientation="vertical"/>
                     
                     {/* Suggested Users */}
-                    <Card className="p-0 gap-0 rounded-3xl bg-muted/50">
+                    <Card className="p-0 pb-2 gap-0 rounded-xl bg-muted/50">
                         <CardHeader className="pt-3 pb-2! border-b px-4">
                             <CardTitle className="text-base flex items-center justify-between gap-2 ">
                                 Who To Follow
-                                <Button variant="ghost" size="icon" className="h-8 w-8 rounded-lg bg-muted hover:text-primary">
-                                    <RefreshCCWIcon className="h-5 w-5" />
+                                <Button variant="link">
+                                    view all
                                 </Button>
                             </CardTitle>
                         </CardHeader>
@@ -86,23 +86,15 @@ export function RightBar() {
                                 </Link>
                             ))}
                         </CardContent>
-                        <CardFooter className="pt-1! pb-1! border-t w-full">
-                            <Link
-                                href={`/tags`}
-                                className="block w-full text-center p-2 hover:text-primary transition-colors font-semibold"
-                            >
-                                View all
-                            </Link>
-                        </CardFooter>
                     </Card>
 
                     {/* Trending Topics */}
-                    <Card className="p-0 gap-0 rounded-3xl bg-muted/50">
+                    <Card className="p-0 pb-2 gap-0 rounded-xl bg-muted/50">
                         <CardHeader className="pt-3 pb-2! border-b px-4">
                             <CardTitle className="text-base flex items-center justify-between gap-2">
                                 Trending
-                                <Button variant="ghost" size="icon" className="h-8 w-8 rounded-lg bg-muted hover:text-primary">
-                                    <RefreshCCWIcon className="h-5 w-5" />
+                                <Button variant="link">
+                                    view all
                                 </Button>
                             </CardTitle>
                         </CardHeader>
@@ -118,14 +110,6 @@ export function RightBar() {
                                 </Link>
                             ))}
                         </CardContent>
-                        <CardFooter className="pt-1! pb-1! border-t w-full">
-                            <Link
-                                href={`/tags`}
-                                className="block w-full text-center p-2 hover:text-primary transition-colors font-semibold"
-                            >
-                                View all
-                            </Link>
-                        </CardFooter>
                     </Card>
                 </>
             )

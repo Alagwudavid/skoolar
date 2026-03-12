@@ -11,7 +11,7 @@ export const siteConfig = {
 
 export const mainNav: NavItem[] = [
   {
-    title: "Feed",
+    title: "Home",
     href: "/feed",
     icon: HomeIcon,
     activeIcon: ActiveHomeIcon,
@@ -23,6 +23,12 @@ export const mainNav: NavItem[] = [
     activeIcon: PlaySquare,
   },
   {
+    title: "Discover",
+    href: "/explore",
+    icon: SearchIcon,
+    activeIcon: ActiveSearchIcon,
+  },
+  {
     title: "Resources",
     href: "/learn",
     icon: FolderIcon,
@@ -32,12 +38,6 @@ export const mainNav: NavItem[] = [
     href: "/opportunities",
     icon: TicketIcon,
     activeIcon: ActiveTicketIcon,
-  },
-  {
-    title: "Search",
-    href: "/explore",
-    icon: SearchIcon,
-    activeIcon: ActiveSearchIcon,
   },
   {
     title: "Activity",

@@ -1,6 +1,6 @@
 import { MobileNavItem } from "@/types";
 import { HomeIcon, ActiveHomeIcon, CompassIcon, ActiveCompassIcon, ChatIcon, ActiveChatIcon, GroupIcon, ActiveGroupIcon, OpportunitiesIcon, ActiveOpportunitiesIcon, PlusIcon, ActivePlusIcon, UserIcon, ActiveUserIcon, SearchIcon, ActiveSearchIcon, ActiveFolderIcon, FolderIcon, ActiveTicketIcon, TicketIcon } from "@/components/icons";
-import { ResourcesIcon } from "@/components/icons/regular";
+import { PlayIcon, ResourcesIcon } from "@/components/icons/regular";
 
 export const siteConfig = {
   name: "Skoolar",
@@ -15,16 +15,10 @@ export const BottomNav: MobileNavItem[] = [
     activeIcon: ActiveHomeIcon,
   },
   {
-    title: "Discover",
-    href: "/explore",
-    icon: SearchIcon,
-    activeIcon: ActiveSearchIcon,
-  },
-  {
-    title: "Create",
-    href: "/create",
-    icon: PlusIcon,
-    activeIcon: ActivePlusIcon,
+    title: "Watch",
+    href: "/watch",
+    icon: PlayIcon,
+    // activeIcon: ActiveSearchIcon,
   },
   {
     title: "Opportunities",

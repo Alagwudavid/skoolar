@@ -85,11 +85,11 @@ export default function FeedPage() {
     setOpenPostMenuId(openPostMenuId === postId ? null : postId)
   }
   return (
-    <div className="max-w-xl mx-auto border divide-y">
+    <div className="max-w-xl mx-auto">
       {/* <Communities /> */}
       <Trending className="sm:hidden" orientation="horizontal"/>
-      <CreatePostModal />
-      <div className="divide-y overflow-hidden" >
+      {/* <CreatePostModal /> */}
+      <div className="mt-4 sm:border divide-y sm:rounded-3xl overflow-hidden" >
         {posts.map((post) => (
           <article key={post.id} className="p-4 cursor-pointer">
             <div className="flex gap-3">
@@ -105,6 +105,7 @@ export default function FeedPage() {
                 {/* User Info */}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-1">
                     <Link href={`/users/${post.user.username}`} className="font-semibold hover:underline">
                       {post.user.name}
                     </Link>
@@ -116,6 +117,11 @@ export default function FeedPage() {
                       <PremiumIcon className="h-5 w-5"/>
                     )) : ""}
                   </div>
+                    <span className="text-muted-foreground">
+                      {" • "}{post.timestamp}
+                    </span>
+                  </div>
+
                   <div className="relative">
                     <Button onClick={(e) => handleOpenPostMenu(e, post.id)} variant="ghost" size="icon" className="h-8 w-8 rounded-full hover:text-primary">
                       <MoreHorizontal className="h-5 w-5" />
@@ -145,16 +151,20 @@ export default function FeedPage() {
                   </div>
                 </div>
                 <div className="flex items-center justify-between gap-3 mt-4">
-                  <span className="text-muted-foreground">{post.timestamp}</span>
+                  {/* <span className="text-muted-foreground">{post.timestamp}</span> */}
                   {/* Action Buttons */}
                   <div className="flex items-center gap-3">
-                    <Button variant="ghost" size="sm" className="gap-2 text-foreground hover:text-red-500 rounded-none bg-transparent hover:bg-transparent! cursor-pointer">
+                    <Button variant="ghost" size="sm" className="gap-2 text-foreground hover:text-red-500 rounded-3xl bg-red-500 cursor-pointer">
                       <Heart className="h-5! w-5!" />
                       <span className="text-sm">{post.likes}</span>
                     </Button>
-                    <Button variant="ghost" size="sm" className="gap-2 text-foreground hover:text-blue-500 rounded-full bg-transparent hover:bg-transparent! cursor-pointer">
+                    <Button variant="ghost" size="sm" className="gap-2 text-foreground hover:text-foreground rounded-3xl shadow-sm cursor-pointer">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" className="h-5! w-5!"><path fill="#009a49" d="M4 5a4 4 0 0 0-4 4v18a4 4 0 0 0 4 4h8V5z"/><path fill="#eee" d="M12 5h12v26H12z"/><path fill="#009a49" d="M32 5h-8v26h8a4 4 0 0 0 4-4V9a4 4 0 0 0-4-4"/></svg>
+                      <span className="text-sm">{post.comments}</span>
+                    </Button>
+                    <Button variant="ghost" size="sm" className="gap-2 text-foreground hover:text-foreground rounded-3xl shadow-sm cursor-pointer">
                       <MessageCircle className="h-5! w-5!" />
-                      <span className="text-xs">{post.comments}</span>
+                      <span className="text-sm">{post.comments}</span>
                     </Button>
                   </div>
                 </div>
@@ -162,11 +172,6 @@ export default function FeedPage() {
             </div>
           </article>
         ))}
-      </div>
-      <div className="w-full p-4 flex items-center justify-center">
-        <Button size="lg" className="rounded-full" asChild>
-          <Link href="/auth/signup">Load more</Link>
-        </Button>
       </div>
     </div>
   );

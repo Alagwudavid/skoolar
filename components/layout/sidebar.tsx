@@ -122,7 +122,7 @@ export function Sidebar() {
       {/* Logo */}
       <div className="p-4">
         <Link href="/" className="flex p-3 items-start justify-start">
-          <RIcons.BrandText className="h-6 w-25 text-primary" />
+          <RIcons.BrandText className="h-6 w-25 text-foreground" />
         </Link>
       </div>
 
@@ -139,18 +139,19 @@ export function Sidebar() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "flex items-center gap-3 px-4 py-3 rounded-full transition-colors hover:bg-muted w-full",
+                    "flex items-center gap-3 px-4 py-3 rounded-full text-xl transition-colors hover:bg-muted w-full",
                     isActive && "font-bold"
                   )}
                 >
-                  <Avatar className="h-7 w-7 shrink-0">
+                  <Avatar className="h-8 w-8 shrink-0">
                     <AvatarImage src={user?.imageUrl} alt={user?.fullName ?? ''} />
                     <AvatarFallback className="bg-secondary text-secondary-foreground">{initials}</AvatarFallback>
                   </Avatar>
-                  <div className="flex flex-col min-w-0">
+                  <span>{item.title}</span>
+                  {/* <div className="flex flex-col min-w-0">
                     <span className="text-base font-semibold leading-tight truncate">{displayName}</span>
                     <span className="text-sm text-muted-foreground leading-tight truncate">@{username}</span>
-                  </div>
+                  </div> */}
                 </Link>
               );
             }
@@ -161,17 +162,21 @@ export function Sidebar() {
                 href={item.href}
                 className={cn(
                   "flex items-center gap-4 px-4 py-3 rounded-full text-xl transition-colors hover:bg-muted w-full",
-                  isActive && "font-bold text-primary"
+                  isActive && "font-bold text-foreground"
                 )}
               >
-                <Icon className="h-7 w-7" />
+                <Icon className=
+                {cn(
+                  "h-7 w-7",
+                  // isActive && "text-primary"
+                )} />
                 <span>{item.title}</span>
               </Link>
             );
           })}
 
           {/* See More Button */}
-          <button
+          {/* <button
             onClick={() => setShowMore(!showMore)}
             className={cn(
               "flex items-center gap-4 px-4 py-2.5 rounded-full text-xl transition-colors bg-primary text-primary-foreground hover:bg-primary/70 cursor-pointer w-fit text-left"
@@ -182,8 +187,7 @@ export function Sidebar() {
               showMore && "rotate-180"
             )} />
             <span>Coming Soon</span>
-            {/* <span>More</span> */}
-          </button>
+          </button> */}
 
           {/* Additional Menu Items */}
           {showMore && (

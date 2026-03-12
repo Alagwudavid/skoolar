@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef } from 'react'
+import React, { useRef, useState, useCallback } from 'react'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import Image from 'next/image'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -53,6 +53,16 @@ const TRENDING: Space[] = [
 export function Trending({ orientation, className }: { orientation?: string, className?: string }) {
 
   const scrollContainerRef = useRef<HTMLDivElement>(null)
+  const [canScrollLeft, setCanScrollLeft] = useState(false)
+  const [canScrollRight, setCanScrollRight] = useState(true)
+
+  const updateScrollButtons = useCallback(() => {
+    const el = scrollContainerRef.current
+    if (!el) return
+    setCanScrollLeft(el.scrollLeft > 0)
+    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1)
+  }, [])
+
   const scroll = (direction: 'left' | 'right') => {
     if (scrollContainerRef.current) {
       const scrollAmount = 320 // Approx card width + gap
@@ -69,14 +79,14 @@ export function Trending({ orientation, className }: { orientation?: string, cla
   }
   if (orientation === 'vertical') {
     return (
-      <Card className={`p-0 gap-0 rounded-3xl bg-muted/50 ${className}`}>
+      <Card className={`p-0 pb-2 gap-0 rounded-xl bg-muted/50 ${className}`}>
         <CardHeader className="pt-3 pb-2! border-b px-4">
           <CardTitle className="text-base flex items-center justify-between gap-2 ">
             <p className="text-foreground">
               Today&#39;s News
             </p>
-            <Button variant="ghost" size="icon" className="h-8 w-8 rounded-lg bg-muted hover:text-primary">
-              <RefreshCCWIcon className="h-5 w-5" />
+            <Button variant="link">
+                view all
             </Button>
           </CardTitle>
         </CardHeader>
@@ -109,86 +119,72 @@ export function Trending({ orientation, className }: { orientation?: string, cla
           ))}
 
         </CardContent>
-        <CardFooter className="pt-1! pb-1! border-t w-full">
-          <Link
-            href={`/tags`}
-            className="block w-full text-center p-2 hover:text-primary transition-colors font-semibold"
-          >
-            View all
-          </Link>
-        </CardFooter>
       </Card>
     )
   }
 
   return (
-    <section className={`w-full bg-transparent ${className}`}>
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="text-xl md:text-2xl font-bold text-foreground tracking-tight">
-            Today&#39;s News
-          </h2>
-          <div className="flex items-center gap-2">
+    <section className={`w-full border-b ${className}`}>
+      <div className="max-w-7xl mx-auto py-4">
+        {/* Scrollable Container with side controls */}
+        <div className="relative">
+          {/* Left control */}
+          {canScrollLeft && (
             <button
               onClick={() => scroll('left')}
-              className="p-1.5 rounded hover:bg-white/10 text-foreground hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-white/20"
+              className="absolute left-5 top-1/2 -translate-y-1/2 -translate-x-1/2 z-10 p-1.5 rounded-full bg-background border shadow-md text-foreground hover:text-primary transition-colors focus:outline-none"
               aria-label="Scroll left"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
+          )}
+
+          <div
+            ref={scrollContainerRef}
+            onScroll={updateScrollButtons}
+            className="flex overflow-x-auto gap-4 scrollbar-hide snap-x snap-mandatory mx-4"
+            style={{
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
+            }}
+          >
+            {TRENDING.map((trend) => (
+              <div
+                key={trend.id}
+                className="flex-none w-75 h-25 rounded-xl overflow-hidden flex snap-start transition-all duration-300 bg-muted/50 hover:bg-muted/70 cursor-pointer group"
+              >
+                {/* Content Section */}
+                <div className="flex-1 flex flex-col min-w-0 text-foreground p-2">
+                  <h3 className="hover:text-primary font-semibold text-base lg:text-lg line-clamp-2">
+                    {trend.name}
+                  </h3>
+                  <div className='flex items-center gap-1'>
+                    <p className="text-sm truncate">
+                      {trend.likes} likes
+                    </p>
+                    ∙
+                    <p className="text-foreground text-sm truncate">
+                      {trend.comments} comments
+                    </p>
+                  </div>
+                </div>
+                {/* Image Section */}
+                <div className="w-25 h-25 bg-primary flex items-center justify-center shrink-0">
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Right control */}
+          {canScrollRight && (
             <button
               onClick={() => scroll('right')}
-              className="p-1.5 rounded hover:bg-white/10 text-foreground hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-white/20"
+              className="absolute right-5 top-1/2 -translate-y-1/2 translate-x-1/2 z-10 p-1.5 rounded-full bg-background border shadow-md text-foreground hover:text-primary transition-colors focus:outline-none"
               aria-label="Scroll right"
             >
               <ChevronRight className="w-5 h-5" />
             </button>
-          </div>
-        </div>
-
-        {/* Scrollable Container */}
-        <div
-          ref={scrollContainerRef}
-          className="flex overflow-x-auto gap-4 scrollbar-hide snap-x snap-mandatory"
-          style={{
-            scrollbarWidth: 'none',
-            msOverflowStyle: 'none',
-          }}
-        >
-          {TRENDING.map((trend) => (
-            <div
-              key={trend.id}
-              className="flex-none w-75 h-20 rounded-xl overflow-hidden flex snap-start transition-all duration-300 bg-secondary"
-            >
-              {/* Image Section */}
-              <div className="w-25 h-20 bg-primary flex items-center justify-center shrink-0">
-                {/* <Image
-                  src={trend.image}
-                  alt={`${trend.name} logo`}
-                  className="w-full h-full object-contain"
-                  width={100}
-                  height={100}
-                /> */}
-              </div>
-
-              {/* Content Section */}
-              <div className="flex-1 flex flex-col min-w-0 text-foreground p-2">
-                <h3 className="hover:text-primary font-semibold text-sm line-clamp-2">
-                  {trend.name}
-                </h3>
-                <div className='flex items-center gap-1'>
-                  <p className="text-xs truncate">
-                    {trend.likes} likes
-                  </p>
-                  ∙
-                  <p className="text-foreground text-xs truncate">
-                    {trend.comments} comments
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
+          )}
         </div>
       </div>
     </section>

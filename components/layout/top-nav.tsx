@@ -26,9 +26,10 @@ import {
   MapPin,
   Home as HomeIcon,
   GraduationCap as UniversityIcon,
-  ChevronLeft
+  ChevronLeft,
 } from "lucide-react";
-import { AiIcon } from "../icons";
+import { AiIcon, SearchIcon } from "../icons";
+import { PlusIcon } from "../icons/regular";
 
 const moreMenuItems = [
   {
@@ -95,28 +96,8 @@ export function TopNav() {
 
   return (
     <>
-      <div className="sticky backdrop-blur-lg bg-background/80 top-0 right-0 z-50 px-4 flex h-16 w-full items-center justify-between md:hidden">
-        <Link href="/" className="flex items-center gap-1 font-bold text-xl">
-          <RIcons.BrandText className="h-6 w-25 text-primary" />
-        </Link>
-        <div className="flex items-center gap-4">
-          {TopNavList.map((item) => {
-            const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
-            const Icon = item.icon;
-
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "flex flex-col items-center justify-center gap-1 text-muted-foreground transition-colors",
-                  isActive && "text-foreground"
-                )}
-              >
-                <Icon className={cn("h-7 w-7", isActive && "stroke-[2.5]")} />
-              </Link>
-            );
-          })}
+      <div className="sticky backdrop-blur-lg bg-background/80 top-0 right-0 z-50 px-4 flex h-16 border-b w-full items-center justify-between md:hidden">
+        <div className="flex items-center gap-2">
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
               <button className="focus:outline-none">
@@ -304,6 +285,27 @@ export function TopNav() {
               </div>
             </SheetContent>
           </Sheet>
+        </div>
+        <Link href="/" className="flex items-center gap-1 font-bold text-xl">
+          <RIcons.BrandText className="h-6 w-25 text-foreground" />
+        </Link>
+        <div className="flex items-center gap-2">
+          <Link
+            href="/explore"
+            className={cn(
+              "flex items-center justify-center text-foreground transition-colors bg-muted p-2 rounded-full",
+            )}
+          >
+            <SearchIcon className="h-6 w-6" />
+          </Link>
+          <Link
+            href="/create"
+            className={cn(
+              "flex items-center justify-center text-foreground transition-colors bg-muted p-2 rounded-full",
+            )}
+          >
+            <PlusIcon className="h-6 w-6" />
+          </Link>
         </div>
       </div>
     </>
